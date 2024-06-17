@@ -26,3 +26,8 @@ const createUser = async (req, res) => {
       res.status(500).send("Error updating user");
     }
   };
+
+  module.exports = {
+    createUser,
+    updateUser,
+  };
