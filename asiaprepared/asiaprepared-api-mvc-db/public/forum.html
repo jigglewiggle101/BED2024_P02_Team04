@@ -3,72 +3,113 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../public/styles/index.css">
+    <!-- Link to external CSS file -->
+    <link rel="stylesheet" href="../public/styles/forum.css">
+    <!-- Link to Font Awesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <!-- Link to Google Material Icons -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 </head>
     <title>Homepage</title>
 </head>
 <body>
+       <!-- Navbar -->
     <div class="navbar">
         <nav>
             <a href="index.html"><img src="img/bedlogo.png" alt="logobrand" width="80" height="80"></a>
             <div class="search-bar">
-                <input type="text" id="searchInput" placeholder="Search...">
-                <i class="material-icons search-icon">search</i>
-                <a href="account.html"><img src="img/bedlogo.png" alt="logobrand" width="80" height="80"></a>
+                <input type="text" placeholder="Search...">
+                <i class="fas fa-search search-icon"></i>
+            </div>
+                <a href="account.html"><img src="../public/img/icons8-test-account-50.png" alt="logobrand" width="80" height="80"></a>
             </div>
         </nav>  
     </div>
-            
+               <!-- Secondary Navbar -->
             <div class="navbar">
             <nav>
             <a href="index.html">Home</a>
-            <a href="#">About</a>
-            <a href="#">Account</a>
-            <a href="#">Contact</a>
+            <a href="about.html">About</a>
+            <a href="account.html">Account</a>
+            <a href="userticform.html">Contact</a>
             <div class="dropdown">
                 <a href="#" class="dropbtn">Others</a>
                 <div class="dropdown-content">
-                    <a href="#">Link 1</a>
-                    <a href="#">Link 2</a>
+                    <a href="#">Bookmark news</a>
+                    <a href="#">Bookmark Posts</a>
                     <a href="#">Link 3</a>
               
             </div>
         </nav>
     </div>
+</div> 
+<!-- Title and Post Creation Section -->
+<div class="title-section">
+    <div class="tags-header">
+        <label for="title">Title</label>
+        <input type="text" id="title" name="title" placeholder="Enter title...">
+        <button class="add-post-btn" onclick="createPost()">+</button>
+    </div>
+</div>
+
+<!-- Tags Section -->
+<div class="tags-section">
+    <div class="tags-input">
+        <button class="add-tag-btn" onclick="addTag()">+</button>
+        <input type="text" id="tag-search" placeholder="Search tags" oninput="searchTags()">
+    </div>
+    <div id="tags-list">
+        <!-- Tags will be dynamically added here -->
+    </div>
+    <div class="sort-dropdown">
+        <button class="sort-btn">Sort by</button>
+        <div class="dropdown-content">
+            <a href="#">Best</a>
+            <a href="#">Hot</a>
+            <a href="#">New</a>
+            <a href="#">Rating</a>
+            <a href="#">Top</a>
+        </div>
+    </div>
 </div>
     
+   <!-- Post 1 -->
     <div class="content">
-        <div class="post">
+        <div class="post" id="news1">
             <img src="../public/img/ser1.jpg" alt="Image 1" style="width:95%">
             <div class="overlay">
-                <div class="text">Your Text Here</div>
+                <div class="country">Country</div>
+                <div class="subtitle">Subtitle</div>
             </div>
         </div>
-        <div class="post">
+           <!-- Post 2 -->
+        <div class="post" id="news2">
             <img src="../public/img/ser2.jpg" alt="Image 2" style="width:100%">
-            <div class="details">
-                <p>Country Report</p>
+            <div class="overlay">
+                <div class="country">Country</div>
+                <div class="subtitle">Subtitle</div>
             </div>
         </div>
-        <div class="post">
+           <!-- Post 3 -->
+        <div class="post" id="news3">
             <img src="../public/img/ser3.jpg" alt="Image 3" style="width:72%">
-            <div class="details">
-                <p>Country Report</p>
+            <div class="overlay">
+                <div class="country">Country</div>
+                <div class="subtitle">Subtitle</div>
             </div>
         </div>
 
- 
+         <!-- Grid of Posts -->
         <div class="posts-grid">
+            <!-- Post Container 1 -->
         <div class="post-container">
-            <div class="user-info">
-                <img src="user-avatar.png" alt="User Avatar" class="user-avatar">
+            <div class="user-info" id="user1">
+                <img src="../public/img/icons8-circled-user-male-skin-type-7-64.png" alt="User Avatar" class="user-avatar">
                 <div class="username">User</div>
             </div>
             <div class="post-content">
                 <div class="post-image">
-                    <button class="view-button">View</button>
+                    <button class="view-button">Share</button>
                 </div>
                 <div class="post-actions">
                     <button class="action-button">Upvote</button>
@@ -77,15 +118,15 @@
                 </div>
             </div>
         </div>
-
+     <!-- Post Container 2 -->
     <div class="post-container">
-        <div class="user-info">
-            <img src="user-avatar.png" alt="User Avatar" class="user-avatar">
+        <div class="user-info" id="user2">
+            <img src="../public/img/icons8-circled-user-male-skin-type-7-64.png" alt="User Avatar" class="user-avatar">
             <div class="username">User</div>
         </div>
         <div class="post-content">
             <div class="post-image">
-                <button class="view-button">View</button>
+                <button class="view-button">Share</button>
             </div>
             <div class="post-actions">
                 <button class="action-button">Upvote</button>
@@ -94,15 +135,16 @@
             </div>
         </div>
     </div>
-
+    
+    <!-- Post Container 3 -->
     <div class="post-container">
-        <div class="user-info">
-            <img src="user-avatar.png" alt="User Avatar" class="user-avatar">
+        <div class="user-info" id="user3">
+            <img src="../public/img/icons8-circled-user-male-skin-type-7-64.png" alt="User Avatar" class="user-avatar">
             <div class="username">User</div>
         </div>
         <div class="post-content">
             <div class="post-image">
-                <button class="view-button">View</button>
+                <button class="view-button">Share</button>
             </div>
             <div class="post-actions">
                 <button class="action-button">Upvote</button>
@@ -111,15 +153,16 @@
             </div>
         </div>
     </div>
-
+   
+    <!-- Post Container 4 -->
     <div class="post-container">
-        <div class="user-info">
-            <img src="user-avatar.png" alt="User Avatar" class="user-avatar">
+        <div class="user-info" id="user4">
+            <img src="../public/img/icons8-circled-user-male-skin-type-7-64.png" alt="User Avatar" class="user-avatar">
             <div class="username">User</div>
         </div>
         <div class="post-content">
             <div class="post-image">
-                <button class="view-button">View</button>
+                <button class="view-button">Share</button>
             </div>
             <div class="post-actions">
                 <button class="action-button">Upvote</button>
@@ -130,20 +173,22 @@
     </div>
   
 
-<!--Footer-->
-<footer>
+ <!-- Footer -->
+ <footer>
     <div class="footer-container">
         <div class="footer-column">
-            <h2>LOGO</h2>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Scelerisque donec non pellentesque ut.</p>
+            <a href="index.html">
+                <img src="img/bedlogo.png" alt="logobrand" width="50" height="50">
+            </a>
+            <p>Asia Prepared to bring you southeast asia readiness awareness.</p>
         </div>
         <div class="footer-column">
             <h2>About</h2>
             <ul>
-                <li><a href="#">About</a></li>
-                <li><a href="#">Account</a></li>
-                <li><a href="#">Q&A</a></li>
-                <li><a href="#">Credit</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="account.html">Account</a></li>
+                <li><a href="qna.html">Q&A</a></li>
+                <li><a href="credit.html">Credit</a></li>
             </ul>
         </div>
         <div class="footer-column">
@@ -151,8 +196,8 @@
             <ul>
                 <li><a href="#">Recent</a></li>
                 <li><a href="#">Popular</a></li>
-                <li><a href="#">Forum</a></li>
-                <li><a href="#">Home</a></li>
+                <li><a href="forum.html">Forum</a></li>
+                <li><a href="index.html">Home</a></li>
             </ul>
         </div>
         <div class="footer-column">
@@ -160,8 +205,8 @@
                 <li><a href="#">Contact</a></li>
             </ul>
             <div class="social-icons">
-                <a href="#"><i class="fab fa-facebook-f"></i></a>
-                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="https://www.facebook.com/AsiaPrepareddddd?mibextid=LQQJ4d"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://www.instagram.com/asiaprepared?igsh=cDVzdmp2Y2VwNHZi&utm_source=qr"><i class="fab fa-instagram"></i></a>
             </div>
         </div>
     </div>
