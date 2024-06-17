@@ -3,26 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Link to external CSS file -->
     <link rel="stylesheet" href="../public/styles/index.css">
+    <!-- Link to Font Awesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <!-- Link to Google Material Icons -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-</head>
     <title>Homepage</title>
 </head>
 <body>
+    <!-- Navbar -->
     <div class="navbar">
         <nav>
-            <a href="index.html"><img src="img/bedlogo.png" alt="logobrand" width="80" height="80"></a>
+            <a href="index.html">
+                <img src="img/bedlogo.png" alt="logobrand" width="80" height="80">
+            </a>
             <div class="search-bar">
-                <input type="text" id="searchInput" placeholder="Search...">
-                <i class="material-icons search-icon">search</i>
-                <a href="account.html"><img src="img/bedlogo.png" alt="logobrand" width="80" height="80"></a>
+                <input type="text" placeholder="Search...">
+                <i class="fas fa-search search-icon"></i>
             </div>
+            <a href="account.html">
+                <img src="../public/img/icons8-test-account-50.png" alt="Profile" class="profile-icon">
+            </a>
         </nav>  
     </div>
-            
-            <div class="navbar">
-            <nav>
+    
+    <!-- Secondary Navbar -->
+    <div class="navbar">
+        <nav>
             <a href="index.html">Home</a>
             <a href="#">About</a>
             <a href="#">Account</a>
@@ -33,144 +41,153 @@
                     <a href="#">Link 1</a>
                     <a href="#">Link 2</a>
                     <a href="#">Link 3</a>
-              
+                </div>
             </div>
         </nav>
     </div>
-</div>
-    
+
+    <!-- Horizontal line for separation -->
+    <hr>
+
+    <!-- Content Section -->
     <div class="content">
+        <!-- Post 1-->
         <div class="post">
             <img src="../public/img/ser1.jpg" alt="Image 1" style="width:95%">
             <div class="overlay">
-                <div class="text">Your Text Here</div>
+                <div class="country">Country</div>
+                <div class="subtitle">Subtitle</div>
             </div>
         </div>
+        <!-- Post 2 -->
         <div class="post">
             <img src="../public/img/ser2.jpg" alt="Image 2" style="width:100%">
             <div class="details">
-                <p>Country Report</p>
+                <div class="country">Country</div>
+                <div class="subtitle">Subtitle</div>
             </div>
         </div>
+         <!-- Post 3 -->
         <div class="post">
             <img src="../public/img/ser3.jpg" alt="Image 3" style="width:72%">
             <div class="details">
-                <p>Country Report</p>
+                <div class="country">Country</div>
+                <div class="subtitle">Subtitle</div>
             </div>
         </div>
 
- 
+        <!-- Grid of Posts -->
         <div class="posts-grid">
-        <div class="post-container">
-            <div class="user-info">
-                <img src="user-avatar.png" alt="User Avatar" class="user-avatar">
-                <div class="username">User</div>
-            </div>
-            <div class="post-content">
-                <div class="post-image">
-                    <button class="view-button">View</button>
+            <!-- Post Container -->
+            <div class="post-container">
+                <div class="user-info">
+                    <img src="../public/img/icons8-circled-user-male-skin-type-7-64.png" alt="User Avatar" class="user-avatar">
+                    <div class="username">User</div>
                 </div>
-                <div class="post-actions">
-                    <button class="action-button">Upvote</button>
-                    <button class="action-button">Downvote</button>
-                    <button class="action-button">Comments</button>
+                <div class="post-content">
+                    <div class="post-image">
+                        <button class="view-button">Share</button>
+                    </div>
+                    <div class="post-actions">
+                        <button class="action-button">Upvote</button>
+                        <button class="action-button">Downvote</button>
+                        <button class="action-button">Comments</button>
+                    </div>
+                </div>
+            </div>
+            <!-- Repeat post container for more posts -->
+            <div class="post-container">
+                <div class="user-info">
+                    <img src="../public/img/icons8-circled-user-male-skin-type-7-64.png" alt="User Avatar" class="user-avatar">
+                    <div class="username">User</div>
+                </div>
+                <div class="post-content">
+                    <div class="post-image">
+                        <button class="view-button">Share</button>
+                    </div>
+                    <div class="post-actions">
+                        <button class="action-button">Upvote</button>
+                        <button class="action-button">Downvote</button>
+                        <button class="action-button">Comments</button>
+                    </div>
+                </div>
+            </div>
+            <div class="post-container">
+                <div class="user-info">
+                    <img src="../public/img/icons8-circled-user-male-skin-type-7-64.png" alt="User Avatar" class="user-avatar">
+                    <div class="username">User</div>
+                </div>
+                <div class="post-content">
+                    <div class="post-image">
+                        <button class="view-button">Share</button>
+                    </div>
+                    <div class="post-actions">
+                        <button class="action-button">Upvote</button>
+                        <button class="action-button">Downvote</button>
+                        <button class="action-button">Comments</button>
+                    </div>
+                </div>
+            </div>
+            <div class="post-container">
+                <div class="user-info">
+                    <img src="../public/img/icons8-circled-user-male-skin-type-7-64.png" alt="User Avatar" class="user-avatar">
+                    <div class="username">User</div>
+                </div>
+                <div class="post-content">
+                    <div class="post-image">
+                        <button class="view-button">Share</button>
+                    </div>
+                    <div class="post-actions">
+                        <button class="action-button">Upvote</button>
+                        <button class="action-button">Downvote</button>
+                        <button class="action-button">Comments</button>
+                    </div>
                 </div>
             </div>
         </div>
-
-    <div class="post-container">
-        <div class="user-info">
-            <img src="user-avatar.png" alt="User Avatar" class="user-avatar">
-            <div class="username">User</div>
-        </div>
-        <div class="post-content">
-            <div class="post-image">
-                <button class="view-button">View</button>
-            </div>
-            <div class="post-actions">
-                <button class="action-button">Upvote</button>
-                <button class="action-button">Downvote</button>
-                <button class="action-button">Comments</button>
-            </div>
-        </div>
     </div>
 
-    <div class="post-container">
-        <div class="user-info">
-            <img src="user-avatar.png" alt="User Avatar" class="user-avatar">
-            <div class="username">User</div>
-        </div>
-        <div class="post-content">
-            <div class="post-image">
-                <button class="view-button">View</button>
+    <!-- Footer -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-column">
+                <a href="index.html">
+                    <img src="img/bedlogo.png" alt="logobrand" width="50" height="50">
+                </a>
+                <p>Asia Prepared to bring you southeast asia readiness awareness.</p>
             </div>
-            <div class="post-actions">
-                <button class="action-button">Upvote</button>
-                <button class="action-button">Downvote</button>
-                <button class="action-button">Comments</button>
+            <div class="footer-column">
+                <h2>About</h2>
+                <ul>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="account.html">Account</a></li>
+                    <li><a href="qna.html">Q&A</a></li>
+                    <li><a href="credit.html">Credit</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h2>Our Sections</h2>
+                <ul>
+                    <li><a href="#">Recent</a></li>
+                    <li><a href="#">Popular</a></li>
+                    <li><a href="forum.html">Forum</a></li>
+                    <li><a href="index.html">Home</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <ul>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                </div>
             </div>
         </div>
-    </div>
+    </footer>
 
-    <div class="post-container">
-        <div class="user-info">
-            <img src="user-avatar.png" alt="User Avatar" class="user-avatar">
-            <div class="username">User</div>
-        </div>
-        <div class="post-content">
-            <div class="post-image">
-                <button class="view-button">View</button>
-            </div>
-            <div class="post-actions">
-                <button class="action-button">Upvote</button>
-                <button class="action-button">Downvote</button>
-                <button class="action-button">Comments</button>
-            </div>
-        </div>
-    </div>
-  
-
-<!--Footer-->
-<footer>
-    <div class="footer-container">
-        <div class="footer-column">
-            <h2>LOGO</h2>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Scelerisque donec non pellentesque ut.</p>
-        </div>
-        <div class="footer-column">
-            <h2>About</h2>
-            <ul>
-                <li><a href="#">About</a></li>
-                <li><a href="#">Account</a></li>
-                <li><a href="#">Q&A</a></li>
-                <li><a href="#">Credit</a></li>
-            </ul>
-        </div>
-        <div class="footer-column">
-            <h2>Our Sections</h2>
-            <ul>
-                <li><a href="#">Recent</a></li>
-                <li><a href="#">Popular</a></li>
-                <li><a href="#">Forum</a></li>
-                <li><a href="#">Home</a></li>
-            </ul>
-        </div>
-        <div class="footer-column">
-            <ul>
-                <li><a href="#">Contact</a></li>
-            </ul>
-            <div class="social-icons">
-                <a href="#"><i class="fab fa-facebook-f"></i></a>
-                <a href="#"><i class="fab fa-instagram"></i></a>
-            </div>
-        </div>
-    </div>
-</footer>
-
-
-<!--Scripts-->
-<script src="https://kit.fontawesome.com/a076d05399.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
 </body>
 </html>

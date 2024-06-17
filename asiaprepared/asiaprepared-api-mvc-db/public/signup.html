@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <link rel="stylesheet" href="../public/styles/login.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+<body>
+    <!-- Navbar -->
+    <div class="navbar">
+        <nav>
+            <a href="index.html" class="logo">Logo</a>
+            <div class="search-bar">
+                <input type="text" id="searchInput" placeholder="Search...">
+                <i class="fas fa-search search-icon"></i>
+                <a href="account.html"><img src="img/profile.png" alt="profile" class="profile-icon"></a>
+            </div>
+        </nav>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-container">
+        <div class="login-container">
+            <h1>Login</h1>
+            <p>Login using your social</p>
+            <button class="google-login"><i class="fab fa-google"></i> Google</button>
+            <p class="or">Or</p>
+            <form action="#">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" required>
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" required>
+                <button type="submit" class="login-button">Log In</button>
+                <div class="captcha">
+                    <input type="checkbox" id="captcha" required>
+                    <label for="captcha">I'm not a robot</label>
+                    <div class="recaptcha">
+                        <img src="https://www.gstatic.com/recaptcha/api2/logo_48.png" alt="reCAPTCHA">
+                    </div>
+                </div>
+            </form>
+            <p class="signup-link">Don't have an account? <a href="#">Sign up</a></p>
+        </div>
+        <div class="signup-container">
+            <h2>New Here?</h2>
+            <p>Sign Up to learn more about southeast asia readiness</p>
+            <button class="signup-button">Sign Up</button>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us</title>
+    <link rel="stylesheet" href="../public/styles/userticsform.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+</head>
+<body>
+    <div class="navbar">
+        <div class="navbar-content">
+            <a href="#" class="logo">Logo</a>
+            <div class="search-bar">
+                <input type="text" placeholder="Search...">
+                <i class="fas fa-search search-icon"></i>
+            </div>
+            <img src="profile.jpg" alt="Profile" class="profile-icon">
+        </div>
+     
+        <div class="navbar">
+            <nav>
+            <a href="index.html">Home</a>
+            <a href="#">About</a>
+            <a href="#">Account</a>
+            <a href="#">Contact</a>
+            <div class="dropdown">
+                <a href="#" class="dropbtn">Others</a>
+                <div class="dropdown-content">
+                    <a href="#">Link 1</a>
+                    <a href="#">Link 2</a>
+                    <a href="#">Link 3</a>
+              
+            </div>
+        </nav>
+    </div>
+ 
+    </div>
+    <div class="main-container">
+        <div class="form-container">
+            <form action="#">
+                <label for="name">Name <span>*</span></label>
+                <input type="text" id="name" name="name" placeholder="Customer full name" required>
+                
+                <label for="email">Email <span>*</span></label>
+                <input type="email" id="email" name="email" placeholder="Customer email" required>
+                
+                <label for="type">Type <span>*</span></label>
+                <select id="type" name="type" required>
+                    <option value="">Choose ticket type</option>
+                    <!-- Add more options as needed -->
+                </select>
+                
+                <label for="subject">Subject <span>*</span></label>
+                <input type="text" id="subject" name="subject" required>
+                
+                <label for="message">Message <span>*</span></label>
+                <textarea id="message" name="message" required></textarea>
+                
+                <div class="captcha">
+                    <input type="checkbox" id="captcha" required>
+                    <label for="captcha">I'm not a robot</label>
+                    <div class="recaptcha">
+                        <img src="https://www.gstatic.com/recaptcha/api2/logo_48.png" alt="reCAPTCHA">
+                    </div>
+                </div>
+                
+                <button type="submit" class="create-ticket">Create Ticket</button>
+            </form>
+        </div>
+
+        <div class="contact-info">
+            <h2>Contact Us</h2>
+            <div class="contact-item">
+                <i class="fas fa-phone"></i>
+                <p>+65 9133 9088</p>
+            </div>
+            <div class="contact-item">
+                <i class="fas fa-envelope"></i>
+                <p>Crushie77@gmail.com</p>
+            </div>
+            <div class="contact-item">
+                <i class="fas fa-map-marker-alt"></i>
+                <p>313 Somer Road, 7th Fl<br>Singapore, SG 777313</p>
+            </div>
+        </div>
+    </div>
+   <!--Footer-->
+<footer>
+    <div class="footer-container">
+        <div class="footer-column">
+            <h2>LOGO</h2>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Scelerisque donec non pellentesque ut.</p>
+        </div>
+        <div class="footer-column">
+            <h2>About</h2>
+            <ul>
+                <li><a href="#">About</a></li>
+                <li><a href="#">Account</a></li>
+                <li><a href="#">Q&A</a></li>
+                <li><a href="#">Credit</a></li>
+            </ul>
+        </div>
+        <div class="footer-column">
+            <h2>Our Sections</h2>
+            <ul>
+                <li><a href="#">Recent</a></li>
+                <li><a href="#">Popular</a></li>
+                <li><a href="#">Forum</a></li>
+                <li><a href="#">Home</a></li>
+            </ul>
+        </div>
+        <div class="footer-column">
+            <ul>
+                <li><a href="#">Contact</a></li>
+            </ul>
+            <div class="social-icons">
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+</body>
+</html>
