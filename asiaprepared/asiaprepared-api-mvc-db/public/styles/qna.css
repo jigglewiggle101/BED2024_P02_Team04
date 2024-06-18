@@ -1,0 +1,260 @@
+/* Body styling */
+body {
+    font-family: 'Playfair Display', serif;
+    line-height: 1.6;
+}
+
+/* Navbar styling */
+.navbar {
+    background-color: white;
+    padding: 10px;
+    border-bottom: 1px solid #ddd; /* Add a border bottom for separation */
+}
+
+/* Navbar layout */
+.navbar nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+/* Navbar links styling */
+.navbar a {
+    color: black;
+    padding: 10px 8px; /* Adjust padding */
+    text-decoration: none;
+    text-align: center;
+}
+
+/* Search bar styling */
+.search-bar {
+    display: flex;
+    align-items: center;
+    margin: 0 5px;
+    position: relative;
+}
+
+/* Search bar input styling */
+.search-bar input[type="text"] {
+    padding: 10px;
+    padding-left: 30px; /* Make space for the icon */
+    font-size: 16px;
+    border: none;
+    border-radius: 4px;
+    width: 500px; /* Adjust width for smaller screens */
+    align-content: center;
+}
+
+/* Search icon styling */
+.search-bar .search-icon {
+    position: absolute;
+    left: 10px;
+    font-size: 18px;
+    color: gray;
+}
+
+/* Dropdown menu styling */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+/* Dropdown content styling */
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: white;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+/* Dropdown content links styling */
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+/* Dropdown content hover effect */
+.dropdown-content a:hover {
+    background-color: #ddd;
+}
+
+/* Show dropdown content on hover */
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+/* Responsive navbar styling for smaller screens */
+@media screen and (max-width: 768px) {
+    .navbar {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .search-bar {
+        margin: 10px 0;
+    }
+
+    .search-bar input[type="text"] {
+        width: 100%;
+    }
+
+    .navbar a {
+        padding: 10px;
+    }
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Playfair Display', serif; /* Setting a base font-family for all elements */
+}
+
+/* Main content styling */
+main {
+    flex-grow: 1;
+    padding: 20px; /* Adding padding around the main content */
+}
+
+/* FAQ section container styling */
+.faq-section {
+    max-width: 800px; /* Limiting the maximum width of the FAQ section */
+    margin: 0 auto; /* Centering the FAQ section */
+    text-align: center; /* Center aligning the text within the FAQ section */
+}
+
+/* FAQ section heading styling */
+.faq-section h1 {
+    font-size: 36px; /* Setting the font size for the FAQ section heading */
+    margin-bottom: 10px; /* Adding space below the heading */
+}
+
+/* FAQ section paragraph styling */
+.faq-section p {
+    font-size: 18px; /* Setting the font size for the paragraph */
+    color: #666; /* Setting a light grey color for the paragraph text */
+    margin-bottom: 30px; /* Adding space below the paragraph */
+}
+
+/* FAQ items container styling */
+.faq {
+    text-align: left; /* Left aligning the text within the FAQ items container */
+}
+
+/* Individual FAQ item styling */
+.faq-item {
+    margin-bottom: 15px; /* Adding space below each FAQ item */
+}
+
+/* FAQ question styling */
+.faq-question {
+    display: flex; /* Using flexbox for layout */
+    justify-content: space-between; /* Spacing out content evenly */
+    align-items: center; /* Center aligning items vertically */
+    padding: 10px 15px; /* Adding padding around the FAQ question */
+    background-color: #f9f9f9; /* Light grey background color for the FAQ question */
+    cursor: pointer; /* Changing cursor to pointer to indicate it's clickable */
+    font-size: 18px; /* Setting the font size for the FAQ question */
+    border: 1px solid #ccc; /* Adding a light grey border around the FAQ question */
+    border-radius: 5px; /* Rounding the corners of the border */
+}
+
+/* FAQ answer styling */
+.faq-answer {
+    padding: 10px 15px; /* Adding padding around the FAQ answer */
+    font-size: 16px; /* Setting the font size for the FAQ answer */
+    color: #666; /* Setting a light grey color for the FAQ answer text */
+    border: 1px solid #ccc; /* Adding a light grey border around the FAQ answer */
+    border-radius: 5px; /* Rounding the corners of the border */
+    border-top: none; /* Removing the top border to visually connect it with the question */
+    background-color: #fff; /* White background color for the FAQ answer */
+}
+
+
+/* Footer styling */
+.footer {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+/* Footer container styling */
+.footer-container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    flex-wrap: wrap;
+}
+
+/* Footer column styling */
+.footer-column {
+    flex: 1;
+    margin: 0 20px;
+    max-width: 200px;
+}
+
+/* Footer column header styling */
+.footer-column h2 {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+/* Footer column paragraph styling */
+.footer-column p {
+    font-size: 14px;
+    line-height: 1.5;
+    color: #666;
+}
+
+/* Footer column list styling */
+.footer-column ul {
+    list-style: none;
+    padding: 0;
+}
+
+/* Footer column list item styling */
+.footer-column ul li {
+    margin-bottom: 10px;
+}
+
+/* Footer column list item link styling */
+.footer-column ul li a {
+    color: #000;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+/* Footer column list item link hover effect */
+.footer-column ul li a:hover {
+    text-decoration: underline;
+}
+
+/* Social icons styling */
+.social-icons {
+    margin-top: 10px;
+}
+
+/* Social icons link styling */
+.social-icons a {
+    text-decoration: none;
+    color: #000;
+    margin-right: 10px;
+    font-size: 20px;
+}
+
+/* Social icons link hover effect */
+.social-icons a:hover {
+    color: #0073e6;
+}
+

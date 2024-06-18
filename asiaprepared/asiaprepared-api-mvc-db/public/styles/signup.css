@@ -1,0 +1,169 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Playfair Display', serif;
+}
+
+.navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 20px;
+    background-color: white;
+    border-bottom: 1px solid #ddd;
+}
+
+.logo {
+    height: 40px;
+}
+
+.search-bar {
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.search-bar input[type="text"] {
+    padding: 10px 20px;
+    border-radius: 20px;
+    border: 1px solid #ddd;
+    width: 400px;
+}
+
+.search-icon {
+    position: absolute;
+    right: 15px;
+    color: #aaa;
+}
+
+.profile-icon {
+    height: 40px;
+    border-radius: 50%;
+}
+
+.container {
+    display: flex;
+    align-items: stretch;
+    justify-content: space-between;
+    height: 80vh;
+    margin: 50px auto;
+    max-width: 1200px;
+}
+
+.signup-container, .login-container {
+    flex: 1;
+    padding: 40px;
+}
+
+.signup-container {
+    background-color: white;
+    border-right: 1px solid #ddd;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.login-container {
+    background-color: #f0f0f0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.signup-container h1, .login-container h1 {
+    font-size: 2em;
+    margin-bottom: 20px;
+}
+
+.signup-container p, .login-container p {
+    margin-bottom: 20px;
+}
+
+.google-login, .or {
+    width: 100%;
+    max-width: 300px;
+    text-align: center;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+form label, form input, form button, .g-recaptcha, form p {
+    width: 100%;
+    max-width: 300px;
+}
+
+form label {
+    margin: 10px 0 5px;
+}
+
+form input[type="email"], form input[type="password"] {
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+form button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    background-color: #007bff;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+form p {
+    margin-top: 20px;
+}
+
+form p a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+form p a:hover {
+    text-decoration: underline;
+}
+
+.login-container button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    background-color: #007bff;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.google-login {
+    background-color: white;
+    color: black;
+    border: 1px solid #ddd;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 16px;
+    margin-bottom: 20px;
+    cursor: pointer;
+}
+
+.google-login i {
+    margin-right: 10px;
+}
+
+.or {
+    margin: 20px 0;
+    font-size: 14px;
+    color: #666;
+}
+
