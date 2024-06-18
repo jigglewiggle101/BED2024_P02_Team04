@@ -11,7 +11,8 @@ function handleCredentialResponse(response) {
   console.log("Image URL: " + responsePayload.picture);
   console.log("Email: " + responsePayload.email);
   
-  // Here you can send the responsePayload data to your server for registration or further processing
+  // Check if the user's email is already registered
+  checkIfUserExists(responsePayload.email);
 }
 
 // Function to decode the JWT token received from Google
@@ -28,5 +29,56 @@ function parseJwt(token) {
   // Parse and return the JSON object
   return JSON.parse(jsonPayload);
 }
+
+// Function to check if the user already exists in your system
+function checkIfUserExists(email) {
+  // Replace with your actual server endpoint URL
+  var url = 'https://example.com/checkUser';
+
+  // Example of using fetch API to check if user exists
+  fetch(url, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ email: email })
+  })
+  .then(response => {
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
+    }
+    return response.json();
+  })
+  .then(data => {
+    // Handle response from server
+    if (data.exists) {
+      // User already exists, handle accordingly (e.g., redirect to login)
+      console.log('User already exists with email:', email);
+      // Redirect or show message to prompt user to login
+    } else {
+      // User does not exist, proceed with sign-up process
+      console.log('User does not exist, proceeding with sign-up');
+      // Call function to create new account
+      createUserAccount(email);
+    }
+  })
+  .catch(error => {
+    // Handle error from server or network failure
+    console.error('Error checking user:', error);
+  });
+}
+
+// Function to create a new user account using Google sign-up data
+function createUserAccount(email) {
+  // Here you would typically show a sign-up form with pre-filled Google data
+  // and allow the user to complete the sign-up process.
+  // You can also use the Google data to pre-fill form fields.
+
+  // Example: Simulate showing a sign-up form
+  console.log('Showing sign-up form for email:', email);
+  // Populate form fields with Google data if needed
+  document.getElementById('signupEmail').value = email;
+}
+
 
 

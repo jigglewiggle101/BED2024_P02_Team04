@@ -1,216 +1,174 @@
-body {
-    font-family: 'Playfair Display', serif;
-    background-color: #f0f0f0;
+/* Reset and box-sizing setup */
+* {
+    box-sizing: border-box;
     margin: 0;
     padding: 0;
 }
 
-.navbar {
-    background-color: white;
-    padding: 10px 20px;
-    border-bottom: 1px solid #e0e0e0;
+/* Body font settings */
+body {
+    font-family: 'Playfair Display', serif;
 }
 
-.navbar nav {
+/* Navbar styling */
+.navbar {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    padding: 10px 20px;
+    background-color: white;
+    border-bottom: 1px solid #ddd;
 }
 
+/* Logo image styling */
 .logo {
-    font-size: 24px;
-    font-weight: bold;
-    color: black;
-    text-decoration: none;
+    height: 40px;
 }
 
+/* Search bar container styling */
 .search-bar {
     display: flex;
     align-items: center;
-    margin: 0 5px;
     position: relative;
 }
 
+/* Search input styling */
 .search-bar input[type="text"] {
-    padding: 10px;
-    padding-left: 30px; /* Make space for the icon */
-    font-size: 16px;
-    border: none;
-    border-radius: 4px;
-    width: 500px; /* Adjust width for smaller screens */
-    align-content: center;
+    padding: 10px 20px;
+    border-radius: 20px;
+    border: 1px solid #ddd;
+    width: 400px;
 }
 
-.search-bar .search-icon {
+/* Search icon styling */
+.search-icon {
     position: absolute;
-    left: 10px;
-    font-size: 18px;
-    color: gray;
+    right: 15px;
+    color: #aaa;
 }
 
-
+/* Profile icon styling */
 .profile-icon {
-    width: 40px;
     height: 40px;
     border-radius: 50%;
-    margin-left: 20px;
 }
 
-/* Ensure the main content is responsive */
-.main-container {
+/* Container styling for sign-up and login */
+.container {
     display: flex;
+    align-items: stretch;
+    justify-content: space-between;
+    height: 80vh;
+    margin: 50px auto;
+    max-width: 1200px;
+}
+
+/* Sign-up container styling */
+.log-container, .login-container {
+    flex: 1;
+    padding: 40px;
+}
+
+.log-container {
+    background-color: white;
+    border-right: 1px solid #ddd;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Login container styling */
+.login-container {
+    background-color: #f0f0f0;
+    display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: calc(100vh - 60px);
-    padding: 20px;
-}
-
-/* Content containers for login and signup */
-.login-container, .signup-container {
-    background-color: white;
-    padding: 40px;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    width: 45%;
-    margin: 10px;
     text-align: center;
 }
 
-.login-container h1, .signup-container h2 {
-    font-size: 36px;
+/* Heading styling for sign-up and login sections */
+.log-container h1, .login-container h1 {
+    font-size: 2em;
     margin-bottom: 20px;
 }
 
-.login-container p, .signup-container p {
-    font-size: 16px;
-    color: #666;
+/* Paragraph styling for sign-up and login sections */
+.log-container p, .login-container p {
     margin-bottom: 20px;
 }
 
-.google-login {
-    background-color: white;
-    color: black;
-    border: 1px solid #ddd;
-    padding: 10px 20px;
-    border-radius: 5px;
-    font-size: 16px;
-    margin-bottom: 20px;
-    cursor: pointer;
+/* Google login button and 'or' separator styling */
+.google-login, .or {
+    width: 100%;
+    max-width: 300px;
+    text-align: center;
 }
 
-.google-login i {
-    margin-right: 10px;
-}
-
-.or {
-    margin: 20px 0;
-    font-size: 14px;
-    color: #666;
-}
-
+/* Form styling */
 form {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-form label {
-    align-self: flex-start;
-    margin-left: 10px;
-    font-size: 14px;
-    margin-bottom: 5px;
+/* Label and input styling within forms */
+form label, form input, form button, .g-recaptcha, form p {
+    width: 100%;
+    max-width: 300px;
 }
 
-form input {
-    width: 100%;
+/* Label styling */
+form label {
+    margin: 10px 0 5px;
+}
+
+/* Input field styling */
+form input[type="email"], form input[type="password"] {
     padding: 10px;
-    font-size: 16px;
     margin-bottom: 20px;
     border: 1px solid #ddd;
-    border-radius: 5px;
+    border-radius: 4px;
 }
 
-.login-button, .signup-button {
-    background-color: #3b82f6;
-    color: white;
-    border: none;
+/* Button styling */
+form button {
     padding: 10px 20px;
-    border-radius: 5px;
+    border: none;
+    border-radius: 4px;
+    background-color: #007bff;
+    color: white;
     font-size: 16px;
     cursor: pointer;
 }
 
-.captcha {
-    display: flex;
-    align-items: center;
+/* Paragraph and link styling within forms */
+form p {
     margin-top: 20px;
 }
 
-.captcha input {
-    margin-right: 10px;
-}
-
-.captcha label {
-    margin-right: 10px;
-}
-
-.recaptcha img {
-    width: 48px;
-    height: 48px;
-}
-
-.signup-link {
-    margin-top: 20px;
-    font-size: 14px;
-    color: #3b82f6;
-}
-
-.signup-link a {
-    color: #3b82f6;
+form p a {
+    color: #007bff;
     text-decoration: none;
 }
 
-.signup-container {
-    text-align: center;
+form p a:hover {
+    text-decoration: underline;
 }
 
-.signup-container h2 {
-    font-size: 36px;
-    margin-bottom: 20px;
-}
-
-.signup-container p {
-    font-size: 16px;
-    color: #666;
-    margin-bottom: 20px;
-}
-
+/* Login button styling */
 .signup-button {
-    background-color: #3b82f6;
-    color: white;
-    border: none;
     padding: 10px 20px;
-    border-radius: 5px;
+    border: none;
+    border-radius: 4px;
+    background-color: #007bff;
+    color: white;
     font-size: 16px;
     cursor: pointer;
 }
 
-@media screen and (max-width: 768px) {
-    .navbar {
-        flex-direction: column;
-        align-items: flex-start;
-    }
-
-    .search-bar {
-        margin: 10px 0;
-    }
-
-    .search-bar input[type="text"] {
-        width: 100%;
-    }
-
-    .navbar a {
-        padding: 10px;
-    }
+/* Google login button styling */
+#g_id_onload, .g_id_signin {
+    margin-bottom: 20px;
 }
 
