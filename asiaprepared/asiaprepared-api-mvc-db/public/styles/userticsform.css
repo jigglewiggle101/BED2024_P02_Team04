@@ -1,7 +1,11 @@
-body {
-    font-family: 'Playfair Display', serif;
+* {
+    box-sizing: border-box;
     margin: 0;
     padding: 0;
+}
+
+body {
+    font-family: 'Playfair Display', serif;
     background-color: #f0f0f0;
 }
 
@@ -115,9 +119,11 @@ body {
 
 .main-container {
     display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    padding: 20px;
+    align-items: stretch;
+    justify-content: space-evenly; /* Adjust as needed */
+    height: 80vh; /* Adjust the height based on your design */
+    margin: 50px auto; /* Center the container */
+    max-width: 1200px; /* Adjust the maximum width */
 }
 
 .form-container, .contact-info {
@@ -125,13 +131,15 @@ body {
     padding: 40px;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    width: 45%;
-    margin: 10px;
+    width: 45%; /* Adjust the width of each container */
+    margin: 10px; /* Adjust the margin between the containers */
     text-align: left;
 }
 
-.contact-info {
-    flex: 1 1 60%;
+.form-container form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 form label {
@@ -153,27 +161,6 @@ form span {
     color: red;
 }
 
-.captcha {
-    display: flex;
-    align-items: center;
-    margin-top: 20px;
-}
-
-.captcha input {
-    margin-right: 0px;
-    margin-left: 5px;
-}
-
-.captcha label {
-    margin-left: 5px;
-    margin-right: 0px;
-}
-
-.recaptcha img {
-    width: 48px;
-    height: 48px;
-}
-
 .create-ticket {
     background-color: #3b82f6;
     color: white;
@@ -182,6 +169,17 @@ form span {
     border-radius: 5px;
     font-size: 16px;
     cursor: pointer;
+    margin-top: 20px;
+}
+
+.contact-info {
+    background-color: white;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 45%; /* Adjust the width of the contact info */
+    margin: 10px; /* Adjust the margin between the containers */
+    text-align: left;
 }
 
 .contact-info h2 {
@@ -191,7 +189,7 @@ form span {
 
 .contact-item {
     display: flex;
-    align-items: center;
+    align-items: left;
     margin-bottom: 20px;
 }
 
@@ -208,6 +206,7 @@ form span {
     font-size: 16px;
     color: black;
 }
+
 
 .contact-item a {
     text-decoration: none;

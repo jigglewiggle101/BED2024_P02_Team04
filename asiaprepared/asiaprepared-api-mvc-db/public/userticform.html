@@ -4,20 +4,28 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contact Us</title>
+    <!-- Link to external CSS file -->
     <link rel="stylesheet" href="../public/styles/userticsform.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+     <!-- Link to Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+      <!--Google Recaptcha link -->
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 </head>
 <body>
+    <!-- Navbar -->
     <div class="navbar">
-        <div class="navbar-content">
-            <a href="#" class="logo">Logo</a>
+        <nav>
+            <a href="index.html"><img src="img/bedlogo.png" alt="logobrand" width="80" height="80"></a>
             <div class="search-bar">
                 <input type="text" placeholder="Search...">
                 <i class="fas fa-search search-icon"></i>
             </div>
-            <img src="profile.jpg" alt="Profile" class="profile-icon">
-        </div>
+                <a href="account.html"><img src="../public/img/icons8-test-account-50.png" alt="logobrand" width="80" height="80"></a>
+            </div>
+        </nav>  
+    </div>
      
+     <!-- Secondary Navbar -->
         <div class="navbar">
             <nav>
             <a href="index.html">Home</a>
@@ -34,42 +42,39 @@
             </div>
         </nav>
     </div>
- 
     </div>
+
+     <!-- User ticket form -->
     <div class="main-container">
         <div class="form-container">
             <form action="#">
+                 <!-- Name -->
                 <label for="name">Name <span>*</span></label>
                 <input type="text" id="name" name="name" placeholder="Customer full name" required>
-                
+                 <!-- Email -->
                 <label for="email">Email <span>*</span></label>
                 <input type="email" id="email" name="email" placeholder="Customer email" required>
-                
+                 <!-- Type -->
                 <label for="type">Type <span>*</span></label>
                 <select id="type" name="type" required>
                     <option value="">Choose ticket type</option>
-                    <!-- Add more options as needed -->
+
                 </select>
-                
+                 <!-- Subject -->
                 <label for="subject">Subject <span>*</span></label>
                 <input type="text" id="subject" name="subject" required>
-                
+                 <!--Message -->
                 <label for="message">Message <span>*</span></label>
                 <textarea id="message" name="message" required></textarea>
-                
-                <div class="captcha">
-                    <input type="checkbox" id="captcha" required>
-                    <label for="captcha">I'm not a robot</label>
-                    <div class="recaptcha">
-                        <img src="https://www.gstatic.com/recaptcha/api2/logo_48.png" alt="reCAPTCHA">
-                    </div>
-                </div>
-                
+                 <!--Google Recaptcha -->
+                <div class="g-recaptcha" data-sitekey="6LfLFfspAAAAABLDOOGpEjTrOM2s4TxVMmJe-9bk" data-callback="onSubmit" data-action="submit"></div>
+                  <!-- Submit button -->
                 <button type="submit" class="create-ticket">Create Ticket</button>
             </form>
         </div>
-
-        <div class="contact-info">
+        
+         <!-- Div for contact information -->
+         <div class="contact-info">
             <h2>Contact Us</h2>
             <div class="contact-item">
                 <i class="fas fa-phone"></i>
@@ -85,20 +90,23 @@
             </div>
         </div>
     </div>
-   <!--Footer-->
-<footer>
+
+   <!-- Footer -->
+ <footer>
     <div class="footer-container">
         <div class="footer-column">
-            <h2>LOGO</h2>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Scelerisque donec non pellentesque ut.</p>
+            <a href="index.html">
+                <img src="img/bedlogo.png" alt="logobrand" width="50" height="50">
+            </a>
+            <p>Asia Prepared to bring you southeast asia readiness awareness.</p>
         </div>
         <div class="footer-column">
             <h2>About</h2>
             <ul>
-                <li><a href="#">About</a></li>
-                <li><a href="#">Account</a></li>
-                <li><a href="#">Q&A</a></li>
-                <li><a href="#">Credit</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="account.html">Account</a></li>
+                <li><a href="qna.html">Q&A</a></li>
+                <li><a href="credit.html">Credit</a></li>
             </ul>
         </div>
         <div class="footer-column">
@@ -106,22 +114,25 @@
             <ul>
                 <li><a href="#">Recent</a></li>
                 <li><a href="#">Popular</a></li>
-                <li><a href="#">Forum</a></li>
-                <li><a href="#">Home</a></li>
+                <li><a href="forum.html">Forum</a></li>
+                <li><a href="index.html">Home</a></li>
             </ul>
         </div>
         <div class="footer-column">
             <ul>
-                <li><a href="#">Contact</a></li>
+                <li><a href="userticform.html">Contact</a></li>
             </ul>
             <div class="social-icons">
-                <a href="#"><i class="fab fa-facebook-f"></i></a>
-                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="https://www.facebook.com/AsiaPrepareddddd?mibextid=LQQJ4d"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://www.instagram.com/asiaprepared?igsh=cDVzdmp2Y2VwNHZi&utm_source=qr"><i class="fab fa-instagram"></i></a>
             </div>
         </div>
     </div>
 </footer>
 
-
+<!--Scripts-->
+<script src="https://kit.fontawesome.com/a076d05399.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
 </body>
 </html>
