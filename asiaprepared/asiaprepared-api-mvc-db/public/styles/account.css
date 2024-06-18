@@ -1,8 +1,238 @@
-.black-box {
+/* Body styling */
+body {
+  font-family: 'Playfair Display', serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f4f4f4;
+}
+
+/* General container styling */
+.container {
+  width: 80%;
+  margin: auto;
+  background-color: #fff;
+  padding: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Header section styling */
+.account-header {
+  position: relative;
+  text-align: center;
+}
+
+/* Cover photo styling */
+.cover-photo {
+  width: 100%;
+  height: 200px;
+  background-color: black;
+}
+
+/* Profile photo container styling */
+.profile-photo-container {
+  position: absolute;
+  bottom: -50px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100px;
+  height: 100px;
+  border: 5px solid white;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+/* Profile photo styling */
+.profile-photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Edit photo button styling */
+.edit-photo-button {
+  position: absolute;
+  bottom: 5px;
+  right: 5px;
+  background-color: #6A0DAD;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  padding: 5px;
+  cursor: pointer;
+  z-index: 2; /* Ensures button is above other elements */
+}
+
+/* Edit profile button styling */
+.edit-profile-button {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  background-color: #6A0DAD;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 20px;
+  z-index: 1; /* Ensures button is above other elements */
+}
+
+/* User settings section styling */
+.user-settings {
+  margin-top: 70px; /* Adds space between the header and settings */
+}
+
+/* User settings header styling */
+.user-settings h2 {
+  text-align: center;
+}
+
+/* Form styling */
+.profile-info {
+  max-width: 500px;
+  margin: auto;
+}
+
+/* Form group styling */
+.form-group {
+  margin-bottom: 20px;
+}
+
+/* Label styling */
+.form-group label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+/* Input and textarea styling */
+.form-group input[type="email"],
+.form-group input[type="text"],
+.form-group textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box;
+}
+
+/* Small text styling */
+.form-group small {
+  display: block;
+  text-align: right;
+  margin-top: 5px;
+  color: #888;
+}
+
+/* Form buttons container styling */
+.form-buttons {
+  text-align: center;
+  margin-top: 30px;
+}
+
+/* Button styling */
+.logout-button,
+.delete-account-button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+/* Logout button styling */
+.logout-button {
+  background-color: #007bff;
+  color: white;
+  margin-right: 10px;
+}
+
+/* Delete account button styling */
+.delete-account-button {
+  background-color: #dc3545;
+  color: white;
+}
+
+
+
+/* Footer styling */
+.footer {
+  background-color: #333;
+  color: white;
+  text-align: center;
+  padding: 20px;
   display: flex;
   justify-content: center;
-  width: calc(40% - 40px); /* Adjust width to account for padding */
-  height: 300px; /* Fixed height */
-  padding-top: 20px;
-  background-color: black;
+  align-items: center;
+  flex-direction: column;
+}
+
+/* Footer container styling */
+.footer-container {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  flex-wrap: wrap;
+}
+
+/* Footer column styling */
+.footer-column {
+  flex: 1;
+  margin: 0 20px;
+  max-width: 200px;
+}
+
+/* Footer column header styling */
+.footer-column h2 {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+/* Footer column paragraph styling */
+.footer-column p {
+  font-size: 14px;
+  line-height: 1.5;
+  color: #666;
+}
+
+/* Footer column list styling */
+.footer-column ul {
+  list-style: none;
+  padding: 0;
+}
+
+/* Footer column list item styling */
+.footer-column ul li {
+  margin-bottom: 10px;
+}
+
+/* Footer column list item link styling */
+.footer-column ul li a {
+  color: #000;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+/* Footer column list item link hover effect */
+.footer-column ul li a:hover {
+  text-decoration: underline;
+}
+
+/* Social icons styling */
+.social-icons {
+  margin-top: 10px;
+}
+
+/* Social icons link styling */
+.social-icons a {
+  text-decoration: none;
+  color: #000;
+  margin-right: 10px;
+  font-size: 20px;
+}
+
+/* Social icons link hover effect */
+.social-icons a:hover {
+  color: #0073e6;
 }
