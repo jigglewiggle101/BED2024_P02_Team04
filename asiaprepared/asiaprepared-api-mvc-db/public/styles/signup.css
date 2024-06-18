@@ -1,13 +1,16 @@
+/* Reset and box-sizing setup */
 * {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
 }
 
+/* Body font settings */
 body {
     font-family: 'Playfair Display', serif;
 }
 
+/* Navbar styling */
 .navbar {
     display: flex;
     align-items: center;
@@ -17,16 +20,19 @@ body {
     border-bottom: 1px solid #ddd;
 }
 
+/* Logo image styling */
 .logo {
     height: 40px;
 }
 
+/* Search bar container styling */
 .search-bar {
     display: flex;
     align-items: center;
     position: relative;
 }
 
+/* Search input styling */
 .search-bar input[type="text"] {
     padding: 10px 20px;
     border-radius: 20px;
@@ -34,17 +40,20 @@ body {
     width: 400px;
 }
 
+/* Search icon styling */
 .search-icon {
     position: absolute;
     right: 15px;
     color: #aaa;
 }
 
+/* Profile icon styling */
 .profile-icon {
     height: 40px;
     border-radius: 50%;
 }
 
+/* Container styling for sign-up and login */
 .container {
     display: flex;
     align-items: stretch;
@@ -54,6 +63,7 @@ body {
     max-width: 1200px;
 }
 
+/* Sign-up container styling */
 .signup-container, .login-container {
     flex: 1;
     padding: 40px;
@@ -67,6 +77,7 @@ body {
     align-items: center;
 }
 
+/* Login container styling */
 .login-container {
     background-color: #f0f0f0;
     display: flex;
@@ -76,36 +87,43 @@ body {
     text-align: center;
 }
 
+/* Heading styling for sign-up and login sections */
 .signup-container h1, .login-container h1 {
     font-size: 2em;
     margin-bottom: 20px;
 }
 
+/* Paragraph styling for sign-up and login sections */
 .signup-container p, .login-container p {
     margin-bottom: 20px;
 }
 
+/* Google login button and 'or' separator styling */
 .google-login, .or {
     width: 100%;
     max-width: 300px;
     text-align: center;
 }
 
+/* Form styling */
 form {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
+/* Label and input styling within forms */
 form label, form input, form button, .g-recaptcha, form p {
     width: 100%;
     max-width: 300px;
 }
 
+/* Label styling */
 form label {
     margin: 10px 0 5px;
 }
 
+/* Input field styling */
 form input[type="email"], form input[type="password"] {
     padding: 10px;
     margin-bottom: 20px;
@@ -113,6 +131,7 @@ form input[type="email"], form input[type="password"] {
     border-radius: 4px;
 }
 
+/* Button styling */
 form button {
     padding: 10px 20px;
     border: none;
@@ -123,6 +142,7 @@ form button {
     cursor: pointer;
 }
 
+/* Paragraph and link styling within forms */
 form p {
     margin-top: 20px;
 }
@@ -136,7 +156,8 @@ form p a:hover {
     text-decoration: underline;
 }
 
-.login-container button {
+/* Login button styling */
+.login-button {
     padding: 10px 20px;
     border: none;
     border-radius: 4px;
@@ -146,24 +167,9 @@ form p a:hover {
     cursor: pointer;
 }
 
-.google-login {
-    background-color: white;
-    color: black;
-    border: 1px solid #ddd;
-    padding: 10px 20px;
-    border-radius: 5px;
-    font-size: 16px;
+/* Google login button styling */
+#g_id_onload, .g_id_signin {
     margin-bottom: 20px;
-    cursor: pointer;
 }
 
-.google-login i {
-    margin-right: 10px;
-}
-
-.or {
-    margin: 20px 0;
-    font-size: 14px;
-    color: #666;
-}
 
