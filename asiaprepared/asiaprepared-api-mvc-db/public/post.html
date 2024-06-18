@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Link to external CSS file -->
+    <link rel="stylesheet" href="../public/styles/forum.css">
+    <link rel="stylesheet" href="../public/styles/post.css">
+    <!-- Link to Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <!-- Link to Google Material Icons -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <!-- Link to Bootstrap -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <title>Post</title>
+</head>
+<body>
+    <!-- Navbar -->
+    <div class="navbar">
+        <nav>
+            <a href="index.html"><img src="img/bedlogo.png" alt="logobrand" width="80" height="80"></a>
+            <div class="search-bar">
+                <input type="text" placeholder="Search...">
+                <i class="fas fa-search search-icon"></i>
+            </div>
+                <a href="account.html"><img src="../public/img/icons8-test-account-50.png" alt="logobrand" width="80" height="80"></a>
+            </div>
+        </nav>  
+    </div>
+        <!-- Secondary Navbar -->
+        <div class="navbar">
+            <nav>
+                <a href="index.html">Home</a>
+                <a href="about.html">About</a>
+                <a href="account.html">Account</a>
+                <a href="userticform.html">Contact</a>
+                <div class="dropdown">
+                    <a href="#" class="dropbtn">Others</a>
+                    <div class="dropdown-content">
+                        <a href="#">Bookmark news</a>
+                        <a href="#">Bookmark Posts</a>
+                        <a href="#">Link 3</a>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </div>
+    <div class="full-post-container">
+        <div class="user-info" id="user4">
+            <img src="../public/img/icons8-circled-user-male-skin-type-7-64.png" alt="User Avatar" class="user-avatar">
+            <div class="username">User</div>
+        </div>
+        <div class="full-post-content">
+            <div class="full-post-image">
+                <button class="full-view-button">Share</button>
+            </div>
+            <div class="full-post-actions">
+                <button class="full-action-button">Upvote</button>
+                <button class="full-action-button">Downvote</button>
+                <button class="full-action-button">Comments</button>
+            </div>
+        </div>
+    </div>
+    <div class="comment-container">
+        <h3 class="comment-word">
+            Comments
+        </h3>
+    </div>
+    <div class="center-screen">
+        <div class="form-group">
+            <h6 class="fw-bold mb-1">Name</h6>
+            <textarea class="form-control" rows="5" id="comment"></textarea>
+        </div>
+    </div>
+
+<!-- Footer -->
+ <footer>
+    <div class="footer-container">
+        <div class="footer-column">
+            <a href="index.html">
+                <img src="img/bedlogo.png" alt="logobrand" width="50" height="50">
+            </a>
+            <p>Asia Prepared to bring you southeast asia readiness awareness.</p>
+        </div>
+        <div class="footer-column">
+            <h2>About</h2>
+            <ul>
+                <li><a href="about.html">About</a></li>
+                <li><a href="account.html">Account</a></li>
+                <li><a href="qna.html">Q&A</a></li>
+                <li><a href="credit.html">Credit</a></li>
+            </ul>
+        </div>
+        <div class="footer-column">
+            <h2>Our Sections</h2>
+            <ul>
+                <li><a href="#">Recent</a></li>
+                <li><a href="#">Popular</a></li>
+                <li><a href="forum.html">Forum</a></li>
+                <li><a href="index.html">Home</a></li>
+            </ul>
+        </div>
+        <div class="footer-column">
+            <ul>
+                <li><a href="#">Contact</a></li>
+            </ul>
+            <div class="social-icons">
+                <a href="https://www.facebook.com/AsiaPrepareddddd?mibextid=LQQJ4d"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://www.instagram.com/asiaprepared?igsh=cDVzdmp2Y2VwNHZi&utm_source=qr"><i class="fab fa-instagram"></i></a>
+            </div>
+        </div>
+    </div>
+</footer>
+</body>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"></script>
+</html>

@@ -1,0 +1,8 @@
+.black-box {
+  display: flex;
+  justify-content: center;
+  width: calc(40% - 40px); /* Adjust width to account for padding */
+  height: 300px; /* Fixed height */
+  padding-top: 20px;
+  background-color: black;
+}
