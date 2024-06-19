@@ -6,12 +6,12 @@ const bodyParser = require("body-parser"); //import body parser
 // User Controllers //
 
 const loginController = require("../controllers/loginController")
-const userController = require("../controllers/userControllers");
-const postController = require("../controllers/userControllers");
-const commentController = require("../controllers/userControllers");
-const bookmarkController = require("../controllers/userControllers");
-const tagController = require("../controllers/userControllers");
-const voteController = require("../controllers/userControllers");
+const userController = require("../controllers/userController");
+const postController = require("../controllers/postController");
+const commentController = require("../controllers/commentController");
+const bookmarkController = require("../controllers/bookmarkController");
+const tagController = require("../controllers/tagController");
+const voteController = require("../controllers/voteController");
 
 // Ticketing Controllers // 
 
