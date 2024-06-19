@@ -1,0 +1,61 @@
+const sql = require("mssql");
+const dbConfig = require("../dbConfig");
+
+class Bookmark {
+  constructor(bookmarkID, userID, postID) {
+    this.bookmarkID = bookmarkID;
+    this.userID = userID;
+    this.postID = postID;
+  }
+
+  static async createBookmark(userID, postID) {
+    try {
+      const connection = await sql.connect(dbConfig);
+
+      const sqlQuery = `
+        INSERT INTO dbo.Bookmark (UserID, PostID)
+        VALUES (@userID, @postID);
+        SELECT SCOPE_IDENTITY() AS bookmarkID;
+      `;
+
+      const request = connection.request();
+      request.input("userID", sql.Int, userID);
+      request.input("postID", sql.Int, postID);
+
+      const result = await request.query(sqlQuery);
+
+      connection.close();
+
+      return new Bookmark(
+        result.recordset[0].bookmarkID,
+        userID,
+        postID
+      );
+    } catch (err) {
+      throw new Error(err.message);
+    }
+  }
+
+  static async deleteBookmark(bookmarkID) {
+    try {
+      const connection = await sql.connect(dbConfig);
+
+      const sqlQuery = `
+        DELETE FROM dbo.Bookmark WHERE BookmarkID = @bookmarkID;
+      `;
+
+      const request = connection.request();
+      request.input("bookmarkID", sql.Int, bookmarkID);
+
+      await request.query(sqlQuery);
+
+      connection.close();
+
+      return true; // Or you can return a success message if needed
+    } catch (err) {
+      throw new Error(err.message);
+    }
+  }
+}
+
+module.exports = Bookmark;
