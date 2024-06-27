@@ -3,8 +3,8 @@ const sql = require("mssql"); // import SQL
 const dbConfig = require("./dbConfig"); // import dbConfig
 const bodyParser = require("body-parser"); //import body parser 
 require('dotenv').config(); // Import dotenv
-const axios = require('axios'); // Import axios
-const { Configuration, OpenAIApi } = require('openai'); // Import OpenAI API
+const NewsAPI = require('newsapi');
+const newsapi = new NewsAPI(process.env.NEWS_API_KEY);
 
 // User Controllers //
 
@@ -67,79 +67,23 @@ app.use(staticMiddleware); // Mount the static middleware
 
 
 
-
-
-
-// Set up OpenAI configuration
-const configuration = new Configuration({
-    apiKey: process.env.OPENAI_API_KEY,
-  });
-  const openai = new OpenAIApi(configuration);
-  
-  app.use(express.json());
-  
-  // In-memory store for posts
-  const posts = [];
-  
-  app.get('/', (req, res) => {
-    res.send('Welcome to the Southeast Asia Readiness API');
-  });
-  
-  // Route to generate a new post
-  app.post('/generate-post', async (req, res) => {
-    try {
-      const { topic } = req.body;
-  
-      // Fetch news data from NewsAPI
-      const newsResponse = await axios.get('https://newsapi.org/v2/everything', {
-        params: {
-          q: topic,
-          apiKey: process.env.NEWS_API_KEY,
+//setup route for news
+app.get('/news', async (req, res) => {
+  try {
+      const response = await newsapi.v2.topHeadlines({
+          sources: 'bbc-news,the-verge',
+          q: 'bitcoin',
+          category: 'business',
           language: 'en',
-          sortBy: 'publishedAt',
-          pageSize: 1
-        }
+          country: 'us'
       });
-  
-      const articles = newsResponse.data.articles;
-      if (articles.length === 0) {
-        return res.status(404).send('No news articles found for the given topic');
-      }
-  
-      const article = articles[0];
-  
-      // Generate additional content using OpenAI
-      const completion = await openai.createCompletion({
-        model: 'text-davinci-003',
-        prompt: `Generate a readiness post about the following news article in Southeast Asia: ${article.title}. ${article.description}. Include a brief summary and any additional insights.`,
-        max_tokens: 150,
-      });
-  
-      const content = completion.data.choices[0].text.trim();
-  
-      const post = {
-        id: Date.now(), // Generate a unique ID based on the current timestamp
-        picture: article.urlToImage,
-        content: content,
-        source: article.url,
-      };
-  
-      // Store the post in the in-memory store
-      posts.push(post);
-  
-      res.json(post);
-    } catch (error) {
-      console.error(error);
-      res.status(500).send('Error generating post');
-    }
-  });
-  
-// Route to retrieve all posts
-app.get('/posts', (req, res) => {
-    res.json(posts);
-  });
+      res.json(response.articles);
+  } catch (error) {
+      console.error('Error fetching news:', error);
+      res.status(500).json({ error: 'Failed to fetch news' });
+  }
+});
 
-//-----------------//
 
 app.listen(port, async () => {
     try {

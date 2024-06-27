@@ -1,0 +1,29 @@
+document.addEventListener('DOMContentLoaded', async () => {
+    try {
+        const response = await fetch('/news');
+        const articles = await response.json();
+
+        articles.slice(0, 3).forEach((article, index) => {
+            const post = document.querySelector(`#news${index + 1}`);
+            if (post) {
+                const imgElement = post.querySelector('img');
+                const countryElement = post.querySelector('.country');
+                const subtitleElement = post.querySelector('.subtitle');
+
+                if (imgElement) {
+                    imgElement.src = article.urlToImage || '../public/img/default-image.jpg';
+                }
+
+                if (countryElement) {
+                    countryElement.textContent = article.source.name || 'Unknown Source';
+                }
+
+                if (subtitleElement) {
+                    subtitleElement.textContent = article.title || 'No Title';
+                }
+            }
+        });
+    } catch (error) {
+        console.error('Error fetching news:', error);
+    }
+});
