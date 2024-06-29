@@ -2,24 +2,25 @@ const express = require("express"); // import Express
 const sql = require("mssql"); // import SQL
 const dbConfig = require("./dbConfig"); // import dbConfig
 const bodyParser = require("body-parser"); //import body parser
-var cors = require("cors");
+var cors = require('cors'); // import cors
 const NewsAPI = require("newsapi");
 const newsapi = new NewsAPI('1ddba88858ce46cfa190cddd3143d4ae');
 
+
 // User Controllers //
 
-const loginController = require("../controllers/loginController");
-const userController = require("../controllers/userController");
-const postController = require("../controllers/postController");
-const commentController = require("../controllers/commentController");
-const bookmarkController = require("../controllers/bookmarkController");
-const tagController = require("../controllers/tagController");
-const voteController = require("../controllers/voteController");
+const loginController = require('./controllers/loginController');
+const userController = require("./controllers/userController");
+const postController = require("./controllers/postController");
+const commentController = require("./controllers/commentController");
+const bookmarkController = require("./controllers/bookmarkController");
+const tagController = require("./controllers/tagController");
+const voteController = require("./controllers/voteController");
 
 // Ticketing Controllers //
 
-const ticketController = require("../controllers/ticketController");
-const ticketReplyController = require("../controllers/ticketReplyController");
+const ticketController = require("./controllers/ticketController");
+const ticketReplyController = require("./controllers/ticketReplyController");
 
 // -------------------- //
 
@@ -31,23 +32,47 @@ const port = process.env.PORT || 3000; // Use Environment variable or default po
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true })); // For form data handling
-app.use(cors()); // Enable CORS
+app.use(cors()); // Use CORS middleware
 app.use(staticMiddleware); // Mount the static middleware
 
-// Route for fetching top headlines
-app.get("/news", async (req, res) => {
-  try {
-    const response = await newsapi.v2.topHeadlines({
-      q: "southeast asia readiness",
-      language: "en",
-      country: "sg,my,ph,id,th,vn,la,mm,kh,timor-leste,brunei"
-    });
-    res.json(response.articles);
-  } catch (error) {
-    console.error("Error fetching news:", error);
-    res.status(500).json({ error: "Failed to fetch news" });
-  }
+
+
+// To query /v2/everything
+// You must include at least one q, source, or domain
+newsapi.v2.everything({
+  q: 'southeast asia readiness',
+  sources: 'bbc-news,the-verge',
+  domains: 'bbc.co.uk, techcrunch.com',
+  from: '2020-12-01',
+  to: '2023-12-12',
+  language: 'en',
+  sortBy: 'relevancy',
+  page: 2
+}).then(response => {
+  console.log(response);
+  /*
+    {
+      status: "ok",
+      articles: [...]
+    }
+  */
 });
+// To query sources
+// All options are optional
+newsapi.v2.sources({
+  category: 'technology',
+  language: 'en',
+  country: 'us'
+}).then(response => {
+  console.log(response);
+  /*
+    {
+      status: "ok",
+      sources: [...]
+    }
+  */
+});
+
 
 // Route for fetching general news
 app.get("/news/general", async (req, res) => {
@@ -110,3 +135,4 @@ process.on("SIGINT", async () => {
   console.log("Database connection closed");
   process.exit(0); // Exit with code 0 indicating successful shutdown
 });
+

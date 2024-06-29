@@ -75,6 +75,3 @@ document.addEventListener('DOMContentLoaded', async () => {
         // Handle errors, e.g., display an error message to the user
     }
 });
-
-
-
