@@ -2,27 +2,31 @@ const sql = require("mssql");
 const dbConfig = require("../dbConfig");
 
 class Login {
-  constructor(id, name, email, password) {
+  constructor(id, username, contactNo, email, password) {
     this.id = id;
-    this.name = name;
-    this.email = email;
+    this.username = username;
+    this.contactNo = contactNo || ""; // Handle NULL contactNo
+    this.email = email || ""; // Handle NULL email
     this.password = password;
   }
+
   static async createUser(newUserData) {
     const connection = await sql.connect(dbConfig);
 
     const sqlQuery = `
-            INSERT INTO UserAcc (Username, UserContactNo, Useremail, UserPass)
-            VALUES (@username, @contact, @email, @password);
-            SELECT SCOPE_IDENTITY() AS id;
-        `;
+      INSERT INTO UserAcc (Username, UserContactNo, Useremail, UserPass)
+      VALUES (@username, @contact, @email, @password);
+      SELECT SCOPE_IDENTITY() AS id, Username, UserContactNo, Useremail, UserPass
+      FROM UserAcc
+      WHERE UserID = SCOPE_IDENTITY();
+    `;
 
     const request = connection.request();
 
     request.input("username", newUserData.username);
     request.input("password", newUserData.password);
-    if (newUserData.contact) {
-      request.input("contact", newUserData.contact);
+    if (newUserData.contactNo) {
+      request.input("contact", newUserData.contactNo);
     } else {
       request.input("contact", null);
     }
@@ -32,10 +36,21 @@ class Login {
     } else {
       request.input("email", null);
     }
+
     const result = await request.query(sqlQuery);
 
     connection.close();
+
+    const newUser = result.recordset[0];
+    return new Login(
+      newUser.id,
+      newUser.Username,
+      newUser.UserContactNo,
+      newUser.Useremail,
+      newUser.UserPass
+    );
   }
+
   static async loginUser(username, password) {
     try {
       await sql.connect(dbConfig);
