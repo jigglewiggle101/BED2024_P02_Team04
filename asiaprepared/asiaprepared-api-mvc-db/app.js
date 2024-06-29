@@ -1,27 +1,29 @@
+
 const express = require("express"); // import Express
 const sql = require("mssql"); // import SQL
 const dbConfig = require("./dbConfig"); // import dbConfig
 const bodyParser = require("body-parser"); //import body parser 
-require('dotenv').config(); // Import dotenv
+var cors = require('cors')
 const NewsAPI = require('newsapi');
-const newsapi = new NewsAPI(process.env.NEWS_API_KEY);
+const newsapi = new NewsAPI('1ddba88858ce46cfa190cddd3143d4ae');
 
 // User Controllers //
 
-const loginController = require("../controllers/loginController")
-const userController = require("../controllers/userController");
-const postController = require("../controllers/postController");
-const commentController = require("../controllers/commentController");
-const bookmarkController = require("../controllers/bookmarkController");
-const tagController = require("../controllers/tagController");
-const voteController = require("../controllers/voteController");
+const loginController = require("./controllers/loginController")
+const userController = require("./controllers/userController");
+const postController = require("./controllers/postController");
+const commentController = require("./controllers/commentController");
+const bookmarkController = require("./controllers/bookmarkController");
+const tagController = require("./controllers/tagController");
+const voteController = require("./controllers/voteController");
 
 // Ticketing Controllers // 
 
-const ticketController = require("../controllers/ticketController");
-const ticketReplyController = require("../controllers/ticketReplyController")
+const ticketController = require("./controllers/ticketController");
+const ticketReplyController = require("./controllers/ticketReplyController")
 
 // -------------------- //
+
 
 const app = express();
 
@@ -31,7 +33,7 @@ const port = process.env.PORT || 3000; // Use Environment variable or default po
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true })); // For form data handling
-
+app.use(cors()); // Enable CORS
 app.use(staticMiddleware); // Mount the static middleware
 
 //----- CRUD OPERATIONS ----- //
@@ -68,20 +70,57 @@ app.use(staticMiddleware); // Mount the static middleware
 
 
 //setup route for news
-app.get('/news', async (req, res) => {
-  try {
-      const response = await newsapi.v2.topHeadlines({
-          sources: 'bbc-news,the-verge',
-          q: 'bitcoin',
-          category: 'business',
-          language: 'en',
-          country: 'us'
-      });
-      res.json(response.articles);
-  } catch (error) {
-      console.error('Error fetching news:', error);
-      res.status(500).json({ error: 'Failed to fetch news' });
-  }
+// To query /v2/top-headlines
+// All options passed to topHeadlines are optional, but you need to include at least one of them
+newsapi.v2.topHeadlines({
+  sources: 'bbc-news,the-verge',
+  q: 'bitcoin',
+  category: 'business',
+  language: 'en',
+  country: 'us'
+}).then(response => {
+  console.log(response);
+  /*
+    {
+      status: "ok",
+      articles: [...]
+    }
+  */
+});
+// To query /v2/everything
+// You must include at least one q, source, or domain
+newsapi.v2.everything({
+  q: 'bitcoin',
+  sources: 'bbc-news,the-verge',
+  domains: 'bbc.co.uk, techcrunch.com',
+  from: '2017-12-01',
+  to: '2017-12-12',
+  language: 'en',
+  sortBy: 'relevancy',
+  page: 2
+}).then(response => {
+  console.log(response);
+  /*
+    {
+      status: "ok",
+      articles: [...]
+    }
+  */
+});
+// To query sources
+// All options are optional
+newsapi.v2.sources({
+  category: 'technology',
+  language: 'en',
+  country: 'us'
+}).then(response => {
+  console.log(response);
+  /*
+    {
+      status: "ok",
+      sources: [...]
+    }
+  */
 });
 
 
