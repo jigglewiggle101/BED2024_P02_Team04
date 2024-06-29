@@ -3,6 +3,8 @@ const Comment = require("../models/comment");
 const createComment = async (req, res) => {
   const { postID, userID, content, createDate } = req.body;
 
+  console.log('Received request body:', req.body); // Add this line to log the request body
+
   if (!postID || !userID || !content || !createDate) {
     return res.status(400).json({ message: 'PostID, UserID, content, and createDate are required' });
   }
@@ -52,3 +54,6 @@ module.exports = {
   updateComment,
   deleteComment,
 };
+
+
+// Commit - Added Console.log for debugging
