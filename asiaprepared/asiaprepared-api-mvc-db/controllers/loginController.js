@@ -13,7 +13,7 @@ const createUser = async (req, res) => {
 const login = async (req, res) => {
   const { username, password } = req.body;
   try {
-    const loginResult = await UserModel.loginUser(username, password);
+    const loginResult = await Login.loginUser(username, password);
 
     if (loginResult.success) {
       res.status(200).json({
