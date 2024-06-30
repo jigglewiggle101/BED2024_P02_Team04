@@ -56,13 +56,18 @@ class TicketReply {
 
       connection.close();
 
-      const replies = result.recordset.map(reply => new TicketReply(
-        reply.ReplyID,
-        reply.TicketID,
-        reply.UserID,
-        reply.ReplyContent,
-        reply.ReplyDate
-      ));
+      const replies = result.recordset.map(
+        (reply) =>
+          new TicketReply(
+            reply.ReplyID,
+            reply.TicketID,
+            reply.UserID,
+            reply.ReplyContent,
+            reply.ReplyDate
+          )
+      );
+
+      console.log("Retrieved replies:", replies); // Log retrieved replies for debugging
 
       return replies;
     } catch (err) {
