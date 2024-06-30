@@ -2,15 +2,24 @@ const sql = require("mssql");
 const dbConfig = require("../dbConfig");
 
 class Ticket {
-  constructor(ticketID, userID, title, description, images, status, createdDate, updatedDate) {
+  constructor(
+    ticketID,
+    userID,
+    title,
+    description,
+    images,
+    status,
+    createdDate,
+    updatedDate
+  ) {
     this.ticketID = ticketID;
     this.userID = userID;
     this.title = title;
     this.description = description;
-    this.images = images;
+    this.images = images || null;
     this.status = status;
     this.createdDate = createdDate;
-    this.updatedDate = updatedDate;
+    this.updatedDate = updatedDate || null;
   }
 
   static async createTicket(newTicketData) {
@@ -26,8 +35,16 @@ class Ticket {
       const request = connection.request();
       request.input("userID", sql.Int, newTicketData.userID);
       request.input("title", sql.VarChar(100), newTicketData.title);
-      request.input("description", sql.VarChar(sql.MAX), newTicketData.description);
-      request.input("images", sql.VarBinary(sql.MAX), newTicketData.images || null);
+      request.input(
+        "description",
+        sql.VarChar(sql.MAX),
+        newTicketData.description
+      );
+      request.input(
+        "images",
+        sql.VarBinary(sql.MAX),
+        newTicketData.images || null
+      );
       request.input("status", sql.VarChar(20), newTicketData.status);
 
       const result = await request.query(sqlQuery);
