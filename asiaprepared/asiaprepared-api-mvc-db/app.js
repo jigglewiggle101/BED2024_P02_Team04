@@ -2,14 +2,13 @@ const express = require("express"); // import Express
 const sql = require("mssql"); // import SQL
 const dbConfig = require("./dbConfig"); // import dbConfig
 const bodyParser = require("body-parser"); //import body parser
-var cors = require('cors'); // import cors
+var cors = require("cors"); // import cors
 const NewsAPI = require("newsapi");
-const newsapi = new NewsAPI('1ddba88858ce46cfa190cddd3143d4ae');
-
+const newsapi = new NewsAPI("1ddba88858ce46cfa190cddd3143d4ae");
 
 // User Controllers //
 
-const loginController = require('./controllers/loginController');
+const loginController = require("./controllers/loginController");
 const userController = require("./controllers/userController");
 const postController = require("./controllers/postController");
 const commentController = require("./controllers/commentController");
@@ -35,44 +34,45 @@ app.use(bodyParser.urlencoded({ extended: true })); // For form data handling
 app.use(cors()); // Use CORS middleware
 app.use(staticMiddleware); // Mount the static middleware
 
-
-
 // To query /v2/everything
 // You must include at least one q, source, or domain
-newsapi.v2.everything({
-  q: 'southeast asia readiness',
-  sources: 'bbc-news,the-verge',
-  domains: 'bbc.co.uk, techcrunch.com',
-  from: '2020-01-01',
-  to: '2024-05-28',
-  language: 'en',
-  sortBy: 'relevancy',
-  page: 2
-}).then(response => {
-  console.log(response);
-  /*
+newsapi.v2
+  .everything({
+    q: "southeast asia readiness",
+    sources: "bbc-news,the-verge",
+    domains: "bbc.co.uk, techcrunch.com",
+    from: "2020-01-01",
+    to: "2024-05-28",
+    language: "en",
+    sortBy: "relevancy",
+    page: 2,
+  })
+  .then((response) => {
+    console.log(response);
+    /*
     {
       status: "ok",
       articles: [...]
     }
   */
-});
+  });
 // To query sources
 // All options are optional
-newsapi.v2.sources({
-  category: 'technology',
-  language: 'en',
-  country: 'us'
-}).then(response => {
-  console.log(response);
-  /*
+newsapi.v2
+  .sources({
+    category: "technology",
+    language: "en",
+    country: "us",
+  })
+  .then((response) => {
+    console.log(response);
+    /*
     {
       status: "ok",
       sources: [...]
     }
   */
-});
-
+  });
 
 // Route for fetching general news
 app.get("/news/general", async (req, res) => {
@@ -80,7 +80,7 @@ app.get("/news/general", async (req, res) => {
     const response = await newsapi.v2.everything({
       q: "southeast asia readiness",
       language: "en",
-      sortBy: "relevancy"
+      sortBy: "relevancy",
     });
     res.json(response.articles);
   } catch (error) {
@@ -88,7 +88,6 @@ app.get("/news/general", async (req, res) => {
     res.status(500).json({ error: "Failed to fetch general news" });
   }
 });
-
 
 //----- CRUD OPERATIONS ----- //
 app.get("/user", userController.getAllUsers);
@@ -126,24 +125,43 @@ app.put("/comment/:id", commentController.updateComment); // Good Just Missing M
 app.delete("/comment/:id", commentController.deleteComment); // Good //
 app.delete("/vote/:id", voteController.deleteVote); // Good //
 
+//-----------------//
+
+// <Jesmine> //
+// GET OPERATIONS ( RETRIEVE ) //
+
+// (MISSING GET (Search Bookmarked))
+
+// POST OPERATIONS ( CREATE ) //
+app.post("/post", postController.createPost); // Good Just Missing Middleware //
+app.post("/bookmark", bookmarkController.createBookmark); // Good //
+
+// PUT OPERATIONS ( UPDATE ) //
+app.put("/post/:id", postController.updatePost); // Good Just Missing Middleware //
+
+// DELETE OPERATIONS ( DELETE )
+app.delete("/post/:id", postController.deletePost); // Good //
+app.delete("/bookmark/:id", bookmarkController.deleteBookmark); // Good //
 
 //-----------------//
 
-// <Jesmine> // 
-// GET OPERATIONS ( RETRIEVE ) // 
- 
-// (MISSING GET (Search Bookmarked)) 
- 
-// POST OPERATIONS ( CREATE ) // 
-app.post("/post", postController.createPost); // Good Just Missing Middleware // 
-app.post("/bookmark", bookmarkController.createBookmark); // Good // 
- 
-// PUT OPERATIONS ( UPDATE ) // 
-app.put("/post/:id", postController.updatePost); // Good Just Missing Middleware // 
- 
-// DELETE OPERATIONS ( DELETE ) 
-app.delete("/post/:id", postController.deletePost); // Good // 
-app.delete("/bookmark/:id", bookmarkController.deleteBookmark); // Good //
+// Kai Jie //
+// GET OPERATIONS ( RETRIEVE ) //
+app.get("/ticket/:id", ticketController.getTicketByID); // Good //
+app.get("/reply/:ticketID", ticketReplyController.getRepliesByTicketID); // Good //
+
+// POST OPERATIONS ( CREATE ) //
+app.post("/tag", tagController.createTag); // Good //
+app.post("/ticket", ticketController.createTicket); // Good //
+app.post("/reply", ticketReplyController.createReply); // Good //
+
+// PUT OPERATIONS ( UPDATE ) //
+app.put("/ticket/:id", ticketController.updateTicketStatus); // Good //
+
+// DELETE OPERATIONS ( DELETE )
+app.delete("/tag/:id", tagController.deleteTag); // Good //
+
+//-----------------//
 
 app.listen(port, async () => {
   try {
@@ -167,4 +185,3 @@ process.on("SIGINT", async () => {
   console.log("Database connection closed");
   process.exit(0); // Exit with code 0 indicating successful shutdown
 });
-
