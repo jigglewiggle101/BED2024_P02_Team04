@@ -43,8 +43,8 @@ newsapi.v2.everything({
   q: 'southeast asia readiness',
   sources: 'bbc-news,the-verge',
   domains: 'bbc.co.uk, techcrunch.com',
-  from: '2020-12-01',
-  to: '2023-12-12',
+  from: '2020-01-01',
+  to: '2024-05-28',
   language: 'en',
   sortBy: 'relevancy',
   page: 2
