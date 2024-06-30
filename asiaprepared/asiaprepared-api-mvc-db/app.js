@@ -129,7 +129,21 @@ app.delete("/vote/:id", voteController.deleteVote); // Good //
 
 //-----------------//
 
-
+// <Jesmine> // 
+// GET OPERATIONS ( RETRIEVE ) // 
+ 
+// (MISSING GET (Search Bookmarked)) 
+ 
+// POST OPERATIONS ( CREATE ) // 
+app.post("/post", postController.createPost); // Good Just Missing Middleware // 
+app.post("/bookmark", bookmarkController.createBookmark); // Good // 
+ 
+// PUT OPERATIONS ( UPDATE ) // 
+app.put("/post/:id", postController.updatePost); // Good Just Missing Middleware // 
+ 
+// DELETE OPERATIONS ( DELETE ) 
+app.delete("/post/:id", postController.deletePost); // Good // 
+app.delete("/bookmark/:id", bookmarkController.deleteBookmark); // Good //
 
 app.listen(port, async () => {
   try {
