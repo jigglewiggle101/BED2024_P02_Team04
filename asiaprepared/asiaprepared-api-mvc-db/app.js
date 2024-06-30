@@ -110,6 +110,24 @@ app.delete("/post", postController.deletePost); //Admin can Delete Any Post (Rou
 
 //-----------------//
 
+// AIMAN //
+// GET OPERATIONS ( RETRIEVE ) //
+
+// (Missing GET (Search News))//
+
+// POST OPERATIONS ( CREATE ) //
+app.post("/comment", commentController.createComment); // Good Just Missing Middleware //
+app.post("/vote", voteController.createVote); // Alright Just Missing Middleware and Duplicates Error  //
+
+// PUT OPERATIONS ( UPDATE ) //
+app.put("/comment/:id", commentController.updateComment); // Good Just Missing Middleware //
+
+// DELETE OPERATIONS ( DELETE )
+app.delete("/comment/:id", commentController.deleteComment); // Good //
+app.delete("/vote/:id", voteController.deleteVote); // Good //
+
+
+//-----------------//
 
 
 
