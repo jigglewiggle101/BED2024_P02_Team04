@@ -5,6 +5,7 @@ const bodyParser = require("body-parser"); //import body parser
 var cors = require("cors"); // import cors
 const NewsAPI = require("newsapi");
 const newsapi = new NewsAPI("1ddba88858ce46cfa190cddd3143d4ae");
+import { EventRegistry } from "eventregistry";
 
 // User Controllers //
 
@@ -88,6 +89,22 @@ app.get("/news/general", async (req, res) => {
     res.status(500).json({ error: "Failed to fetch general news" });
   }
 });
+
+// examples showing how to use the autosuggest functionalities for
+// concepts, sources, categories, locations, ....
+
+const er = new EventRegistry();
+
+// get concept uris for concepts based on the concept labels
+er.suggestConcepts("Obama", {lang: "eng", conceptLang: ["eng", "deu"]}).then((response) => {
+    console.info(response);
+});
+
+// get only the top concept that best matches the prefix
+er.getConceptUri("Obama").then((response) => {
+    console.info(`A URI of the top concept that contains the term 'Obama': ${response}`);
+});
+
 
 //----- CRUD OPERATIONS ----- //
 app.get("/user", userController.getAllUsers);
