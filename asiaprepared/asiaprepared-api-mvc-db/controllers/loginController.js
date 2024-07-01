@@ -11,7 +11,8 @@ const createUser = async (req, res) => {
   }
 };
 const login = async (req, res) => {
-  const { username, password } = req.body;
+  const { username, password } = req.query; // Assuming username and password are sent as query parameters
+
   try {
     const loginResult = await Login.loginUser(username, password);
 
