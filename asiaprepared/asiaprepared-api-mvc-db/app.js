@@ -129,8 +129,7 @@ app.delete("/vote/:id", voteController.deleteVote); // Good //
 
 // <Jesmine> //
 // GET OPERATIONS ( RETRIEVE ) //
-
-// (MISSING GET (Search Bookmarked))
+app.get("/bookmarks/search", bookmarkController.searchBookmarkByContent);
 
 // POST OPERATIONS ( CREATE ) //
 app.post("/post", postController.createPost); // Good Just Missing Middleware //
@@ -174,7 +173,7 @@ app.listen(port, async () => {
     process.exit(1); // Exit with code 1 indicating an error
   }
 
-  console.log(`Server listening on port ${port}`);
+  console.log("Server listening on port ${port}");
 });
 
 // Close the connection pool on SIGINT signal
