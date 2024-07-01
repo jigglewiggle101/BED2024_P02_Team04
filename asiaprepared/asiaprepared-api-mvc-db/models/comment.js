@@ -45,26 +45,50 @@ class Comment {
   static async updateComment(commentID, updatedCommentData) {
     try {
       const connection = await sql.connect(dbConfig);
-
-      const sqlQuery = `
+  
+      const updateQuery = `
         UPDATE dbo.Comment
         SET Content = @content
         WHERE CommentID = @commentID;
       `;
-
-      const request = connection.request();
-      request.input("commentID", sql.Int, commentID);
-      request.input("content", sql.VarChar(255), updatedCommentData.content);
-
-      await request.query(sqlQuery);
-
+  
+      const selectQuery = `
+        SELECT CommentID, PostID, UserID, Content, CreateDate
+        FROM dbo.Comment
+        WHERE CommentID = @commentID;
+      `;
+  
+      // Update the comment
+      await connection
+        .request()
+        .input("commentID", sql.Int, commentID)
+        .input("content", sql.VarChar(255), updatedCommentData.content)
+        .query(updateQuery);
+  
+      // Fetch the updated comment
+      const result = await connection
+        .request()
+        .input("commentID", sql.Int, commentID)
+        .query(selectQuery);
+  
       connection.close();
-
-      return true; // Or you can return updated data if needed
+  
+      const updatedComment = result.recordset.map(
+        (row) =>
+          new Comment(
+            row.CommentID,
+            row.PostID,
+            row.UserID,
+            row.Content,
+            row.CreateDate
+          )
+      )[0];
+  
+      return updatedComment;
     } catch (err) {
       throw new Error(err.message);
     }
-  }
+  }  
 
   static async deleteComment(commentID) {
     try {

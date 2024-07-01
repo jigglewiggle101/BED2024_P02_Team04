@@ -184,3 +184,5 @@ process.on("SIGINT", async () => {
   console.log("Database connection closed");
   process.exit(0); // Exit with code 0 indicating successful shutdown
 });
+
+//just for information THE API was working not sure what happened... I will try to fix it

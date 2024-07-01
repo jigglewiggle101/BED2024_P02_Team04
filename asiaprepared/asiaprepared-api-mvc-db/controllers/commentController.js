@@ -23,16 +23,17 @@ const updateComment = async (req, res) => {
   const { content } = req.body;
 
   try {
-    const updated = await Comment.updateComment(commentID, { content });
-    if (!updated) {
+    const updatedComment = await Comment.updateComment(commentID, { content });
+    if (!updatedComment) {
       return res.status(404).json({ message: 'Comment not found' });
     }
-    res.json({ message: 'Comment updated successfully' });
+    res.json({ message: 'Comment updated successfully', comment: updatedComment });
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: 'Error updating comment', error: error.message });
   }
 };
+
 
 const deleteComment = async (req, res) => {
   const commentID = parseInt(req.params.id);
