@@ -4,7 +4,7 @@ const dbConfig = require("./dbConfig"); // import dbConfig
 const bodyParser = require("body-parser"); //import body parser
 var cors = require("cors"); // import cors
 const NewsAPI = require("newsapi");
-const newsapi = new NewsAPI("1ddba88858ce46cfa190cddd3143d4ae");
+const newsapi = new NewsAPI("8815aee61514412a95f61942901b141b");
 import { EventRegistry } from "eventregistry";
 
 // User Controllers //
