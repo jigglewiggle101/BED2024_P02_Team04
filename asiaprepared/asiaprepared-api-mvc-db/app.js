@@ -35,75 +35,7 @@ app.use(bodyParser.urlencoded({ extended: true })); // For form data handling
 app.use(cors()); // Use CORS middleware
 app.use(staticMiddleware); // Mount the static middleware
 
-// To query /v2/everything
-// You must include at least one q, source, or domain
-newsapi.v2
-  .everything({
-    q: "southeast asia readiness",
-    sources: "bbc-news,the-verge",
-    domains: "bbc.co.uk, techcrunch.com",
-    from: "2020-01-01",
-    to: "2024-05-28",
-    language: "en",
-    sortBy: "relevancy",
-    page: 2,
-  })
-  .then((response) => {
-    console.log(response);
-    /*
-    {
-      status: "ok",
-      articles: [...]
-    }
-  */
-  });
-// To query sources
-// All options are optional
-newsapi.v2
-  .sources({
-    category: "technology",
-    language: "en",
-    country: "us",
-  })
-  .then((response) => {
-    console.log(response);
-    /*
-    {
-      status: "ok",
-      sources: [...]
-    }
-  */
-  });
 
-// Route for fetching general news
-app.get("/news/general", async (req, res) => {
-  try {
-    const response = await newsapi.v2.everything({
-      q: "southeast asia readiness",
-      language: "en",
-      sortBy: "relevancy",
-    });
-    res.json(response.articles);
-  } catch (error) {
-    console.error("Error fetching general news:", error);
-    res.status(500).json({ error: "Failed to fetch general news" });
-  }
-});
-
-// examples showing how to use the autosuggest functionalities for
-// concepts, sources, categories, locations, ....
-
-const er = new EventRegistry();
-
-// get concept uris for concepts based on the concept labels
-er.suggestConcepts("Obama", {lang: "eng", conceptLang: ["eng", "deu"]}).then((response) => {
-    console.info(response);
-});
-
-// get only the top concept that best matches the prefix
-er.getConceptUri("Obama").then((response) => {
-    console.info(`A URI of the top concept that contains the term 'Obama': ${response}`);
-});
 
 
 //----- CRUD OPERATIONS ----- //
