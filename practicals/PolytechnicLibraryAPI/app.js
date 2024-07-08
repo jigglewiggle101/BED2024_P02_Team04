@@ -1,5 +1,7 @@
 require("dotenv").config(); // Make sure this is at the very top
 const express = require("express");
+const swaggerUi = require("swagger-ui-express");
+const swaggerDocument = require("./swagger-output.json"); // Import generated spec
 const { poolPromise } = require("./dbConfig");
 const { registerUser, login } = require("./controllers/authController");
 const {
@@ -10,6 +12,8 @@ const { verifyJWT, authorizeRoles } = require("./middlewares/authorizeUser");
 
 const app = express();
 app.use(express.json());
+
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 app.post("/register", registerUser);
 app.post("/login", login);
