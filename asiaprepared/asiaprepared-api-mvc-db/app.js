@@ -1,11 +1,12 @@
+require("dotenv").config();
 const express = require("express"); // import Express
 const sql = require("mssql"); // import SQL
 const dbConfig = require("./dbConfig"); // import dbConfig
 const bodyParser = require("body-parser"); //import body parser
-var cors = require("cors"); // import cors
-const NewsAPI = require("newsapi");
-const newsapi = new NewsAPI("8815aee61514412a95f61942901b141b");
-import { EventRegistry } from "eventregistry";
+const cors = require("cors"); // import cors
+
+
+
 
 // User Controllers //
 
@@ -34,6 +35,54 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true })); // For form data handling
 app.use(cors()); // Use CORS middleware
 app.use(staticMiddleware); // Mount the static middleware
+
+const GNEWS_API_KEY = process.env.GNEWS_API_KEY || 'dffe0c45dddbbbcaea086977e5475a0d';
+
+// Routes for fetching news data from GNews API
+app.get("/news/top-headlines", async (req, res) => {
+  const { type } = req.query;
+  let apiUrl = `https://gnews.io/api/v4/top-headlines?category=general,world,nation,business,technology,science,health&lang=en&country=sg,my,ph,bn,kh,id,la,mm,th,vn,id&max=10&apikey=${GNEWS_API_KEY}`;
+
+  if (type === 'forum') {
+    apiUrl = `https://gnews.io/api/v4/search?q=forum&lang=en&country=sg,my,ph,bn,kh,id,la,mm,th,vn,id&max=20&apikey=${GNEWS_API_KEY}`;
+  }
+
+  try {
+      const response = await fetch(apiUrl);
+      const data = await response.json();
+      res.json(data.articles);
+  } catch (error) {
+      console.error('Error fetching news:', error);
+      res.status(500).json({ error: 'Failed to fetch news' });
+  }
+});
+
+app.get("/news/search", async (req, res) => {
+  const query = req.query.q || 'example';
+  try {
+      const response = await fetch(`https://gnews.io/api/v4/search?q=${query}&lang=en&country=sg,my,ph,bn,kh,id,la,mm,th,vn,id&max=10&apikey=${GNEWS_API_KEY}`);
+      const data = await response.json();
+      res.json(data.articles);
+  } catch (error) {
+      console.error('Error fetching general news:', error);
+      res.status(500).json({ error: 'Failed to fetch general news' });
+  }
+});
+
+// new endpoint for forum-related articles
+app.get("/news/forum", async (req, res) => {
+  const query = req.query.q || 'forum';
+  try {
+      const response = await fetch(`https://gnews.io/api/v4/search?q=${query}&lang=en&country=sg,my,ph,bn,kh,id,la,mm,th,vn,id&max=20&apikey=${GNEWS_API_KEY}`);
+      const data = await response.json();
+      res.json(data.articles);
+  } catch (error) {
+      console.error('Error fetching forum news:', error);
+      res.status(500).json({ error: 'Failed to fetch forum news' });
+  }
+});
+
+
 
 
 
@@ -122,7 +171,7 @@ app.listen(port, async () => {
     process.exit(1); // Exit with code 1 indicating an error
   }
 
-  console.log("Server listening on port ${port}");
+  console.log(`Server listening on port ${port}`);
 });
 
 // Close the connection pool on SIGINT signal
@@ -134,4 +183,5 @@ process.on("SIGINT", async () => {
   process.exit(0); // Exit with code 0 indicating successful shutdown
 });
 
-//just for information THE API was working not sure what happened... I will try to fix it
+
+//forum articles got some issue..will fix later
