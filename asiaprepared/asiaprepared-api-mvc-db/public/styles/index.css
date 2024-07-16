@@ -7,7 +7,7 @@
 
 /* Body styling */
 body {
-    font-family: 'Playfair Display', serif;
+    font-family: "Playfair Display", serif;
     line-height: 1.6;
 }
 
@@ -71,7 +71,7 @@ body {
     display: none;
     position: absolute;
     background-color: white;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
     z-index: 1;
 }
 
@@ -117,7 +117,7 @@ body {
 .content {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-around;
+    justify-content: space-between; /* Adjusted */
     padding: 20px;
 }
 
@@ -125,9 +125,22 @@ body {
 .post {
     background-color: white;
     margin: 10px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
-    width: calc(33% - 20px);
-    box-sizing: border-box;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: calc(33.333% - 20px); /* Adjust width for three columns */
+    position: relative;
+    padding: 10px;
+}
+
+/* Share button styling */
+.share-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    padding: 5px 10px;
+    background-color: white;
+    border: 1px solid gray;
+    border-radius: 20px;
+    cursor: pointer;
 }
 
 /* Post image styling */
@@ -229,7 +242,7 @@ body {
 .post-container {
     background-color: white;
     border-radius: 10px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     margin: 20px auto;
     padding: 20px;
     max-width: 600px;
@@ -240,6 +253,7 @@ body {
     display: flex;
     align-items: center;
     margin-bottom: 20px;
+    position: relative;
 }
 
 /* User avatar styling */
@@ -256,6 +270,14 @@ body {
     color: white;
     padding: 5px 10px;
     border-radius: 10px;
+}
+
+/* Share button in user info */
+.user-info .share-button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 0;
 }
 
 /* Post content section styling */

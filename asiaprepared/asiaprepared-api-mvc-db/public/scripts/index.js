@@ -7,12 +7,32 @@ document.addEventListener('DOMContentLoaded', async () => {
         // Update top headlines section
         updateTopHeadlines(topHeadlinesArticles);
 
-        // Fetch search results (example query)
-        const responseSearchNews = await fetch('/news/search?q=example');
+        // Fetch search results (initially empty or default query)
+        const searchQuery = document.getElementById('search-input').value;
+        const responseSearchNews = await fetch(`/news/search?q=${searchQuery}`);
         const searchNewsArticles = await responseSearchNews.json();
 
         // Update search results section
         updateSearchResults(searchNewsArticles);
+
+        // Add event listener to search button
+        document.getElementById('search-button').addEventListener('click', async () => {
+            const searchQuery = document.getElementById('search-input').value;
+            const responseSearchNews = await fetch(`/news/search?q=${searchQuery}`);
+            const searchNewsArticles = await responseSearchNews.json();
+            updateSearchResults(searchNewsArticles);
+        });
+
+        // Add event listener for enter key press in search input
+        document.getElementById('search-input').addEventListener('keypress', async (event) => {
+            if (event.key === 'Enter') {
+                const searchQuery = document.getElementById('search-input').value;
+                const responseSearchNews = await fetch(`/news/search?q=${searchQuery}`);
+                const searchNewsArticles = await responseSearchNews.json();
+                updateSearchResults(searchNewsArticles);
+            }
+        });
+
     } catch (error) {
         console.error('Error fetching or updating news:', error);
     }
@@ -28,6 +48,8 @@ function updateTopHeadlines(articles) {
             const postImage = postElement.querySelector(`.img${index + 1}`);
             const countryElement = postElement.querySelector('.country');
             const subtitleElement = postElement.querySelector('.subtitle');
+            const shareButton = postElement.querySelector('.share-button');
+            const viewButton = postElement.querySelector('.view-button');
 
             if (postImage) {
                 postImage.src = article.image || '/img/default-post.jpg';
@@ -41,30 +63,78 @@ function updateTopHeadlines(articles) {
             if (subtitleElement) {
                 subtitleElement.textContent = article.title || 'No Title';
             }
+
+            if (shareButton) {
+                shareButton.innerHTML = `
+                    Share
+                    <div class="share-options">
+                        <a href="https://api.whatsapp.com/send?text=${encodeURIComponent(article.url)}" target="_blank">WhatsApp</a>
+                        <a href="https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(article.url)}" target="_blank">Facebook</a>
+                        <a href="https://twitter.com/intent/tweet?url=${encodeURIComponent(article.url)}" target="_blank">Twitter</a>
+                    </div>
+                `;
+                shareButton.addEventListener('click', (event) => {
+                    event.stopPropagation();
+                    shareButton.querySelector('.share-options').classList.toggle('visible');
+                });
+            }
+
+            if (viewButton) {
+                viewButton.addEventListener('click', () => {
+                    window.open(article.url, '_blank');
+                });
+            }
         }
     });
 }
 
 function updateSearchResults(articles) {
     articles.slice(0, 4).forEach((article, index) => {
-        const postImage = document.querySelector(`#image${index + 1} .imgretrieved`);
-        const postText = document.querySelector(`#text${index + 1}`);
-        const viewButton = document.querySelector(`#image${index + 1} .view-button`);
+        const postContainer = document.querySelector(`#image${index + 1}`).closest('.post-container');
+        const postImage = postContainer.querySelector('.imgretrieved');
+        const postText = postContainer.querySelector('.post-text');
+        const viewButton = postContainer.querySelector('.view-button');
+        const postTitle = postContainer.querySelector('.headline');
+        const shareButton = postContainer.querySelector('.share-button');
 
         if (postImage) {
             postImage.src = article.image || '/img/default-post.jpg';
-            postImage.alt = article.title || 'Image not available';
         }
 
         if (postText) {
             postText.innerHTML = `<p>${article.description || 'No description available.'}</p>`;
         }
 
+        if (postTitle) {
+            postTitle.innerHTML = `<h2>${article.title || 'No title available.'}</h2>`;
+        }
+
         if (viewButton) {
             viewButton.innerHTML = `<a href="${article.url || '#'}" target="_blank">Read More</a>`;
         }
+
+        if (shareButton) {
+            shareButton.innerHTML = `
+                Share
+                <div class="share-options">
+                    <a href="https://api.whatsapp.com/send?text=${encodeURIComponent(article.url)}" target="_blank">WhatsApp</a>
+                    <a href="https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(article.url)}" target="_blank">Facebook</a>
+                    <a href="https://twitter.com/intent/tweet?url=${encodeURIComponent(article.url)}" target="_blank">Twitter</a>
+                </div>
+            `;
+            shareButton.addEventListener('click', (event) => {
+                event.stopPropagation();
+                shareButton.querySelector('.share-options').classList.toggle('visible');
+            });
+        }
     });
 }
+
+
+
+
+
+
 
 
 

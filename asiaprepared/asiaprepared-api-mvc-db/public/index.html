@@ -18,8 +18,8 @@
         <nav>
             <a href="signup.html"><img src="img/bedlogo.png" alt="logobrand" width="80" height="80"></a>
             <div class="search-bar">
-                <input type="text" placeholder="Search...">
-                <i class="fas fa-search search-icon"></i>
+                <input type="text" id="search-input" placeholder="Search...">
+                <i class="fas fa-search search-icon" id="search-button"></i>
             </div>
                 <a href="account.html"><img src="img/icons8-test-account-50.png" alt="logobrand" width="80" height="80"></a>
             </div>
@@ -43,31 +43,38 @@
     </div>
 </div> 
 
-   <!-- Post 1 -->
-    <div class="content">
-        <div class="post" id="news1">
-            <img src="img/ser1.jpg" alt="Image 1" class="img1" style="width:100%">
-            <div class="overlay">
-                <div class="country">Country</div>
-                <div class="subtitle">Subtitle</div>
-            </div>
+<div class="content">
+<!-- Post 1 -->
+    <div class="post" id="news1">
+        <button class="view-button">View</button>
+        <img src="" alt="Post image 1" class="img1" style="width:100%">
+        <div class="overlay">
+            <div class="country">Country</div>
+            <div class="subtitle">Subtitle</div>
         </div>
-           <!-- Post 2 -->
-        <div class="post" id="news2">
-            <img src="img/ser2.jpg" alt="Image 2"  class="img2" style="width:100%">
-            <div class="overlay">
-                <div class="country">Country</div>
-                <div class="subtitle">Subtitle</div>
-            </div>
+    </div>
+    <!-- Post 2 -->
+    <div class="post" id="news2">
+        <button class="view-button">View</button>
+        <img src="" alt="Post image 2" class="img2" style="width:100%">
+        <div class="overlay">
+            <div class="country">Country</div>
+            <div class="subtitle">Subtitle</div>
         </div>
-           <!-- Post 3 -->
-        <div class="post" id="news3">
-            <img src="img/ser3.jpg" alt="Image 3" class="img3" style="width:100%">
-            <div class="overlay">
-                <div class="country">Country</div>
-                <div class="subtitle">Subtitle</div>
-            </div>
+    </div>
+    <!-- Post 3 -->
+    <div class="post" id="news3">
+        <button class="view-button">View</button>
+        <img src="" alt="Post image 3" class="img3" style="width:100%">
+        <div class="overlay">
+            <div class="country">Country</div>
+            <div class="subtitle">Subtitle</div>
         </div>
+    </div>
+</div>
+</div>
+
+
 
          <!-- Grid of Posts -->
         <div class="posts-grid">
@@ -80,9 +87,16 @@
                 <div class="post-content">
                     <div class="post-image" id="image1">
                         <img src="img/icons8-circled-user-male-skin-type-7-64.png" alt="imgretrieved" class="imgretrieved">
-                        <button class="view-button">Share</button>
+                        <button class="share-button">Share
+                            <div class="share-options">
+                                <a href="#">WhatsApp</a>
+                                <a href="#">Facebook</a>
+                                <a href="#">Twitter</a>
+                            </div>
+                        </button>
                     </div>
                     <div class="post-text" id="text1">
+                    <div class="headline" id="headline1"></div>
                     </div>
                     <div class="post-actions">
                         <button class="action-button">Upvote</button>
@@ -100,9 +114,16 @@
                 <div class="post-content">
                     <div class="post-image" id="image2">
                         <img src="/img/icons8-circled-user-male-skin-type-7-64.png" alt="imgretrieved" class="imgretrieved">
-                        <button class="view-button">Share</button>
+                        <button class="share-button">Share
+                            <div class="share-options">
+                                <a href="#">WhatsApp</a>
+                                <a href="#">Facebook</a>
+                                <a href="#">Twitter</a>
+                            </div>
+                        </button>
                     </div>
                     <div class="post-text" id="text2">
+                    <div class="headline" id="headline2"></div>
                     </div>
                     <div class="post-actions">
                         <button class="action-button">Upvote</button>
@@ -121,9 +142,16 @@
                 <div class="post-content">
                     <div class="post-image" id="image3">
                         <img src="/img/icons8-circled-user-male-skin-type-7-64.png" alt="imgretrieved" class="imgretrieved" style="width:80%">
-                        <button class="view-button">Share</button>
+                        <button class="share-button">Share
+                            <div class="share-options">
+                                <a href="#">WhatsApp</a>
+                                <a href="#">Facebook</a>
+                                <a href="#">Twitter</a>
+                            </div>
+                        </button>
                     </div>
                     <div class="post-text" id="text3">
+                    <div class="headline" id="headline3"></div>
                     </div>
                     <div class="post-actions">
                         <button class="action-button">Upvote</button>
@@ -142,9 +170,16 @@
                 <div class="post-content">
                     <div class="post-image" id="image4">
                         <img src="/img/icons8-circled-user-male-skin-type-7-64.png" alt="imgretrieved" class="imgretrieved">
-                        <button class="view-button">Share</button>
+                        <button class="share-button">Share
+                            <div class="share-options">
+                                <a href="#">WhatsApp</a>
+                                <a href="#">Facebook</a>
+                                <a href="#">Twitter</a>
+                            </div>
+                        </button>
                     </div>
                     <div class="post-text" id="text4">
+                    <div class="headline" id="headline4"></div>
                     </div>
                     <div class="post-actions">
                         <button class="action-button">Upvote</button>
@@ -155,6 +190,7 @@
             </div>
         </div>
     </div>
+
 
  <!-- Footer -->
  <footer>
