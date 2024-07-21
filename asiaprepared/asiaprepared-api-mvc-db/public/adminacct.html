@@ -1,0 +1,165 @@
+<!-- Using gignite.ai to create a simple admin dashboard screen -->
+<html lang="en"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AdminDashboardScreen</title>
+</head>
+<body>
+
+    <div style="display: flex; flex-direction: column; min-height: 100vh;">
+  <!-- Header -->
+  <header style="background-color: #1F2937;">
+    <div style="container mx-auto; padding: 24px 16px; display: flex; align-items: center; justify-content: space-between;">
+      <div style="display: flex; align-items: center; gap: 16px;">
+        <div style="position: relative; display: inline-flex; justify-content: center; align-items: center; overflow: hidden; background-color: #F3F4F6; border-radius: 9999px; height: 40px; width: 40px;">
+          <img src="https://storage.gignite.ai/mediaengine/gignite-logo.png" alt="Avatar" style="height: 100%; width: 100%; object-fit: cover; border-radius: 9999px;">
+        </div>
+        <h1 style="font-size: 1.5rem; font-weight: 700; color: #FFFFFF;">User Management</h1>
+      </div>
+      <div style="display: flex; align-items: center; gap: 16px;">
+        <input type="text" placeholder="Search users..." style="border-radius: 8px; padding: 8px 16px; background-color: #374151; color: #FFFFFF; placeholder-color: #9CA3AF; outline: none; ring: 2px solid #06B6D4; ring-offset: none;">
+        <button style="padding: 8px; color: #FFFFFF; background-color: transparent; border-radius: 4px; transition: background-color 0.2s ease-in-out;">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" style="height: 24px; width: 24px;">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a2 2 0 00-2-2h-3v-4h8V9a2 2 0 00-2-2h-6V3a2 2 0 00-2-2H9a2 2 0 00-2 2v4H1a2 2 0 00-2 2v5h8v4H3a2 2 0 00-2 2v2h5v-2a2 2 0 00-2-2H5v-4h6v4h-3a2 2 0 00-2 2v2h5z"></path>
+          </svg>
+        </button>
+        <div style="position: relative; display: inline-flex; justify-content: center; align-items: center; overflow: hidden; background-color: #F3F4F6; border-radius: 9999px; height: 40px; width: 40px;">
+          <img src="https://i.pravatar.cc/150" alt="Avatar" style="height: 100%; width: 100%; object-fit: cover; border-radius: 9999px;">
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main style="flex: 1;">
+    <div style="container mx-auto; padding: 32px 16px;">
+      <div style="display: grid; grid-template-columns: 1fr; gap: 24px; md:grid-template-columns: 1fr 1fr;">
+        <!-- User List -->
+        <div style="background-color: #FFFFFF; padding: 16px; border-radius: 8px; box-shadow: 0 1px 3px rgb(0 0 0 / 0.1), 0 1px 2px rgb(0 0 0 / 0.06);">
+          <h2 style="font-size: 1.125rem; font-weight: 600; margin-bottom: 16px;">User List</h2>
+          <table style="width: 100%; border-collapse: collapse;">
+            <caption style="caption-side: bottom; text-align: center; font-size: 0.875rem; color: gray;">List of users and their details</caption>
+            <thead>
+              <tr>
+                <th style="padding: 8px; text-align: left;">Name</th>
+                <th style="padding: 8px; text-align: left;">Email</th>
+                <th style="padding: 8px; text-align: left;">Role</th>
+                <th style="padding: 8px; text-align: left;">Last Login</th>
+                <th style="padding: 8px; text-align: right;">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td style="padding: 8px;">Jon Oh</td>
+                <td style="padding: 8px;">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" style="height: 16px; width: 16px; margin-right: 4px; display: inline;">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 12H2M16 12H2m11-6h6m-6 0H7m5 6h11m-11 0H7m6 0h5m-5 6h6m-6 0H7m11-6v2a2 2 0 01-2 2H6a2 2 0 01-2-2V10m0-2a2 2 0 00-2-2H1M11 20V6m-1 2h2"></path>
+                  </svg>
+                  jonoh@example.com
+                </td>
+                <td style="padding: 8px;">Admin</td>
+                <td style="padding: 8px;">2023-01-01</td>
+                <td style="padding: 8px; text-align: right;">
+                  <button style="display: inline-flex; align-items: center; justify-content: center; padding: 4px 8px; color: #3B82F6; background-color: transparent; border: 1px solid #E5E7EB; border-radius: 4px; transition: background-color 0.2s ease-in-out;">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" style="height: 16px; width: 16px; margin-right: 4px;">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8H16M12 8H8m0-4h10m-10 8h12m-12 8h12m-12 8h12m-8 8h8m-8-12h8m-8-8h8m-8-4h8"></path>
+                    </svg>
+                    View
+                  </button>
+                </td>
+              </tr>
+              <tr>
+                <td style="padding: 8px;">Jane Smith</td>
+                <td style="padding: 8px;">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" style="height: 16px; width: 16px; margin-right: 4px; display: inline;">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 12H2M16 12H2m11-6h6m-6 0H7m5 6h11m-11 0H7m6 0h5m-5 6h6m-6 0H7m11-6v2a2 2 0 01-2 2H6a2 2 0 01-2-2V10m0-2a2 2 0 00-2-2H1M11 20V6m-1 2h2"></path>
+                  </svg>
+                  janesmith@example.com
+                </td>
+                <td style="padding: 8px;">Manager</td>
+                <td style="padding: 8px;">2023-01-05</td>
+                <td style="padding: 8px; text-align: right;">
+                  <button style="display: inline-flex; align-items: center; justify-content: center; padding: 4px 8px; color: #3B82F6; background-color: transparent; border: 1px solid #E5E7EB; border-radius: 4px; transition: background-color 0.2s ease-in-out;">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" style="height: 16px; width: 16px; margin-right: 4px;">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8H16M12 8H8m0-4h10m-10 8h12m-12 8h12m-12 8h12m-8 8h8m-8-12h8m-8-8h8m-8-4h8"></path>
+                    </svg>
+                    View
+                  </button>
+                </td>
+              </tr>
+              <tr>
+                <td style="padding: 8px;">Michael Lee</td>
+                <td style="padding: 8px;">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" style="height: 16px; width: 16px; margin-right: 4px; display: inline;">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 12H2M16 12H2m11-6h6m-6 0H7m5 6h11m-11 0H7m6 0h5m-5 6h6m-6 0H7m11-6v2a2 2 0 01-2 2H6a2 2 0 01-2-2V10m0-2a2 2 0 00-2-2H1M11 20V6m-1 2h2"></path>
+                  </svg>
+                  michaellee@example.com
+                </td>
+                <td style="padding: 8px;">Analyst</td>
+                <td style="padding: 8px;">2023-01-03</td>
+                <td style="padding: 8px; text-align: right;">
+                  <button style="display: inline-flex; align-items: center; justify-content: center; padding: 4px 8px; color: #3B82F6; background-color: transparent; border: 1px solid #E5E7EB; border-radius: 4px; transition: background-color 0.2s ease-in-out;">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" style="height: 16px; width: 16px; margin-right: 4px;">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8H16M12 8H8m0-4h10m-10 8h12m-12 8h12m-12 8h12m-8 8h8m-8-12h8m-8-8h8m-8-4h8"></path>
+                    </svg>
+                    View
+                  </button>
+                </td>
+              </tr>
+              <tr>
+                <td style="padding: 8px;">Emily Brown</td>
+                <td style="padding: 8px;">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" style="height: 16px; width: 16px; margin-right: 4px; display: inline;">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 12H2M16 12H2m11-6h6m-6 0H7m5 6h11m-11 0H7m6 0h5m-5 6h6m-6 0H7m11-6v2a2 2 0 01-2 2H6a2 2 0 01-2-2V10m0-2a2 2 0 00-2-2H1M11 20V6m-1 2h2"></path>
+                  </svg>
+                  emilybrown@example.com
+                </td>
+                <td style="padding: 8px;">Designer</td>
+                <td style="padding: 8px;">2023-01-04</td>
+                <td style="padding: 8px; text-align: right;">
+                  <button style="display: inline-flex; align-items: center; justify-content: center; padding: 4px 8px; color: #3B82F6; background-color: transparent; border: 1px solid #E5E7EB; border-radius: 4px; transition: background-color 0.2s ease-in-out;">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" style="height: 16px; width: 16px; margin-right: 4px;">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8H16M12 8H8m0-4h10m-10 8h12m-12 8h12m-12 8h12m-8 8h8m-8-12h8m-8-8h8m-8-4h8"></path>
+                    </svg>
+                    View
+                  </button>
+                </td>
+              </tr>
+              <tr>
+                <td style="padding: 8px;">David Wilson</td>
+                <td style="padding: 8px;">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" style="height: 16px; width: 16px; margin-right: 4px; display: inline;">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 12H2M16 12H2m11-6h6m-6 0H7m5 6h11m-11 0H7m6 0h5m-5 6h6m-6 0H7m11-6v2a2 2 0 01-2 2H6a2 2 0 01-2-2V10m0-2a2 2 0 00-2-2H1M11 20V6m-1 2h2"></path>
+                  </svg>
+                  davidwilson@example.com
+                </td>
+                <td style="padding: 8px;">Developer</td>
+                <td style="padding: 8px;">2023-01-02</td>
+                <td style="padding: 8px; text-align: right;">
+                  <button style="display: inline-flex; align-items: center; justify-content: center; padding: 4px 8px; color: #3B82F6; background-color: transparent; border: 1px solid #E5E7EB; border-radius: 4px; transition: background-color 0.2s ease-in-out;">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" style="height: 16px; width: 16px; margin-right: 4px;">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8H16M12 8H8m0-4h10m-10 8h12m-12 8h12m-12 8h12m-8 8h8m-8-12h8m-8-8h8m-8-4h8"></path>
+                    </svg>
+                    View
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- User Profile -->
+        <div class="rounded-lg bg-white p-4 shadow"><div dir="ltr" data-orientation="horizontal">
+            <div role="tablist" aria-orientation="horizontal" class="inline-flex h-9 items-center justify-center rounded-lg bg-muted p-1 text-muted-foreground" tabindex="0" data-orientation="horizontal" style="outline: none;">
+                <button type="button" role="tab" aria-selected="true" aria-controls="radix-:r0:-content-profile" data-state="active" id="radix-:r0:-trigger-profile" class="inline-flex items-center justify-center whitespace-nowrap rounded-md px-3 py-1 text-sm font-medium ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 data-[state=active]:bg-background data-[state=active]:text-foreground data-[state=active]:shadow" tabindex="0" data-orientation="horizontal" data-radix-collection-item="">Profile</button>
+                <button type="button" role="tab" aria-selected="false" aria-controls="radix-:r0:-content-settings" data-state="inactive" id="radix-:r0:-trigger-settings" class="inline-flex items-center justify-center whitespace-nowrap rounded-md px-3 py-1 text-sm font-medium ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 data-[state=active]:bg-background data-[state=active]:text-foreground data-[state=active]:shadow" tabindex="-1" data-orientation="horizontal" data-radix-collection-item="">Settings</button></div>
+                <div data-state="active" data-orientation="horizontal" role="tabpanel" aria-labelledby="radix-:r0:-trigger-profile" id="radix-:r0:-content-profile" tabindex="0" class="mt-2 ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 border-0 focus:ring-none outline-none" style="">
+                <div class="space-y-4"><div class="flex items-center space-x-4"><span class="relative flex h-10 w-10 shrink-0 overflow-hidden rounded-full"><img class="aspect-square h-full w-full" src="https://i.pravatar.cc/150?u=jon-oh"></span>
+                <button class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground shadow hover:bg-primary/90 h-9 px-4 py-2">Change Avatar</button></div>
+                <div>
+                <label for="name" class="block text-sm font-medium">Name</label>
+                <div class="mt-1 flex rounded-md shadow-sm"><input id="name" class="flex-1 block w-full min-w-0 rounded-none rounded-r-md border-border focus:border-secondary0 focus:ring-indigo-500 sm:text-sm" placeholder="Jon Oh" type="text"></div></div>
+                <div><label for="email" class="block text-sm font-medium">Email</label><div class="mt-1 flex rounded-md shadow-sm"><input id="email" class="flex-1 block w-full min-w-0 rounded-none rounded-r-md border-border focus:border-secondary0 focus:ring-indigo-500 sm:text-sm" placeholder="jonoh@example.com" type="email"></div></div></div></div>
+                <div data-state="inactive" data-orientation="horizontal" role="tabpanel" aria-labelledby="radix-:r0:-trigger-settings" id="radix-:r0:-content-settings" tabindex="0" class="mt-2 ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 border-0 focus:ring-none outline-none" hidden="">  
+                </div></div></div>
+            </div></div></div></div></main></div></body></html>

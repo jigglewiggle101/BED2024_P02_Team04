@@ -5,6 +5,7 @@
     "dbconfig": "^1.1.7",
     "eventregistry": "^9.1.0",
     "express": "^4.19.2",
+    "google-auth-library": "^9.11.0",
     "mssql": "^11.0.0",
     "newsapi": "^2.4.1"
   },

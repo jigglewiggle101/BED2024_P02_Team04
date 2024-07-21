@@ -450,3 +450,11 @@ body {
   cursor: pointer;
   margin-left: 5px;
 }
+
+.share-options {
+  display: none;
+}
+
+.share-options.visible {
+  display: block;
+}
