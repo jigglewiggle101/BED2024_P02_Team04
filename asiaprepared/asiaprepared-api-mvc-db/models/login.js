@@ -1,87 +1,50 @@
 const sql = require("mssql");
 const dbConfig = require("../dbConfig");
+const poolPromise = new sql.ConnectionPool(dbConfig).connect();
 
 class Login {
-  constructor(id, username, contactNo, email, password) {
+  constructor(id, username, email, password) {
     this.id = id;
     this.username = username;
-    this.contactNo = contactNo || ""; // Handle NULL contactNo
-    this.email = email || ""; // Handle NULL email
+    this.email = email;
     this.password = password;
   }
 
-  static async createUser(newUserData) {
-    const connection = await sql.connect(dbConfig);
-
-    const sqlQuery = `
-      INSERT INTO UserAcc (Username, UserContactNo, Useremail, UserPass)
-      VALUES (@username, @contact, @email, @password);
-      SELECT SCOPE_IDENTITY() AS id, Username, UserContactNo, Useremail, UserPass
-      FROM UserAcc
-      WHERE UserID = SCOPE_IDENTITY();
-    `;
-
-    const request = connection.request();
-
-    request.input("username", newUserData.username);
-    request.input("password", newUserData.password);
-    if (newUserData.contactNo) {
-      request.input("contact", newUserData.contactNo);
-    } else {
-      request.input("contact", null);
+  static async getUserByEmail(email) {
+    try {
+      const pool = await poolPromise;
+      const result = await pool
+        .request()
+        .input("email", sql.VarChar, email)
+        .query("SELECT * FROM UserAcc WHERE Useremail = @email");
+      return result.recordset[0];
+    } catch (err) {
+      console.error("Error during getUserByEmail:", err);
+      throw new Error("Database query failed");
     }
-
-    if (newUserData.email) {
-      request.input("email", newUserData.email);
-    } else {
-      request.input("email", null);
-    }
-
-    const result = await request.query(sqlQuery);
-
-    connection.close();
-
-    const newUser = result.recordset[0];
-    return new Login(
-      newUser.id,
-      newUser.Username,
-      newUser.UserContactNo,
-      newUser.Useremail,
-      newUser.UserPass
-    );
   }
 
-  static async loginUser(username, password) {
+  static async createUser(username, email, password) {
     try {
-      await sql.connect(dbConfig);
-      const sqlQuery = `
-            SELECT UserID, Username
-            FROM UserAcc
-            WHERE Username = @username AND UserPass = @password;
-        `;
-      const request = new sql.Request();
-      request.input("username", username);
-      request.input("password", password);
+      const pool = await poolPromise;
+      const result = await pool
+        .request()
+        .input("username", sql.VarChar, username)
+        .input("email", sql.VarChar, email)
+        .input("password", sql.VarChar, password)
+        .query(
+          `INSERT INTO UserAcc (Username, Useremail, UserPass) 
+           VALUES (@username, @email, @password);
+           SELECT SCOPE_IDENTITY() AS id, Username, Useremail, UserPass 
+           FROM UserAcc 
+           WHERE UserID = SCOPE_IDENTITY();`
+        );
 
-      const result = await request.query(sqlQuery);
-      sql.close();
-
-      if (result.recordset.length > 0) {
-        const user = result.recordset[0];
-        return {
-          success: true,
-          message: "Login successful",
-          user: user,
-        };
-      } else {
-        return {
-          success: false,
-          message: "Invalid username or password",
-        };
-      }
+      const newUser = result.recordset[0];
+      return new Login(newUser.id, newUser.Username, newUser.Useremail, newUser.UserPass);
     } catch (err) {
-      console.error("Error logging in:", err.message);
-      throw err;
+      console.error("Error during createUser:", err);
+      throw new Error("Database insert failed");
     }
   }
 }

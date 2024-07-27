@@ -3,9 +3,6 @@ const express = require("express"); // import Express
 const sql = require("mssql"); // import SQL
 const dbConfig = require("./dbConfig"); // import dbConfig
 const bodyParser = require("body-parser"); //import body parser
-//const { OAuth2Client } = require('google-auth-library'); // Import Google OAuth2Client
-// Initialize Google OAuth2Client with your client ID
-//const client = new OAuth2Client('78537916437-27e0ogu3jmbf80da4p3r75s0qsin84n6.apps.googleusercontent.com');
 const cors = require("cors"); // import cors
 
 // User Controllers //
@@ -45,33 +42,10 @@ app.get("/user", userController.getAllUsers);
 
 // <JOVAN> //
 // GET OPERATIONS ( RETRIEVE ) //
-app.get("/login", loginController.login); // Good Just Missing Middleware //
-// Endpoint to handle ID token verification
-app.post('/your-backend-endpoint', async (req, res) => {
-  const { id_token } = req.body;
-
-  try {
-    const ticket = await client.verifyIdToken({
-      idToken: id_token,
-      audience: '78537916437-27e0ogu3jmbf80da4p3r75s0qsin84n6.apps.googleusercontent.com', // Replace with your actual client ID
-    });
-
-    const payload = ticket.getPayload();
-    const userid = payload['sub'];
-    // If request specified a G Suite domain:
-    // const domain = payload['hd'];
-
-    // Handle successful verification, send response back
-    res.status(200).send('ID Token verified');
-  } catch (error) {
-    // Handle error
-    console.error('Error verifying ID token:', error);
-    res.status(400).send('ID Token verification failed');
-  }
-});
+app.post("/login", loginController.login); // Good Just Missing Middleware //
 
 // POST OPERATIONS ( CREATE ) //
-app.post("/register", loginController.createUser); // Good Just Missing Middleware //
+app.post("/register", loginController.registerUser); // Good Just Missing Middleware //
 
 // PUT OPERATIONS ( UPDATE ) //
 app.put("/user/:id", userController.updateUser); // Good Just Missing Middleware //
