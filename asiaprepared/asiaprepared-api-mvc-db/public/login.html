@@ -13,6 +13,29 @@
 
   <!--Google Recaptcha link -->
   <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+  <script>
+    function onSignIn(googleUser) {
+      var profile = googleUser.getBasicProfile();
+      var id_token = googleUser.getAuthResponse().id_token;
+  
+      fetch('http://localhost:3000/google-login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ id_token })
+      })
+      .then(response => response.json())
+      .then(data => {
+        if (data.success) {
+          window.location.href = 'http://localhost:3000'; // Redirect to the home page or another page
+        } else {
+          console.error('Google login failed:', data.message);
+        }
+      })
+      .catch(error => console.error('Error:', error));
+    }
+  </script>
 </head>
 <body>
   <!-- Navbar -->
@@ -58,6 +81,7 @@
     </div>
   </div>
   <!-- Scripts -->
+
   <script src="/scripts/googlesignin.js"></script>
   <script src="https://kit.fontawesome.com/a076d05399.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>

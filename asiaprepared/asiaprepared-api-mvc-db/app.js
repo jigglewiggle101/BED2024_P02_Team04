@@ -4,7 +4,8 @@ const sql = require("mssql"); // import SQL
 const dbConfig = require("./dbConfig"); // import dbConfig
 const bodyParser = require("body-parser"); //import body parser
 const { OAuth2Client } = require('google-auth-library'); // Import Google OAuth2Client
-const client = new OAuth2Client('78537916437-27e0ogu3jmbf80da4p3r75s0qsin84n6.apps.googleusercontent.com'); // Replace with your actual client ID
+// Initialize Google OAuth2Client with your client ID
+const client = new OAuth2Client('78537916437-27e0ogu3jmbf80da4p3r75s0qsin84n6.apps.googleusercontent.com');
 const cors = require("cors"); // import cors
 
 // User Controllers //
@@ -22,7 +23,11 @@ const voteController = require("./controllers/voteController");
 const ticketController = require("./controllers/ticketController");
 const ticketReplyController = require("./controllers/ticketReplyController");
 
+//  News Controllers    //
+const newsController = require('./controllers/newsController');
+
 // -------------------- //
+
 
 const app = express();
 
@@ -34,57 +39,6 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true })); // For form data handling
 app.use(cors()); // Use CORS middleware
 app.use(staticMiddleware); // Mount the static middleware
-
-const GNEWS_API_KEY = process.env.GNEWS_API_KEY || 'dffe0c45dddbbbcaea086977e5475a0d';
-
-// Routes for fetching news data from GNews API
-app.get("/news/top-headlines", async (req, res) => {
-  const { type } = req.query;
-  let apiUrl = `https://gnews.io/api/v4/top-headlines?category=general,world,nation,business,technology,science,health&lang=en&country=sg,my,ph,bn,kh,id,la,mm,th,vn,id&max=10&apikey=${GNEWS_API_KEY}`;
-
-  if (type === 'forum') {
-    apiUrl = `https://gnews.io/api/v4/search?q=forum&lang=en&country=sg,my,ph,bn,kh,id,la,mm,th,vn,id&max=20&apikey=${GNEWS_API_KEY}`;
-  }
-
-  try {
-      const response = await fetch(apiUrl);
-      const data = await response.json();
-      res.json(data.articles);
-  } catch (error) {
-      console.error('Error fetching news:', error);
-      res.status(500).json({ error: 'Failed to fetch news' });
-  }
-});
-
-app.get("/news/search", async (req, res) => {
-  const query = req.query.q || 'example';
-  try {
-      const response = await fetch(`https://gnews.io/api/v4/search?q=${query}&lang=en&country=sg,my,ph,bn,kh,id,la,mm,th,vn,id&max=10&apikey=${GNEWS_API_KEY}`);
-      const data = await response.json();
-      res.json(data.articles);
-  } catch (error) {
-      console.error('Error fetching general news:', error);
-      res.status(500).json({ error: 'Failed to fetch general news' });
-  }
-});
-
-// new endpoint for forum-related articles
-app.get("/news/forum", async (req, res) => {
-  const query = req.query.q || 'forum';
-  try {
-      const response = await fetch(`https://gnews.io/api/v4/search?q=${query}&lang=en&country=sg,my,ph,bn,kh,id,la,mm,th,vn,id&max=20&apikey=${GNEWS_API_KEY}`);
-      const data = await response.json();
-      res.json(data.articles);
-  } catch (error) {
-      console.error('Error fetching forum news:', error);
-      res.status(500).json({ error: 'Failed to fetch forum news' });
-  }
-});
-
-
-
-
-
 
 //----- CRUD OPERATIONS ----- //
 app.get("/user", userController.getAllUsers);
@@ -99,7 +53,7 @@ app.post('/your-backend-endpoint', async (req, res) => {
   try {
     const ticket = await client.verifyIdToken({
       idToken: id_token,
-      audience: 'YOUR_CLIENT_ID.apps.googleusercontent.com', // Replace with your actual client ID
+      audience: '78537916437-27e0ogu3jmbf80da4p3r75s0qsin84n6.apps.googleusercontent.com', // Replace with your actual client ID
     });
 
     const payload = ticket.getPayload();
@@ -131,6 +85,8 @@ app.delete("/post", postController.deletePost); //Admin can Delete Any Post (Rou
 
 // AIMAN //
 // GET OPERATIONS ( RETRIEVE ) //
+app.get('/news/top-headlines', newsController.getTopHeadlines);
+app.get('/news/search', newsController.searchNews);
 
 // (Missing GET (Search News))//
 

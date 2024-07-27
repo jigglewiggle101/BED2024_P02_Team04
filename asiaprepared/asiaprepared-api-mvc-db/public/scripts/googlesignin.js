@@ -1,7 +1,7 @@
 function initGoogleSignIn() {
   gapi.load('auth2', function() {
     var auth2 = gapi.auth2.init({
-      client_id: '78537916437-27e0ogu3jmbf80da4p3r75s0qsin84n6.apps.googleusercontent.com'
+      client_id: '78537916437-m1ndkap4qlipsnults2u5qj274o79pds.apps.googleusercontent.com'
     });
 
     auth2.attachClickHandler('google-signin-button', {},

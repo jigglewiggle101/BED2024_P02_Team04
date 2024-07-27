@@ -1,35 +1,52 @@
+
 document.addEventListener('DOMContentLoaded', async () => {
     try {
         // Fetch top headlines
         const responseTopHeadlines = await fetch('/news/top-headlines');
+        if (!responseTopHeadlines.ok) {
+            throw new Error('Error fetching top headlines');
+        }
         const topHeadlinesArticles = await responseTopHeadlines.json();
-
-        // Update top headlines section
         updateTopHeadlines(topHeadlinesArticles);
 
         // Fetch search results (initially empty or default query)
         const searchQuery = document.getElementById('search-input').value;
         const responseSearchNews = await fetch(`/news/search?q=${searchQuery}`);
+        if (!responseSearchNews.ok) {
+            throw new Error('Error fetching search news');
+        }
         const searchNewsArticles = await responseSearchNews.json();
-
-        // Update search results section
         updateSearchResults(searchNewsArticles);
 
         // Add event listener to search button
         document.getElementById('search-button').addEventListener('click', async () => {
-            const searchQuery = document.getElementById('search-input').value;
-            const responseSearchNews = await fetch(`/news/search?q=${searchQuery}`);
-            const searchNewsArticles = await responseSearchNews.json();
-            updateSearchResults(searchNewsArticles);
+            try {
+                const searchQuery = document.getElementById('search-input').value;
+                const responseSearchNews = await fetch(`/news/search?q=${searchQuery}`);
+                if (!responseSearchNews.ok) {
+                    throw new Error('Error fetching search news');
+                }
+                const searchNewsArticles = await responseSearchNews.json();
+                updateSearchResults(searchNewsArticles);
+            } catch (error) {
+                console.error('Error fetching search news:', error);
+            }
         });
 
         // Add event listener for enter key press in search input
         document.getElementById('search-input').addEventListener('keypress', async (event) => {
             if (event.key === 'Enter') {
-                const searchQuery = document.getElementById('search-input').value;
-                const responseSearchNews = await fetch(`/news/search?q=${searchQuery}`);
-                const searchNewsArticles = await responseSearchNews.json();
-                updateSearchResults(searchNewsArticles);
+                try {
+                    const searchQuery = document.getElementById('search-input').value;
+                    const responseSearchNews = await fetch(`/news/search?q=${searchQuery}`);
+                    if (!responseSearchNews.ok) {
+                        throw new Error('Error fetching search news');
+                    }
+                    const searchNewsArticles = await responseSearchNews.json();
+                    updateSearchResults(searchNewsArticles);
+                } catch (error) {
+                    console.error('Error fetching search news:', error);
+                }
             }
         });
 
@@ -129,7 +146,6 @@ function updateSearchResults(articles) {
         }
     });
 }
-
 
 
 
