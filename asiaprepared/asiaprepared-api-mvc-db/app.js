@@ -3,9 +3,9 @@ const express = require("express"); // import Express
 const sql = require("mssql"); // import SQL
 const dbConfig = require("./dbConfig"); // import dbConfig
 const bodyParser = require("body-parser"); //import body parser
-const { OAuth2Client } = require('google-auth-library'); // Import Google OAuth2Client
+//const { OAuth2Client } = require('google-auth-library'); // Import Google OAuth2Client
 // Initialize Google OAuth2Client with your client ID
-const client = new OAuth2Client('78537916437-27e0ogu3jmbf80da4p3r75s0qsin84n6.apps.googleusercontent.com');
+//const client = new OAuth2Client('78537916437-27e0ogu3jmbf80da4p3r75s0qsin84n6.apps.googleusercontent.com');
 const cors = require("cors"); // import cors
 
 // User Controllers //
