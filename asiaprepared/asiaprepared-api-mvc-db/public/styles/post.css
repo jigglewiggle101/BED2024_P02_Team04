@@ -456,3 +456,22 @@ body {
   cursor: pointer;
   margin-left: 5px;
 }
+
+.full-post-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.bookmark-button {
+  background-color: transparent;
+  border: none;
+  font-size: 18px;
+  cursor: pointer;
+  color: #ff6600;
+}
+
+.bookmark-button:hover {
+  color: #ff3300;
+}
+
