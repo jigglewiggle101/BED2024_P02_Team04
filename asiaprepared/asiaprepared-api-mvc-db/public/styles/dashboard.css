@@ -4,8 +4,12 @@
   .h-screen {
     height: 100vh;
   }
-  .w-1/4 {
+  .w-25 {
     width: 25%;
+  }
+  .rounded-full {
+    width: 50%;
+    height: auto;
   }
   .bg-gray-100 {
     background-color: #f7fafc;

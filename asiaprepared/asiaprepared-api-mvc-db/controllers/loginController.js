@@ -1,23 +1,21 @@
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
-const { getUserByEmail, createUser } = require("../models/login");
+const Login = require("../models/login");
 
 async function registerUser(req, res) {
   const { username, email, password } = req.body;
 
   try {
-    const existingUser = await getUserByEmail(email);
+    const existingUser = await Login.getUserByEmail(email);
     if (existingUser) {
       return res.status(400).json({ message: "Email already exists" });
     }
 
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(password, salt);
-
     const role = email.includes("@admin.ap") ? "admin" : "user";
 
-    const newUser = await createUser(username, email, hashedPassword, role.trim());
-
+    const newUser = await Login.createUser(username, email, hashedPassword, role.trim());
     res.status(201).json({ message: "User created successfully", user: newUser });
   } catch (err) {
     console.error("Error during registration:", err.message);
@@ -29,7 +27,7 @@ async function login(req, res) {
   const { email, password } = req.body;
 
   try {
-    const user = await getUserByEmail(email);
+    const user = await Login.getUserByEmail(email);
     if (!user) {
       return res.status(401).json({ message: "Invalid credentials" });
     }
@@ -41,11 +39,9 @@ async function login(req, res) {
 
     const payload = {
       id: user.UserID,
-      role: user.UserRole.trim() // Ensure the role is trimmed
+      role: user.UserRole.trim(),
     };
-    const token = jwt.sign(payload, process.env.JWT_SECRET, {
-      expiresIn: "1h",
-    });
+    const token = jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: "1h" });
 
     res.status(200).json({ token });
   } catch (err) {
@@ -53,6 +49,5 @@ async function login(req, res) {
     res.status(500).json({ message: "Internal server error", error: err.message });
   }
 }
-
 
 module.exports = { registerUser, login };
