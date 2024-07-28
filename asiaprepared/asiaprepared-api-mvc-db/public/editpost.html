@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Link to external CSS file -->
+    <link rel="stylesheet" href="styles/forum.css">
+    <link rel="stylesheet" href="styles/post.css">
+    <!-- Link to Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <!-- Link to Google Material Icons -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <!-- Link to Bootstrap -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <title>Post</title>
+
+</head>
+<body>
+    <!-- Navbar -->
+    <div class="navbar">
+        <nav>
+            <a href="index.html"><img src="img/bedlogo.png" alt="logobrand" width="80" height="80"></a>
+            <div class="search-bar">
+                <input type="text" placeholder="Search...">
+                <i class="fas fa-search search-icon"></i>
+            </div>
+            <a href="account.html"><img src="img/icons8-test-account-50.png" alt="logobrand" width="80" height="80"></a>
+        </nav>  
+    </div>
+    <!-- Secondary Navbar -->
+    <div class="navbar">
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="account.html">Account</a>
+            <a href="userticform.html">Contact</a>
+            <div class="dropdown">
+                <a href="#" class="dropbtn">Others</a>
+                <div class="dropdown-content">
+                    <a href="#">Bookmark news</a>
+                    <a href="post.html">Bookmark Posts</a>
+                    <a href="forum.html">Forum</a>
+                </div>
+            </div>
+        </nav>
+    </div>
+    <!-- Post Container -->
+    <div class="full-post-container">
+        <div class="user-info" id="user4">
+            <img src="img/icons8-circled-user-male-skin-type-7-64.png" alt="User Avatar" class="user-avatar">
+            <div class="username">User</div>
+        </div>
+        <div class="full-post-content">
+            <div class="full-post-header">
+                <h2 class="full-post-title">Title</h2>
+                <div class="actions">
+                   <button class="bookmark-button"><i class="fas fa-bookmark"></i> Bookmark</button>
+                   <button class="full-action-button" onclick="editPost(postID)">Edit</button>
+                </div>
+            </div>
+            <div class="full-post-image">
+                <img src="path/to/image.jpg" alt="Post Image" class="full-post-image"> 
+                <!-- Conditionally render the delete button -->
+                <button class="delete-button" id="delete-button" onclick="deletePost(postID)"><i class="fas fa-trash-alt"></i> Delete</button>
+            </div>
+            <div class="full-post-actions">
+                <button class="full-action-button">Upvote</button>
+                <button class="full-action-button">Downvote</button>
+                <button class="full-action-button">Comments</button>
+            </div>
+        </div>
+    </div>
+    <div class="comment-container">
+        <h3 class="comment-word">Comments</h3>
+    </div>
+    <div class="center-screen">
+        <div class="form-group">
+            <h6 class="fw-bold mb-1">Name</h6>
+            <textarea class="form-control" rows="5" id="comment" placeholder="Enter your comment here..."></textarea>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-column">
+                <a href="index.html">
+                    <img src="img/bedlogo.png" alt="logobrand" width="50" height="50">
+                </a>
+                <p>Asia Prepared to bring you southeast asia readiness awareness.</p>
+            </div>
+            <div class="footer-column">
+                <h2>About</h2>
+                <ul>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="account.html">Account</a></li>
+                    <li><a href="qna.html">Q&A</a></li>
+                    <li><a href="credit.html">Credit</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h2>Our Sections</h2>
+                <ul>
+                    <li><a href="#">Recent</a></li>
+                    <li><a href="#">Popular</a></li>
+                    <li><a href="forum.html">Forum</a></li>
+                    <li><a href="index.html">Home</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <ul>
+                    <li><a href="userticform.html">Contact</a></li>
+                </ul>
+                <div class="social-icons">
+                    <a href="https://www.facebook.com/AsiaPrepareddddd?mibextid=LQQJ4d"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://www.instagram.com/asiaprepared?igsh=cDVzdmp2Y2VwNHZi&utm_source=qr"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script src="/scripts/editpost.js"></script>
+</body>
+
+<!-- <script>
+    // Replace with actual post ID
+    const postID = 1;
+
+    async function editPost(postId) {
+        const updatedContent = prompt("Enter new content:");
+        if (updatedContent) {
+            const token = localStorage.getItem('token'); // Get token from storage
+
+            const response = await fetch(`/posts/${postId}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                },
+                body: JSON.stringify({ content: updatedContent })
+            });
+
+            const data = await response.json();
+            if (data.message === "Post updated successfully") {
+                alert("Post updated successfully!");
+                location.reload();
+            } else {
+                alert(data.message);
+            }
+        }
+    }
+
+    async function deletePost(postId) {
+        const token = localStorage.getItem('token'); // Get token from storage
+
+        const response = await fetch(`/posts/${postId}`, {
+            method: 'DELETE',
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        });
+
+        const data = await response.json();
+        if (data.message === "Post deleted successfully") {
+            alert("Post deleted successfully!");
+            location.reload();
+        } else {
+            alert(data.message);
+        }
+    } 
+</script>-->
+</html>

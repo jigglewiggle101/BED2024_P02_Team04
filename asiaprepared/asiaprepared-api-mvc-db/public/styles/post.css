@@ -475,3 +475,20 @@ body {
   color: #ff3300;
 }
 
+.full-post-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.full-post-header .actions {
+  display: flex;
+  gap: 10px;
+}
+.full-post-image {
+  position: relative;
+}
+.delete-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
