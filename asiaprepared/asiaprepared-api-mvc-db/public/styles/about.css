@@ -1,0 +1,16 @@
+.about-container {
+  max-width: 600px;
+  margin: 50px auto;
+  padding: 20px;
+  text-align: left;
+}
+.about-container h1 {
+  font-size: 3em;
+  margin-bottom: 0.5em;
+  border-bottom: 2px solid #000;
+  display: inline-block;
+}
+.about-container p {
+  font-size: 2em;
+  line-height: 1.5em;
+}
