@@ -13,6 +13,7 @@
     <!-- Link to Bootstrap -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <title>Post</title>
+
 </head>
 <body>
     <!-- Navbar -->
@@ -52,10 +53,15 @@
         <div class="full-post-content">
             <div class="full-post-header">
                 <h2 class="full-post-title">Title</h2>
-                <button class="bookmark-button"><i class="fas fa-bookmark"></i> Bookmark</button>
+                <div class="actions">
+                   <button class="bookmark-button"><i class="fas fa-bookmark"></i> Bookmark</button>
+                   <button class="full-action-button" onclick="editPost(postID)">Edit</button>
+                </div>
             </div>
             <div class="full-post-image">
-                <button class="full-view-button">Share</button>
+                <img src="path/to/image.jpg" alt="Post Image" class="full-post-image"> 
+                <!-- Conditionally render the delete button -->
+                <button class="delete-button" id="delete-button" onclick="deletePost(postID)"><i class="fas fa-trash-alt"></i> Delete</button>
             </div>
             <div class="full-post-actions">
                 <button class="full-action-button">Upvote</button>
@@ -112,6 +118,6 @@
             </div>
         </div>
     </footer>
+    <script src="/scripts/editpost.js"></script>
 </body>
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-</html>
+
