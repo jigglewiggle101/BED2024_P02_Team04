@@ -34,7 +34,6 @@ const updateComment = async (req, res) => {
   }
 };
 
-
 const deleteComment = async (req, res) => {
   const commentID = parseInt(req.params.id);
 
@@ -50,11 +49,19 @@ const deleteComment = async (req, res) => {
   }
 };
 
+const getAllComments = async (req, res) => {
+  try {
+    const comments = await Comment.getAllComments();
+    res.status(200).json(comments);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Error fetching comments', error: error.message });
+  }
+};
+
 module.exports = {
   createComment,
   updateComment,
   deleteComment,
+  getAllComments,
 };
-
-
-// Commit - Added Console.log for debugging

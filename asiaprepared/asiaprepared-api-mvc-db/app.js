@@ -4,6 +4,7 @@ const sql = require("mssql"); // import SQL
 const dbConfig = require("./dbConfig"); // import dbConfig
 const bodyParser = require("body-parser"); //import body parser
 const cors = require("cors"); // import cors
+const { verifyJWT, authorizeRoles } = require("./middlewares/authorizeUser");
 
 // User Controllers //
 
@@ -39,6 +40,8 @@ app.use(staticMiddleware); // Mount the static middleware
 
 //----- CRUD OPERATIONS ----- //
 app.get("/user", userController.getAllUsers);
+app.get("/tag", tagController.getAllTags);
+app.get("/comment", commentController.getAllComments);
 
 // <JOVAN> //
 // GET OPERATIONS ( RETRIEVE ) //
@@ -48,12 +51,11 @@ app.post("/login", loginController.login); // Good Just Missing Middleware //
 app.post("/register", loginController.registerUser); // Good Just Missing Middleware //
 
 // PUT OPERATIONS ( UPDATE ) //
-app.put("/user/:id", userController.updateUser); // Good Just Missing Middleware //
-
+app.put("/user/:id", userController.updateUser); // No verification needed
 // DELETE OPERATIONS ( DELETE )
+app.delete("/user/:id", userController.deleteUser); // No verification needed
 app.delete("/comment/:id", commentController.deleteComment); //Admin can Delete Any Comment (Route may differ) // Not Done //
-app.delete("/tag", tagController.deleteTag); //Admin can Delete Any Tag (Route may differ) // Good //
-app.delete("/post", postController.deletePost); //Admin can Delete Any Post (Route may differ) // Not Done //
+app.delete("/tag/:id", tagController.deleteTag); //Admin can Delete Any Tag (Route may differ) // Good //
 
 //-----------------//
 
