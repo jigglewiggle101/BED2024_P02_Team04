@@ -51,6 +51,27 @@ class Tag {
       throw new Error(err.message);
     }
   }
+
+  static async getAllTags() {
+    try {
+      const connection = await sql.connect(dbConfig);
+
+      const sqlQuery = `
+        SELECT TagID, TagName
+        FROM dbo.Tag;
+      `;
+
+      const request = connection.request();
+
+      const result = await request.query(sqlQuery);
+
+      connection.close();
+
+      return result.recordset.map(row => new Tag(row.TagID, row.TagName));
+    } catch (err) {
+      throw new Error(err.message);
+    }
+  }
 }
 
 module.exports = Tag;

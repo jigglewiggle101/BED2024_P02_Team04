@@ -14,7 +14,9 @@ async function registerUser(req, res) {
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(password, salt);
 
-    const newUser = await createUser(username, email, hashedPassword);
+    const role = email.includes("@admin.ap") ? "admin" : "user";
+
+    const newUser = await createUser(username, email, hashedPassword, role.trim());
 
     res.status(201).json({ message: "User created successfully", user: newUser });
   } catch (err) {
@@ -39,6 +41,7 @@ async function login(req, res) {
 
     const payload = {
       id: user.UserID,
+      role: user.UserRole.trim() // Ensure the role is trimmed
     };
     const token = jwt.sign(payload, process.env.JWT_SECRET, {
       expiresIn: "1h",
@@ -50,5 +53,6 @@ async function login(req, res) {
     res.status(500).json({ message: "Internal server error", error: err.message });
   }
 }
+
 
 module.exports = { registerUser, login };

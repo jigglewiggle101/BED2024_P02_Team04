@@ -110,6 +110,27 @@ class Comment {
       throw new Error(err.message);
     }
   }
+
+  static async getAllComments() {
+    try {
+      const connection = await sql.connect(dbConfig);
+
+      const sqlQuery = `
+        SELECT CommentID, PostID, UserID, Content, CreateDate
+        FROM dbo.Comment;
+      `;
+
+      const request = connection.request();
+
+      const result = await request.query(sqlQuery);
+
+      connection.close();
+
+      return result.recordset.map(row => new Comment(row.CommentID, row.PostID, row.UserID, row.Content, row.CreateDate));
+    } catch (err) {
+      throw new Error(err.message);
+    }
+  }
 }
 
 module.exports = Comment;

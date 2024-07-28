@@ -3,120 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AdminDashboardScreen</title>
-  <style>
-    .flex {
-      display: flex;
-    }
-    .h-screen {
-      height: 100vh;
-    }
-    .w-1/4 {
-      width: 25%;
-    }
-    .bg-gray-100 {
-      background-color: #f7fafc;
-    }
-    .p-4 {
-      padding: 1rem;
-    }
-    .mb-8 {
-      margin-bottom: 2rem;
-    }
-    .rounded-full {
-      border-radius: 9999px;
-    }
-    .space-y-4 > * + * {
-      margin-top: 1rem;
-    }
-    .mr-2 {
-      margin-right: 0.5rem;
-    }
-    .cursor-pointer {
-      cursor: pointer;
-    }
-    .bg-blue-200 {
-      background-color: #bfdbfe;
-    }
-    .p-2 {
-      padding: 0.5rem;
-    }
-    .rounded {
-      border-radius: 0.5rem;
-    }
-    .flex-1 {
-      flex: 1;
-    }
-    .p-6 {
-      padding: 1.5rem;
-    }
-    .mb-6 {
-      margin-bottom: 1.5rem;
-    }
-    .text-3xl {
-      font-size: 1.875rem;
-      line-height: 2.25rem;
-    }
-    .font-bold {
-      font-weight: 700;
-    }
-    .font-medium {
-      font-weight: 500;
-    }
-    table {
-      width: 100%;
-      border-collapse: collapse;
-    }
-    th, td {
-      border-bottom: 1px solid #e2e8f0;
-      text-align: left;
-      padding: 0.75rem;
-    }
-    th {
-      font-weight: 700;
-    }
-    .text-right {
-      text-align: right;
-    }
-    .text-sm {
-      font-size: 0.875rem;
-      line-height: 1.25rem;
-    }
-    .bg-yellow-100 {
-      background-color: #fefcbf;
-    }
-    .bg-red-100 {
-      background-color: #fee2e2;
-    }
-    .bg-blue-500 {
-      background-color: #3b82f6;
-    }
-    .text-white {
-      color: #ffffff;
-    }
-    .font-semibold {
-      font-weight: 600;
-    }
-    .py-2 {
-      padding-top: 0.5rem;
-      padding-bottom: 0.5rem;
-    }
-    .px-4 {
-      padding-left: 1rem;
-      padding-right: 1rem;
-    }
-    .hover\:bg-blue-600:hover {
-      background-color: #2563eb;
-    }
-    .hidden {
-      display: none;
-    }
-  </style>
+  <title>Admin Dashboard</title>
+  <link rel="stylesheet" href="./styles/dashboard.css">
 </head>
 <body>
   <div class="flex h-screen">
     <div class="w-1/4 bg-gray-100 p-4">
-      <img src="../public/img/bedlogo.png" alt="Company Logo" class="mb-5 rounded-full">
+      <img src="./img/bedlogo.png" alt="Company Logo" class="mb-5 rounded-full">
       <nav>
         <ul class="space-y-4">
           <li class="cursor-pointer p-2 rounded" onclick="showSection('users')">
@@ -125,12 +18,6 @@
           <li class="cursor-pointer p-2 rounded" onclick="showSection('tags')">
             <span class="mr-2">T</span>Tags
           </li>
-          <li class="cursor-pointer p-2 rounded" onclick="showSection('comments')">
-            <span class="mr-2">C</span>Comments
-          </li>
-          <li class="cursor-pointer p-2 rounded" onclick="showSection('search')">
-            <span class="mr-2">S</span>Search
-          </li>
         </ul>
       </nav>
     </div>
@@ -138,7 +25,7 @@
       <h1 class="mb-6 text-3xl font-bold">Admin Dashboard</h1>
       
       <!-- Users Section -->
-      <div id="users-section" class="rounded border border-gray-300 p-4 bg-white">
+      <div id="users-section" class="rounded border border-gray-300 p-4 bg-white hidden">
         <div class="mb-4">
           <h2 class="text-xl font-bold">User Management</h2>
           <p>View and manage user accounts.</p>
@@ -153,59 +40,8 @@
               <th class="text-right">Actions</th>
             </tr>
           </thead>
-          <tbody>
-            <tr>
-              <td>Jon Oh</td>
-              <td>jon@example.com</td>
-              <td>Admin</td>
-              <td class="text-right">
-                <button class="mr-2 text-sm p-1 px-2 bg-yellow-100 rounded">
-                  Edit
-                </button>
-                <button class="text-sm p-1 px-2 bg-red-100 rounded">
-                  Delete
-                </button>
-              </td>
-            </tr>
-            <tr>
-              <td>Jane Smith</td>
-              <td>jane@example.com</td>
-              <td>Moderator</td>
-              <td class="text-right">
-                <button class="mr-2 text-sm p-1 px-2 bg-yellow-100 rounded">
-                  Edit
-                </button>
-                <button class="text-sm p-1 px-2 bg-red-100 rounded">
-                  Delete
-                </button>
-              </td>
-            </tr>
-            <tr>
-              <td>Mike Johnson</td>
-              <td>mike@example.com</td>
-              <td>Author</td>
-              <td class="text-right">
-                <button class="mr-2 text-sm p-1 px-2 bg-yellow-100 rounded">
-                  Edit
-                </button>
-                <button class="text-sm p-1 px-2 bg-red-100 rounded">
-                  Delete
-                </button>
-              </td>
-            </tr>
-            <tr>
-              <td>Emily Brown</td>
-              <td>emily@example.com</td>
-              <td>Member</td>
-              <td class="text-right">
-                <button class="mr-2 text-sm p-1 px-2 bg-yellow-100 rounded">
-                  Edit
-                </button>
-                <button class="text-sm p-1 px-2 bg-red-100 rounded">
-                  Delete
-                </button>
-              </td>
-            </tr>
+          <tbody id="user-list">
+            <!-- Users will be populated here -->
           </tbody>
         </table>
       </div>
@@ -217,104 +53,35 @@
           <thead>
             <tr>
               <th>Tag Name</th>
-              <th>Associated Posts</th>
               <th class="text-right">Actions</th>
             </tr>
           </thead>
-          <tbody>
-            <tr>
-              <td>Technology</td>
-              <td>150</td>
-              <td class="text-right">
-                <button class="mr-2 text-sm p-1 px-2 bg-yellow-100 rounded">Edit</button>
-                <button class="text-sm p-1 px-2 bg-red-100 rounded">Delete</button>
-              </td>
-            </tr>
-            <tr>
-              <td>Travel</td>
-              <td>75</td>
-              <td class="text-right">
-                <button class="mr-2 text-sm p-1 px-2 bg-yellow-100 rounded">Edit</button>
-                <button class="text-sm p-1 px-2 bg-red-100 rounded">Delete</button>
-              </td>
-            </tr>
+          <tbody id="tag-list">
+            <!-- Tags will be populated here -->
           </tbody>
         </table>
-      </div>
-
-      <!-- Comments Section -->
-      <div id="comments-section" class="rounded border border-gray-300 p-4 bg-white hidden">
-        <h2 class="text-xl font-bold mb-4">Comment Management</h2>
-        <table>
-          <thead>
-            <tr>
-              <th>User</th>
-              <th>Comment</th>
-              <th>Post</th>
-              <th class="text-right">Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>John Doe</td>
-              <td>Great article!</td>
-              <td>10 Tips for SEA Travel</td>
-              <td class="text-right">
-                <button class="mr-2 text-sm p-1 px-2 bg-yellow-100 rounded">Edit</button>
-                <button class="text-sm p-1 px-2 bg-red-100 rounded">Delete</button>
-              </td>
-            </tr>
-            <tr>
-              <td>Jane Smith</td>
-              <td>I disagree with point 3...</td>
-              <td>Economic Outlook 2024</td>
-              <td class="text-right">
-                <button class="mr-2 text-sm p-1 px-2 bg-yellow-100 rounded">Edit</button>
-                <button class="text-sm p-1 px-2 bg-red-100 rounded">Delete</button>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-
-      <!-- Search Section -->
-      <div id="search-section" class="rounded border border-gray-300 p-4 bg-white hidden">
-        <h2 class="text-xl font-bold mb-4">Search</h2>
-        <input type="text" placeholder="Search users, posts, or comments..." class="w-full p-2 border rounded mb-4">
-        <button class="bg-blue-500 text-white font-semibold py-2 px-4 rounded hover:bg-blue-600">
-          Search
-        </button>
-        <div class="mt-4">
-          <h3 class="font-bold mb-2">Search Results:</h3>
-          <ul class="list-disc pl-5">
-            <li>User: John Doe (john@example.com)</li>
-            <li>Post: 10 Tips for SEA Travel</li>
-            <li>Comment: Great article! (by John Doe)</li>
-          </ul>
-        </div>
       </div>
     </div>
   </div>
 
-  <script>
-    function showSection(sectionId) {
-      // Hide all sections
-      document.querySelectorAll('.flex-1 > div').forEach(section => {
-        section.classList.add('hidden');
-      });
-      
-      // Show the selected section
-      document.getElementById(`${sectionId}-section`).classList.remove('hidden');
-      
-      // Update active menu item
-      document.querySelectorAll('nav li').forEach(item => {
-        item.classList.remove('bg-blue-200');
-      });
-      event.currentTarget.classList.add('bg-blue-200');
-    }
+  <!-- Edit User Modal -->
+  <div id="editUserModal" class="modal hidden">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal('editUserModal')">&times;</span>
+      <h2>Edit User</h2>
+      <form id="editUserForm">
+        <input type="hidden" id="editUserId">
+        <label for="editUsername">Username:</label>
+        <input type="text" id="editUsername" name="username" required>
+        <label for="editEmail">Email:</label>
+        <input type="email" id="editEmail" name="email" required>
+        <label for="editRole">Role:</label>
+        <input type="text" id="editRole" name="role" required>
+        <button type="submit">Save Changes</button>
+      </form>
+    </div>
+  </div>
 
-    // Show users section by default
-    showSection('users');
-  </script>
+  <script src="./scripts/dashboard.js"></script>
 </body>
 </html>

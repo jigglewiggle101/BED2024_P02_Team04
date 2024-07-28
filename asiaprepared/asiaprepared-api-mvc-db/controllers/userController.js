@@ -40,32 +40,20 @@ const updateUser = async (req, res) => {
   }
 };
 
+const deleteUser = async (req, res) => {
+  const userId = parseInt(req.params.id);
+
+  try {
+    await User.deleteUser(userId);
+    res.json({ message: "User deleted successfully" });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Error deleting user", error: error.message });
+  }
+};
+
 module.exports = {
   getAllUsers,
   updateUser,
+  deleteUser,
 };
-
-// const createUser = async (req, res) => {
-//   const { username, contactNo, email, password } = req.body;
-
-//   // Input validation
-//   if (!username || !email || !password) {
-//     return res.status(400).json({ message: 'Username, email, and password are required' });
-//   }
-
-//   try {
-//     // Create new user data object
-//     const newUser = { username, email, password };
-//     if (contactNo) {
-//       newUser.contactNo = contactNo; // Include contactNo only if it is provided
-//     }
-
-//     const createdUser = await User.createUser(newUser);
-//     res.status(201).json(createdUser);
-//   } catch (error) {
-//     console.error(error);
-//     res.status(500).json({ message: 'Error creating user', error: error.message });
-//   }
-// };
-
-// Commit - Changed userControllers.js to userController.js (without the s) and also included error handling for updateUser and getAllUsers
