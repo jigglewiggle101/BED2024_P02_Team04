@@ -1,14 +1,14 @@
 const Ticket = require("../models/ticket");
 
 const createTicket = async (req, res) => {
-  const { userID, title, description, images, status } = req.body;
+  const { userID, title, description, ticketType, images, status } = req.body;
 
-  if (!userID || !title || !description || !status) {
-    return res.status(400).json({ message: 'UserID, Title, Description, and Status are required' });
+  if (!userID || !title || !description || !ticketType || !status) {
+    return res.status(400).json({ message: 'UserID, Title, Description, TicketType, and Status are required' });
   }
 
   try {
-    const newTicket = await Ticket.createTicket({ userID, title, description, images, status });
+    const newTicket = await Ticket.createTicket({ userID, title, description, ticketType, images, status });
     res.status(201).json(newTicket);
   } catch (error) {
     console.error(error);
@@ -53,6 +53,8 @@ const getAllTicketsWithReplies = async (req, res) => {
     res.status(500).json({ message: "Error fetching tickets with replies", error: error.message });
   }
 };
+
+
 
 module.exports = {
   createTicket,

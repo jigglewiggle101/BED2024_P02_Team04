@@ -7,6 +7,7 @@ class Ticket {
     userID,
     title,
     description,
+    ticketType,
     images,
     status,
     createdDate,
@@ -16,6 +17,7 @@ class Ticket {
     this.userID = userID;
     this.title = title;
     this.description = description;
+    this.ticketType = ticketType;
     this.images = images || null;
     this.status = status;
     this.createdDate = createdDate;
@@ -27,8 +29,8 @@ class Ticket {
       const connection = await sql.connect(dbConfig);
 
       const sqlQuery = `
-        INSERT INTO dbo.Ticket (UserID, Title, Description, Images, Status, CreatedDate)
-        VALUES (@userID, @title, @description, @images, @status, GETDATE());
+        INSERT INTO dbo.Ticket (UserID, Title, Description, TicketType, Images, Status, CreatedDate)
+        VALUES (@userID, @title, @description, @ticketType, @images, @status, GETDATE());
         SELECT SCOPE_IDENTITY() AS ticketID;
       `;
 
@@ -36,6 +38,7 @@ class Ticket {
       request.input("userID", sql.Int, newTicketData.userID);
       request.input("title", sql.VarChar(100), newTicketData.title);
       request.input("description", sql.VarChar(sql.MAX), newTicketData.description);
+      request.input("ticketType", sql.VarChar(50), newTicketData.ticketType); // Add ticketType here
       request.input("images", sql.VarBinary(sql.MAX), newTicketData.images || null);
       request.input("status", sql.VarChar(20), newTicketData.status);
 
@@ -48,6 +51,7 @@ class Ticket {
         newTicketData.userID,
         newTicketData.title,
         newTicketData.description,
+        newTicketData.ticketType, // Add ticketType here
         newTicketData.images,
         newTicketData.status,
         new Date(), // CreatedDate will be current date/time from SQL Server
@@ -106,6 +110,7 @@ class Ticket {
         UserID,
         Title,
         Description,
+        TicketType,
         Images,
         Status,
         CreatedDate,
@@ -117,6 +122,7 @@ class Ticket {
         UserID,
         Title,
         Description,
+        TicketType,
         Images,
         Status,
         CreatedDate,
@@ -127,6 +133,30 @@ class Ticket {
     }
   }
 
+  static async updateTicketStatus(ticketID, newStatus) {
+    try {
+      const connection = await sql.connect(dbConfig);
+
+      const sqlQuery = `
+        UPDATE dbo.Ticket
+        SET Status = @status, UpdatedDate = GETDATE()
+        WHERE TicketID = @ticketID;
+      `;
+
+      const request = connection.request();
+      request.input("ticketID", sql.Int, ticketID);
+      request.input("status", sql.VarChar(20), newStatus);
+
+      await request.query(sqlQuery);
+
+      connection.close();
+
+      return true; // Or you can return updated data if needed
+    } catch (err) {
+      throw new Error(err.message);
+    }
+  }
+  
   static async getAllTicketsWithReplies() {
     try {
       const connection = await sql.connect(dbConfig);
@@ -174,5 +204,7 @@ class Ticket {
     }
   }
 }
+
+
 
 module.exports = Ticket;

@@ -1,3 +1,6 @@
+let currentTicketID = null;
+let currentUpdateTicketID = null;
+
 async function fetchAndDisplayUsers() {
   try {
     const response = await fetch('/user');
@@ -42,6 +45,33 @@ async function deleteUser(userId) {
   }
 }
 
+document.getElementById('createTagForm').addEventListener('submit', async function(event) {
+  event.preventDefault();
+  const tagName = document.getElementById('newTagName').value;
+
+  try {
+    const response = await fetch('/tag', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ tagName })
+    });
+
+    if (response.ok) {
+      alert('Tag created successfully!');
+      document.getElementById('newTagName').value = ''; // Clear the input field
+      fetchAndDisplayTags(); // Refresh the tag list
+    } else {
+      const error = await response.json();
+      alert(`Error: ${error.message}`);
+    }
+  } catch (error) {
+    console.error('Error creating tag:', error);
+    alert('An error occurred while creating the tag.');
+  }
+});
+
 async function fetchAndDisplayTags() {
   try {
     const response = await fetch('/tag');
@@ -83,6 +113,9 @@ async function deleteTag(tagID) {
     alert('An error occurred while deleting the tag.');
   }
 }
+
+// Initial call to fetch and display tags
+fetchAndDisplayTags();
 
 async function fetchAndDisplayTickets() {
   try {
@@ -128,11 +161,45 @@ async function viewReplies(ticketID) {
       repliesList.appendChild(replyElement);
     });
 
+    currentTicketID = ticketID; // Set the current ticket ID for creating replies
     document.getElementById('repliesModal').classList.remove('hidden');
   } catch (error) {
     console.error('Error fetching replies:', error);
     alert('Error fetching replies.');
   }
+}
+
+document.getElementById('createReplyForm').addEventListener('submit', async function(event) {
+  event.preventDefault();
+  const replyContent = document.getElementById('newReplyContent').value;
+  const userId = localStorage.getItem('userId'); // Get the userId from localStorage
+
+  try {
+    const response = await fetch('/reply', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ ticketID: currentTicketID, userID: userId, replyContent })
+    });
+
+    if (response.ok) {
+      alert('Reply created successfully!');
+      document.getElementById('newReplyContent').value = ''; // Clear the input field
+      viewReplies(currentTicketID); // Refresh the replies list
+      closeModal('createReplyModal'); // Close the create reply modal
+    } else {
+      const error = await response.json();
+      alert(`Error: ${error.message}`);
+    }
+  } catch (error) {
+    console.error('Error creating reply:', error);
+    alert('An error occurred while creating the reply.');
+  }
+});
+
+function openCreateReplyModal() {
+  document.getElementById('createReplyModal').classList.remove('hidden');
 }
 
 function closeModal(modalId) {
@@ -163,6 +230,38 @@ function showSection(sectionId) {
     fetchAndDisplayTickets();
   }
 }
+
+function openUpdateStatusModal(ticketID) {
+  currentUpdateTicketID = ticketID;
+  document.getElementById('updateStatusModal').classList.remove('hidden');
+}
+
+document.getElementById('updateStatusForm').addEventListener('submit', async function(event) {
+  event.preventDefault();
+  const newStatus = document.getElementById('newStatus').value;
+
+  try {
+    const response = await fetch(`/ticket/${currentUpdateTicketID}`, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ status: newStatus })
+    });
+
+    if (response.ok) {
+      alert('Ticket status updated successfully!');
+      closeModal('updateStatusModal'); // Close the update status modal
+      fetchAndDisplayTickets(); // Refresh the ticket list
+    } else {
+      const error = await response.json();
+      alert(`Error: ${error.message}`);
+    }
+  } catch (error) {
+    console.error('Error updating ticket status:', error);
+    alert('An error occurred while updating the ticket status.');
+  }
+})
 
 // Show users section by default
 showSection('users');

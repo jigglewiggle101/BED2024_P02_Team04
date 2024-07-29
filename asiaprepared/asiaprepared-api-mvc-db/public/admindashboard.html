@@ -54,6 +54,10 @@
       <!-- Tags Section -->
       <div id="tags-section" class="rounded border border-gray-300 p-4 bg-white hidden">
         <h2 class="text-xl font-bold mb-4">Tag Management</h2>
+        <form id="createTagForm" class="mb-4">
+          <input type="text" id="newTagName" placeholder="Enter new tag" required>
+          <button type="submit">Create Tag</button>
+        </form>
         <table>
           <thead>
             <tr>
@@ -93,6 +97,37 @@
           <div id="replies-list">
             <!-- Replies will be populated here -->
           </div>
+          <!-- Button to open the create reply modal -->
+          <button class="mr-2 text-sm p-1 px-2 bg-green-100 rounded" onclick="openCreateReplyModal()">Create Reply</button>
+        </div>
+      </div>
+
+      <!-- Create Reply Modal -->
+      <div id="createReplyModal" class="modal hidden">
+        <div class="modal-content">
+          <span class="close" onclick="closeModal('createReplyModal')">&times;</span>
+          <h2>Create Reply</h2>
+          <form id="createReplyForm">
+            <textarea id="newReplyContent" placeholder="Enter your reply" required></textarea>
+            <button type="submit">Submit Reply</button>
+          </form>
+        </div>
+      </div>
+
+      <!-- Update Status Modal -->
+      <div id="updateStatusModal" class="modal hidden">
+        <div class="modal-content">
+          <span class="close" onclick="closeModal('updateStatusModal')">&times;</span>
+          <h2>Update Ticket Status</h2>
+          <form id="updateStatusForm">
+            <select id="newStatus" required>
+              <option value="">Select Status</option>
+              <option value="Open">Open</option>
+              <option value="In Progress">In Progress</option>
+              <option value="Closed">Closed</option>
+            </select>
+            <button type="submit">Update Status</button>
+          </form>
         </div>
       </div>
     </div>
