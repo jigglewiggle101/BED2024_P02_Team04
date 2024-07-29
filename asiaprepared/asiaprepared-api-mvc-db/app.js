@@ -5,6 +5,7 @@ const dbConfig = require("./dbConfig"); // import dbConfig
 const bodyParser = require("body-parser"); //import body parser
 const cors = require("cors"); // import cors
 const { verifyJWT, authorizeRoles } = require("./middlewares/authorizeUser");
+const { validateUser, schemas } = require("./middlewares/validateUser");
 
 // User Controllers //
 
@@ -47,10 +48,8 @@ app.get("/comment", commentController.getAllComments);
 
 // <JOVAN> //
 // GET OPERATIONS ( RETRIEVE ) //
-app.post("/login", loginController.login); // Good Just Missing Middleware //
-
-// POST OPERATIONS ( CREATE ) //
-app.post("/register", loginController.registerUser); // Good Just Missing Middleware //
+app.post("/login", validateUser(schemas.login), loginController.login);
+app.post("/register", validateUser(schemas.register), loginController.registerUser);
 
 // PUT OPERATIONS ( UPDATE ) //
 app.put("/user/:id", userController.updateUser); // No verification needed
