@@ -13,7 +13,7 @@ async function registerUser(req, res) {
 
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(password, salt);
-    const role = email.includes("@admin.ap") ? "admin" : "user";
+    const role = email.includes("@admin.com") ? "admin" : "user";
 
     const newUser = await Login.createUser(username, email, hashedPassword, role.trim());
     res.status(201).json({ message: "User created successfully", user: newUser });

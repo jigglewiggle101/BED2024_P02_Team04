@@ -45,6 +45,9 @@ app.use(staticMiddleware); // Mount the static middleware
 app.get("/user", userController.getAllUsers);
 app.get("/tag", tagController.getAllTags);
 app.get("/comment", commentController.getAllComments);
+app.get("/user/:id", userController.getUserById);
+app.get("/user/email/:id", userController.getEmailByUserId);
+
 
 // <JOVAN> //
 // GET OPERATIONS ( RETRIEVE ) //
@@ -55,10 +58,7 @@ app.post("/register", validateUser(schemas.register), loginController.registerUs
 app.put("/user/:id", userController.updateUser); // No verification needed
 // DELETE OPERATIONS ( DELETE )
 app.delete("/user/:id", userController.deleteUser); // No verification needed
-app.delete("/tag/:id", tagController.deleteTag); //Admin can Delete Any Tag (Route may differ) // Good //
-
 //-----------------//
-app.get("/user/:id", userController.getUserById);
 
 
 // AIMAN //
@@ -104,10 +104,10 @@ app.delete("/bookmark/:id", bookmarkController.deleteBookmark); // Good //
 //-----------------//
 
 
-app.get("/tickets-with-replies", ticketController.getAllTicketsWithReplies);
 
 // Kai Jie //
 // GET OPERATIONS ( RETRIEVE ) //
+app.get("/tickets-with-replies", ticketController.getAllTicketsWithReplies);
 app.get("/ticket/:id", ticketController.getTicketByID); // Good //
 app.get("/reply/:ticketID", ticketReplyController.getRepliesByTicketID); // Good //
 

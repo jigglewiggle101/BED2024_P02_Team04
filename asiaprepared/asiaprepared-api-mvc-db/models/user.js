@@ -50,6 +50,21 @@ class User {
     }
   }
 
+  static async getEmailByUserId(userId) {
+    const connection = await sql.connect(dbConfig);
+    const sqlQuery = `SELECT Useremail FROM UserAcc WHERE UserID = @userId`;
+    const request = connection.request();
+    request.input("userId", sql.Int, userId);
+    const result = await request.query(sqlQuery);
+    connection.close();
+
+    if (result.recordset.length > 0) {
+      return result.recordset[0].Useremail;
+    } else {
+      throw new Error('User not found');
+    }
+  }
+
   static async updateUser(userId, newUserData) {
     const connection = await sql.connect(dbConfig);
 
@@ -116,12 +131,6 @@ class User {
     try {
       const connection = await sql.connect(dbConfig);
 
-      // Delete associated votes
-      const deleteVotesQuery = `
-        DELETE FROM dbo.Vote WHERE UserID = @userId;
-      `;
-      await connection.request().input("userId", sql.Int, userId).query(deleteVotesQuery);
-
       // Delete associated comments
       const deleteCommentsQuery = `
         DELETE FROM dbo.Comment WHERE UserID = @userId;
@@ -150,6 +159,14 @@ class User {
       const getPostsQuery = `
         SELECT PostID FROM dbo.Post WHERE CreateBy = @userId;
       `;
+
+      
+      // Delete associated votes
+      const deleteVotesQuery = `
+        DELETE FROM dbo.Vote WHERE UserID = @userId;
+      `;
+      await connection.request().input("userId", sql.Int, userId).query(deleteVotesQuery);      
+
       const postsResult = await connection.request().input("userId", sql.Int, userId).query(getPostsQuery);
       const posts = postsResult.recordset;
 

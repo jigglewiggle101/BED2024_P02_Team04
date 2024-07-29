@@ -22,27 +22,33 @@ const getUserById = async (req, res) => {
   }
 };
 
+const getEmailByUserId = async (req, res) => {
+  const userId = parseInt(req.params.id);
+
+  try {
+    const email = await User.getEmailByUserId(userId);
+    res.json({ email });
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Error retrieving user email");
+  }
+};
+
 const updateUser = async (req, res) => {
-  const userId = parseInt(req.params.id); // Parse userId from URL parameter
+  const userId = parseInt(req.params.id);
   const { username, contactNo, email, password } = req.body;
 
-  // Input validation
   if (!userId) {
     return res.status(400).json({ message: "User ID is required" });
   }
 
-  // Create new user data object
-  const newUserData = {
-    username,
-    password,
-  };
-
-  // Add optional fields if they exist in the request body
+  const newUserData = { username };
   if (contactNo) newUserData.contactNo = contactNo;
   if (email) newUserData.email = email;
+  if (password) newUserData.password = password;
 
   try {
-    const updatedUser = await User.updateUser(userId, newUserData); // Get the updated user info
+    const updatedUser = await User.updateUser(userId, newUserData);
     res.json({ message: "User updated successfully", updatedUser });
   } catch (error) {
     console.error(error);
@@ -65,6 +71,7 @@ const deleteUser = async (req, res) => {
 module.exports = {
   getAllUsers,
   getUserById,
+  getEmailByUserId,
   updateUser,
   deleteUser,
 };
