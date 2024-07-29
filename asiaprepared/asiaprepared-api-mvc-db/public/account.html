@@ -31,13 +31,13 @@
       <a href="index.html">Home</a>
       <a href="about.html">About</a>
       <a href="account.html">Account</a>
-      <a href="userticform.html">Contact</a>
+      <a href="forum.html">Forum</a>
       <div class="dropdown">
         <a href="#" class="dropbtn">Others</a>
         <div class="dropdown-content">
-          <a href="#">Bookmark news</a>
+          <a href="credit.html">Credit</a>
           <a href="bookmark.html">Bookmark Posts</a>
-          <a href="forum.html">Forum</a>
+          <a href="userticform.html">Contact</a>
         </div>
       </div>
     </nav>
@@ -54,32 +54,32 @@
       <button class="edit-profile-button">Edit Profile</button>
     </div>
 
-    <!-- User settings profile -->
-    <div class="user-settings">
-      <h2>User settings</h2>
-      <form class="profile-info" method="POST" action="/update-profile">
-        <div class="form-group">
+<!-- User settings profile -->
+<div class="user-settings">
+  <h2>User settings</h2>
+  <form class="profile-info" method="POST" action="/update-profile">
+      <div class="form-group">
           <label for="email">Email</label>
           <input type="email" id="email" value="" disabled>
-        </div>
-        <div class="form-group">
+      </div>
+      <div class="form-group">
           <label for="username">Username</label>
           <input type="text" id="username" maxlength="30" disabled>
           <button type="button" class="edit-username-button">Edit</button>
           <small>30 Characters Remaining</small>
-        </div>
-        <div class="form-group">
+      </div>
+      <div class="form-group">
           <label for="about">About (Optional)</label>
           <textarea id="about" maxlength="200"></textarea>
           <small>200 Characters Remaining</small>
-        </div>
-        <div class="form-buttons">
+      </div>
+      <div class="form-buttons">
           <button type="button" class="logout-button">Log Out</button>
           <button type="button" class="delete-account-button">Delete Account</button>
-        </div>
-      </form>
-    </div>
-  </div>
+      </div>
+  </form>
+</div>
+
 
   <!-- Modal for editing username -->
   <div id="editUsernameModal" class="modal">

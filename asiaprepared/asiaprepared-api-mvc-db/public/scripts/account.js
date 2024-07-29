@@ -63,6 +63,21 @@ async function initializeAccountPage() {
             alert('Error: ' + error.message);
         }
     });
+
+    document.querySelector('.logout-button').addEventListener('click', logout);
+}
+
+
+function logout() {
+    // Clear user data from localStorage
+    localStorage.removeItem('token');
+    localStorage.removeItem('userId');
+    localStorage.removeItem('role');
+    localStorage.removeItem('email');
+    localStorage.removeItem('username');
+
+    // Redirect to the login page
+    window.location.href = 'login.html';
 }
 
 function closeModal(modalId) {
