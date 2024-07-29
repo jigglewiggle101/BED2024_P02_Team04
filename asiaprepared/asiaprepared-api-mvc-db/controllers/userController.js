@@ -10,6 +10,18 @@ const getAllUsers = async (req, res) => {
   }
 };
 
+const getUserById = async (req, res) => {
+  const userId = parseInt(req.params.id);
+
+  try {
+    const username = await User.getUsernameById(userId);
+    res.json({ username });
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Error retrieving user");
+  }
+};
+
 const updateUser = async (req, res) => {
   const userId = parseInt(req.params.id); // Parse userId from URL parameter
   const { username, contactNo, email, password } = req.body;
@@ -34,9 +46,7 @@ const updateUser = async (req, res) => {
     res.json({ message: "User updated successfully", updatedUser });
   } catch (error) {
     console.error(error);
-    res
-      .status(500)
-      .json({ message: "Error updating user", error: error.message });
+    res.status(500).json({ message: "Error updating user", error: error.message });
   }
 };
 
@@ -54,6 +64,7 @@ const deleteUser = async (req, res) => {
 
 module.exports = {
   getAllUsers,
+  getUserById,
   updateUser,
   deleteUser,
 };

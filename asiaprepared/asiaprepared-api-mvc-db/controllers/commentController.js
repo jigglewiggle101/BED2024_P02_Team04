@@ -1,9 +1,10 @@
 const Comment = require("../models/comment");
+const User = require("../models/user");
 
 const createComment = async (req, res) => {
   const { postID, userID, content, createDate } = req.body;
 
-  console.log('Received request body:', req.body); // Add this line to log the request body
+  console.log('Received request body:', req.body);
 
   if (!postID || !userID || !content || !createDate) {
     return res.status(400).json({ message: 'PostID, UserID, content, and createDate are required' });
@@ -52,6 +53,28 @@ const deleteComment = async (req, res) => {
 const getAllComments = async (req, res) => {
   try {
     const comments = await Comment.getAllComments();
+    for (const comment of comments) {
+      comment.username = await User.getUsernameById(comment.userID);
+    }
+    res.status(200).json(comments);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Error fetching comments', error: error.message });
+  }
+};
+
+const getCommentsByPostID = async (req, res) => {
+  const postID = parseInt(req.params.postID);
+
+  if (isNaN(postID)) {
+    return res.status(400).json({ message: 'Invalid postID' });
+  }
+
+  try {
+    const comments = await Comment.getCommentsByPostID(postID);
+    for (const comment of comments) {
+      comment.username = await User.getUsernameById(comment.userID);
+    }
     res.status(200).json(comments);
   } catch (error) {
     console.error(error);
@@ -64,4 +87,5 @@ module.exports = {
   updateComment,
   deleteComment,
   getAllComments,
+  getCommentsByPostID,
 };

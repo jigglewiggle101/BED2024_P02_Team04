@@ -2,12 +2,13 @@ const sql = require("mssql");
 const dbConfig = require("../dbConfig");
 
 class Comment {
-  constructor(commentID, postID, userID, content, createDate) {
+  constructor(commentID, postID, userID, content, createDate, username) {
     this.commentID = commentID;
     this.postID = postID;
     this.userID = userID;
     this.content = content;
     this.createDate = createDate;
+    this.username = username;
   }
 
   static async createComment(newCommentData) {
@@ -127,6 +128,29 @@ class Comment {
       connection.close();
 
       return result.recordset.map(row => new Comment(row.CommentID, row.PostID, row.UserID, row.Content, row.CreateDate));
+    } catch (err) {
+      throw new Error(err.message);
+    }
+  }
+
+  static async getCommentsByPostID(postID) {
+    try {
+      const connection = await sql.connect(dbConfig);
+
+      const sqlQuery = `
+        SELECT c.CommentID, c.PostID, c.UserID, c.Content, c.CreateDate, u.Username
+        FROM dbo.Comment c
+        JOIN dbo.UserAcc u ON c.UserID = u.UserID
+        WHERE c.PostID = @postID;
+      `;
+
+      const request = connection.request();
+      request.input("postID", sql.Int, postID);
+      const result = await request.query(sqlQuery);
+
+      connection.close();
+
+      return result.recordset.map(row => new Comment(row.CommentID, row.PostID, row.UserID, row.Content, row.CreateDate, row.Username));
     } catch (err) {
       throw new Error(err.message);
     }

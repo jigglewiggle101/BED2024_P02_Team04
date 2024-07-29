@@ -21,8 +21,10 @@ const voteController = require("./controllers/voteController");
 const ticketController = require("./controllers/ticketController");
 const ticketReplyController = require("./controllers/ticketReplyController");
 
+
 //  News Controllers    //
 const newsController = require('./controllers/newsController');
+
 
 // -------------------- //
 
@@ -54,17 +56,21 @@ app.post("/register", loginController.registerUser); // Good Just Missing Middle
 app.put("/user/:id", userController.updateUser); // No verification needed
 // DELETE OPERATIONS ( DELETE )
 app.delete("/user/:id", userController.deleteUser); // No verification needed
-app.delete("/comment/:id", commentController.deleteComment); //Admin can Delete Any Comment (Route may differ) // Not Done //
 app.delete("/tag/:id", tagController.deleteTag); //Admin can Delete Any Tag (Route may differ) // Good //
 
 //-----------------//
+app.get("/user/:id", userController.getUserById);
+
 
 // AIMAN //
 // GET OPERATIONS ( RETRIEVE ) //
 app.get('/news/top-headlines', newsController.getTopHeadlines);
 app.get('/news/search', newsController.searchNews);
+app.get('/voteCount/:id', postController.getVoteCountByPostID);
 
 // (Missing GET (Search News))//
+app.get('/getAllPosts', postController.getAllPosts);
+app.get('/comments/:postID', commentController.getCommentsByPostID);
 
 // POST OPERATIONS ( CREATE ) //
 app.post("/comment", commentController.createComment); // Good Just Missing Middleware //
@@ -82,6 +88,7 @@ app.delete("/vote/:id", voteController.deleteVote); // Good //
 // <Jesmine> //
 // GET OPERATIONS ( RETRIEVE ) //
 app.get("/bookmarks/search", bookmarkController.searchBookmarkByContent);
+app.get('/post/:id', postController.getPostById);
 
 // POST OPERATIONS ( CREATE ) //
 app.post("/post", postController.createPost); // Good Just Missing Middleware //
@@ -95,6 +102,9 @@ app.delete("/post/:id", postController.deletePost); // Good //
 app.delete("/bookmark/:id", bookmarkController.deleteBookmark); // Good //
 
 //-----------------//
+
+
+app.get("/tickets-with-replies", ticketController.getAllTicketsWithReplies);
 
 // Kai Jie //
 // GET OPERATIONS ( RETRIEVE ) //

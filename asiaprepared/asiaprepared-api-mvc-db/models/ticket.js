@@ -35,16 +35,8 @@ class Ticket {
       const request = connection.request();
       request.input("userID", sql.Int, newTicketData.userID);
       request.input("title", sql.VarChar(100), newTicketData.title);
-      request.input(
-        "description",
-        sql.VarChar(sql.MAX),
-        newTicketData.description
-      );
-      request.input(
-        "images",
-        sql.VarBinary(sql.MAX),
-        newTicketData.images || null
-      );
+      request.input("description", sql.VarChar(sql.MAX), newTicketData.description);
+      request.input("images", sql.VarBinary(sql.MAX), newTicketData.images || null);
       request.input("status", sql.VarChar(20), newTicketData.status);
 
       const result = await request.query(sqlQuery);
@@ -130,6 +122,53 @@ class Ticket {
         CreatedDate,
         UpdatedDate
       );
+    } catch (err) {
+      throw new Error(err.message);
+    }
+  }
+
+  static async getAllTicketsWithReplies() {
+    try {
+      const connection = await sql.connect(dbConfig);
+
+      const sqlQuery = `
+        SELECT * FROM dbo.Ticket;
+      `;
+
+      const request = connection.request();
+      const result = await request.query(sqlQuery);
+
+      connection.close();
+
+      const tickets = result.recordset;
+
+      for (const ticket of tickets) {
+        const replies = await Ticket.getRepliesByTicketID(ticket.TicketID);
+        ticket.replies = replies;
+      }
+
+      return tickets;
+    } catch (err) {
+      throw new Error(err.message);
+    }
+  }
+
+  static async getRepliesByTicketID(ticketID) {
+    try {
+      const connection = await sql.connect(dbConfig);
+
+      const sqlQuery = `
+        SELECT * FROM dbo.TicketReply WHERE TicketID = @ticketID;
+      `;
+
+      const request = connection.request();
+      request.input("ticketID", sql.Int, ticketID);
+
+      const result = await request.query(sqlQuery);
+
+      connection.close();
+
+      return result.recordset;
     } catch (err) {
       throw new Error(err.message);
     }

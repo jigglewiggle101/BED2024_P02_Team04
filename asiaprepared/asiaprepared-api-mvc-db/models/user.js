@@ -1,6 +1,7 @@
 const sql = require("mssql");
 const dbConfig = require("../dbConfig");
 const bcrypt = require("bcryptjs");
+const Post = require("./post"); // Make sure to require the Post model
 
 class User {
   constructor(userId, username, contactNo, email, password, role) {
@@ -19,7 +20,6 @@ class User {
     const result = await request.query(sqlQuery);
     connection.close();
 
-    // Map database results to User objects
     const users = result.recordset.map(
       (row) =>
         new User(
@@ -35,6 +35,21 @@ class User {
     return users;
   }
 
+  static async getUsernameById(userId) {
+    const connection = await sql.connect(dbConfig);
+    const sqlQuery = `SELECT Username FROM UserAcc WHERE UserID = @userId`;
+    const request = connection.request();
+    request.input("userId", sql.Int, userId);
+    const result = await request.query(sqlQuery);
+    connection.close();
+
+    if (result.recordset.length > 0) {
+      return result.recordset[0].Username;
+    } else {
+      throw new Error('User not found');
+    }
+  }
+
   static async updateUser(userId, newUserData) {
     const connection = await sql.connect(dbConfig);
 
@@ -47,21 +62,18 @@ class User {
     request.input("userId", sql.Int, userId);
     request.input("username", sql.VarChar(30), newUserData.username);
 
-    // Add UserContactNo to query if it exists in newUserData
     if (newUserData.contactNo) {
       sqlQuery += `,
         UserContactNo = @contactNo`;
       request.input("contactNo", sql.Char(8), newUserData.contactNo);
     }
 
-    // Add Useremail to query if it exists in newUserData
     if (newUserData.email) {
       sqlQuery += `,
         Useremail = @email`;
       request.input("email", sql.VarChar(255), newUserData.email);
     }
 
-    // Check if the password needs to be updated
     if (newUserData.password) {
       const hashedPassword = await bcrypt.hash(newUserData.password, 10);
       sqlQuery += `,
@@ -74,7 +86,6 @@ class User {
     try {
       await request.query(sqlQuery);
 
-      // Fetch the updated user information
       const result = await connection
         .request()
         .input("userId", sql.Int, userId)
@@ -82,7 +93,6 @@ class User {
 
       connection.close();
 
-      // Map the result to a User object and return it
       const updatedUser = result.recordset.map(
         (row) =>
           new User(
@@ -98,22 +108,65 @@ class User {
       return updatedUser;
     } catch (error) {
       connection.close();
-      throw error; // Rethrow the error to be caught by the controller
+      throw error;
     }
   }
 
   static async deleteUser(userId) {
-    const connection = await sql.connect(dbConfig);
     try {
-      const sqlQuery = `DELETE FROM dbo.UserAcc WHERE UserID = @userId`;
-      const request = connection.request();
-      request.input("userId", sql.Int, userId);
-      await request.query(sqlQuery);
+      const connection = await sql.connect(dbConfig);
+
+      // Delete associated votes
+      const deleteVotesQuery = `
+        DELETE FROM dbo.Vote WHERE UserID = @userId;
+      `;
+      await connection.request().input("userId", sql.Int, userId).query(deleteVotesQuery);
+
+      // Delete associated comments
+      const deleteCommentsQuery = `
+        DELETE FROM dbo.Comment WHERE UserID = @userId;
+      `;
+      await connection.request().input("userId", sql.Int, userId).query(deleteCommentsQuery);
+
+      // Delete associated bookmarks
+      const deleteBookmarksQuery = `
+        DELETE FROM dbo.Bookmark WHERE UserID = @userId;
+      `;
+      await connection.request().input("userId", sql.Int, userId).query(deleteBookmarksQuery);
+
+      // Delete associated ticket replies
+      const deleteTicketRepliesQuery = `
+        DELETE FROM dbo.TicketReply WHERE TicketID IN (SELECT TicketID FROM dbo.Ticket WHERE UserID = @userId);
+      `;
+      await connection.request().input("userId", sql.Int, userId).query(deleteTicketRepliesQuery);
+
+      // Delete associated tickets
+      const deleteTicketsQuery = `
+        DELETE FROM dbo.Ticket WHERE UserID = @userId;
+      `;
+      await connection.request().input("userId", sql.Int, userId).query(deleteTicketsQuery);
+
+      // Delete associated posts and related bookmarks
+      const getPostsQuery = `
+        SELECT PostID FROM dbo.Post WHERE CreateBy = @userId;
+      `;
+      const postsResult = await connection.request().input("userId", sql.Int, userId).query(getPostsQuery);
+      const posts = postsResult.recordset;
+
+      for (const post of posts) {
+        await Post.deletePost(post.PostID);
+      }
+
+      // Finally, delete the user
+      const deleteUserQuery = `
+        DELETE FROM dbo.UserAcc WHERE UserID = @userId;
+      `;
+      await connection.request().input("userId", sql.Int, userId).query(deleteUserQuery);
+
       connection.close();
-      return true; // Return true to indicate successful deletion
-    } catch (error) {
-      connection.close();
-      throw error; // Rethrow the error to be caught by the controller
+      return true;
+    } catch (err) {
+      throw new Error(err.message);
     }
   }
 }

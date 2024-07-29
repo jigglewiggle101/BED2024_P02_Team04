@@ -314,164 +314,62 @@ body {
   width: 1225px;
 }
 
-.comment-container {
-  margin-left: 20%;
+/* Add these styles for the comment box */
+.comment-box {
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  margin: 20px auto;
+  padding: 20px;
+  max-width: 800px;
+  text-align: left;
+}
+
+.comment {
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  padding: 10px;
   margin-bottom: 20px;
-}
-.sort-dropdown {
-  position: relative;
-}
-
-.sort-btn {
-  padding: 10px 20px;
-  border: 1px solid #ddd;
-  background-color: white;
-  cursor: pointer;
-  border-radius: 5px;
-}
-
-.dropdown-content {
-  display: none;
-  position: absolute;
-  top: 100%;
-  left: 0;
-  background-color: white;
-  border: 1px solid #ddd;
-  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
-  z-index: 1;
-  border-radius: 5px;
-}
-
-.dropdown-content a {
-  padding: 10px 20px;
-  display: block;
-  text-decoration: none;
-  color: black;
-}
-
-.dropdown-content a:hover {
-  background-color: #f1f1f1;
-}
-
-/* Show dropdown on hover */
-.sort-dropdown:hover .dropdown-content {
-  display: block;
-}
-
-/* Additional styles for title section */
-.title-section {
-  margin: 20px 0;
-  padding: 10px;
-  background-color: #f9f9f9;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-}
-
-.title-section .tags-header {
+  max-width: 800px;
+  margin: 20px auto;
   display: flex;
-  align-items: center;
+  flex-direction: column;
+  align-items: flex-start;
 }
 
-.title-section label {
-  font-size: 16px;
+.comment .username {
   font-weight: bold;
-  margin-right: 10px;
+  margin-bottom: 5px;
 }
 
-.title-section input[type="text"] {
-  padding: 10px;
-  font-size: 16px;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  flex: 1;
-  margin-right: 10px;
-}
-
-.title-section .add-post-btn {
-  background-color: #007bff;
-  color: white;
-  border: none;
-  padding: 10px;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-.title-section .add-post-btn:hover {
-  background-color: #0056b3;
-}
-
-/* Adjustments to tags section */
-.tags-section {
-  margin: 20px 0;
-  padding: 10px;
-  background-color: #f9f9f9;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-}
-
-.tags-section .tags-input {
-  display: flex;
-  align-items: center;
+.comment .comment-content {
   margin-bottom: 10px;
 }
 
-.tags-section .add-tag-btn {
-  background-color: #007bff;
-  color: white;
-  border: none;
-  padding: 10px;
-  border-radius: 4px;
-  cursor: pointer;
-  margin-right: 10px;
+.comment .comment-date {
+  color: gray;
+  font-size: 0.9em;
 }
 
-.tags-section .add-tag-btn:hover {
-  background-color: #0056b3;
-}
-
-.tags-section #tag-search {
-  padding: 10px;
-  font-size: 16px;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  flex: 1;
-}
-
-/* Additional styles for tags */
-.tag-item {
-  background-color: #007bff;
-  color: white;
-  padding: 5px 10px;
-  border-radius: 4px;
-  display: inline-flex;
-  align-items: center;
-  margin-right: 5px;
-}
-
-.tag-item span {
-  margin-right: 5px;
-}
-
-.tag-item i {
-  cursor: pointer;
-  margin-left: 5px;
-}
-
-.full-post-header {
+.comment-form {
+  max-width: 800px;
+  margin: 20px auto;
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  flex-direction: column;
 }
 
-.bookmark-button {
-  background-color: transparent;
+.comment-form textarea {
+  margin-bottom: 10px;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ddd;
+}
+
+.comment-form button {
+  padding: 10px;
   border: none;
-  font-size: 18px;
+  border-radius: 5px;
+  background-color: #007bff;
+  color: white;
   cursor: pointer;
-  color: #ff6600;
 }
-
-.bookmark-button:hover {
-  color: #ff3300;
-}
-

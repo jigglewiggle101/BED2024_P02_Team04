@@ -20,12 +20,15 @@
           <li class="cursor-pointer p-2 rounded" onclick="showSection('tags')">
             <span class="mr-2">T</span>Tags
           </li>
+          <li class="cursor-pointer p-2 rounded" onclick="showSection('tickets')">
+            <span class="mr-2">T</span>Tickets
+          </li>
         </ul>
       </nav>
     </div>
     <div class="flex-1 p-6">
       <h1 class="mb-6 text-3xl font-bold">Admin Dashboard</h1>
-      
+
       <!-- Users Section -->
       <div id="users-section" class="rounded border border-gray-300 p-4 bg-white hidden">
         <div class="mb-4">
@@ -63,24 +66,35 @@
           </tbody>
         </table>
       </div>
-    </div>
-  </div>
 
-  <!-- Edit User Modal -->
-  <div id="editUserModal" class="modal hidden">
-    <div class="modal-content">
-      <span class="close" onclick="closeModal('editUserModal')">&times;</span>
-      <h2>Edit User</h2>
-      <form id="editUserForm">
-        <input type="hidden" id="editUserId">
-        <label for="editUsername">Username:</label>
-        <input type="text" id="editUsername" name="username" required>
-        <label for="editEmail">Email:</label>
-        <input type="email" id="editEmail" name="email" required>
-        <label for="editRole">Role:</label>
-        <input type="text" id="editRole" name="role" required>
-        <button type="submit">Save Changes</button>
-      </form>
+      <!-- Tickets Section -->
+      <div id="tickets-section" class="rounded border border-gray-300 p-4 bg-white hidden">
+        <h2 class="text-xl font-bold mb-4">Ticket Management</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>Title</th>
+              <th>Description</th>
+              <th>Status</th>
+              <th class="text-right">Actions</th>
+            </tr>
+          </thead>
+          <tbody id="ticket-list">
+            <!-- Tickets will be populated here -->
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Replies Modal -->
+      <div id="repliesModal" class="modal hidden">
+        <div class="modal-content">
+          <span class="close" onclick="closeModal('repliesModal')">&times;</span>
+          <h2>Replies</h2>
+          <div id="replies-list">
+            <!-- Replies will be populated here -->
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 

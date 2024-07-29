@@ -44,8 +44,19 @@ const getTicketByID = async (req, res) => {
   }
 };
 
+const getAllTicketsWithReplies = async (req, res) => {
+  try {
+    const tickets = await Ticket.getAllTicketsWithReplies();
+    res.status(200).json(tickets);
+  } catch (error) {
+    console.error("Error fetching tickets with replies:", error);
+    res.status(500).json({ message: "Error fetching tickets with replies", error: error.message });
+  }
+};
+
 module.exports = {
   createTicket,
   updateTicketStatus,
   getTicketByID,
+  getAllTicketsWithReplies,
 };
