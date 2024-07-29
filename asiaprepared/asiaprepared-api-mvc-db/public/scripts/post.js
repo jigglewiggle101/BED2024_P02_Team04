@@ -58,7 +58,7 @@ async function fetchAndDisplayPost(postID) {
                 </div>
                 <div class="full-post-content">
                     <div class="full-post-image">
-                        <button class="full-view-button">Share</button>
+                        ${post.createBy == userId ? `<button class="full-view-button" onclick="openEditPostModal(${post.postID}, '${post.content}')">Edit</button>` : ''}
                     </div>
                     <h2 class="full-post-title">${post.content}</h2>
                     <div class="full-post-actions">
@@ -89,11 +89,121 @@ async function fetchAndDisplayComments(postID) {
                 <div class="username">${comment.username}</div>
                 <div class="comment-content">${comment.content}</div>
                 <div class="comment-date">${new Date(comment.createDate).toLocaleString()}</div>
-                ${role === 'admin' || comment.userID == userId ? `<button class="action-button" onclick="deleteComment(${comment.commentID})">Delete</button>` : ''}
+                ${role === 'admin' || comment.userID == userId ? `
+                    <button class="action-button" onclick="deleteComment(${comment.commentID}, ${postID})">Delete</button>
+                    <button class="action-button" onclick="openEditCommentModal(${comment.commentID}, '${comment.content}', ${postID})">Edit</button>
+                ` : ''}
             </div>
         `).join('');
     } catch (error) {
         console.error('Error fetching comments:', error);
+    }
+}
+
+function openEditPostModal(postID, currentContent) {
+    // Remove existing modals to avoid duplicates
+    const existingModal = document.getElementById('editPostModal');
+    if (existingModal) {
+        existingModal.remove();
+    }
+
+    const modalHtml = `
+        <div id="editPostModal" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="closeModal('editPostModal')">&times;</span>
+                <h2>Edit Post</h2>
+                <form id="editPostForm">
+                    <textarea id="editPostContent" required>${currentContent}</textarea>
+                    <button type="submit">Save</button>
+                </form>
+            </div>
+        </div>
+    `;
+    document.body.insertAdjacentHTML('beforeend', modalHtml);
+    document.getElementById('editPostModal').style.display = 'block';
+
+    document.getElementById('editPostForm').addEventListener('submit', async function(event) {
+        event.preventDefault();
+
+        const newContent = document.getElementById('editPostContent').value;
+
+        try {
+            const response = await fetch(`/post/${postID}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ content: newContent })
+            });
+
+            const responseData = await response.json();
+            if (response.ok) {
+                alert('Post updated successfully!');
+                closeModal('editPostModal');
+                await fetchAndDisplayPost(postID);
+            } else {
+                alert('Error: ' + responseData.message);
+            }
+        } catch (error) {
+            alert('Error: ' + error.message);
+        }
+    });
+}
+
+function openEditCommentModal(commentID, currentContent, postID) {
+    // Remove existing modals to avoid duplicates
+    const existingModal = document.getElementById('editCommentModal');
+    if (existingModal) {
+        existingModal.remove();
+    }
+
+    const modalHtml = `
+        <div id="editCommentModal" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="closeModal('editCommentModal')">&times;</span>
+                <h2>Edit Comment</h2>
+                <form id="editCommentForm">
+                    <textarea id="editCommentContent" required>${currentContent}</textarea>
+                    <button type="submit">Save</button>
+                </form>
+            </div>
+        </div>
+    `;
+    document.body.insertAdjacentHTML('beforeend', modalHtml);
+    document.getElementById('editCommentModal').style.display = 'block';
+
+    document.getElementById('editCommentForm').addEventListener('submit', async function(event) {
+        event.preventDefault();
+
+        const newContent = document.getElementById('editCommentContent').value;
+
+        try {
+            const response = await fetch(`/comment/${commentID}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ content: newContent })
+            });
+
+            const responseData = await response.json();
+            if (response.ok) {
+                alert('Comment updated successfully!');
+                closeModal('editCommentModal');
+                await fetchAndDisplayComments(postID);
+            } else {
+                alert('Error: ' + responseData.message);
+            }
+        } catch (error) {
+            alert('Error: ' + error.message);
+        }
+    });
+}
+
+function closeModal(modalId) {
+    const modal = document.getElementById(modalId);
+    if (modal) {
+        modal.remove();
     }
 }
 
@@ -124,7 +234,7 @@ async function votePost(postID, voteType) {
         const responseData = await response.json();
         if (response.ok) {
             alert('Vote recorded successfully!');
-            fetchAndDisplayPost(postID);
+            await fetchAndDisplayPost(postID);
         } else {
             alert('Error: You already input this VoteType');
         }
@@ -176,7 +286,7 @@ async function deletePost(postID) {
     }
 }
 
-async function deleteComment(commentID) {
+async function deleteComment(commentID, postID) {
     try {
         const response = await fetch(`/comment/${commentID}`, {
             method: 'DELETE'
@@ -185,7 +295,7 @@ async function deleteComment(commentID) {
         const responseData = await response.json();
         if (response.ok) {
             alert('Comment deleted successfully!');
-            fetchAndDisplayComments(postID);
+            await fetchAndDisplayComments(postID);
         } else {
             alert('Error: ' + responseData.message);
         }

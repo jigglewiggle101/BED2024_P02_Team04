@@ -87,6 +87,7 @@ app.delete("/vote/:id", voteController.deleteVote); // Good //
 // <Jesmine> //
 // GET OPERATIONS ( RETRIEVE ) //
 app.get("/bookmarks/search", bookmarkController.searchBookmarkByContent);
+app.get('/bookmarks/user/:id', bookmarkController.getBookmarksByUserId);
 app.get('/post/:id', postController.getPostById);
 
 // POST OPERATIONS ( CREATE ) //

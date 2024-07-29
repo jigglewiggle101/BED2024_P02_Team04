@@ -23,6 +23,10 @@ const updateComment = async (req, res) => {
   const commentID = parseInt(req.params.id);
   const { content } = req.body;
 
+  if (!content) {
+    return res.status(400).json({ message: 'Content is required' });
+  }
+
   try {
     const updatedComment = await Comment.updateComment(commentID, { content });
     if (!updatedComment) {
