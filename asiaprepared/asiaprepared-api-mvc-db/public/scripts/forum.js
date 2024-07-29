@@ -85,6 +85,9 @@ async function fetchAndDisplayPosts() {
         const postContainer = document.getElementById('postContainer');
         postContainer.innerHTML = '';
 
+        const userId = localStorage.getItem('userId');
+        const userRole = localStorage.getItem('role');
+
         for (const post of posts) {
             const username = await getUsernameById(post.createBy);
             const userVote = await getUserVote(post.postID);
@@ -100,14 +103,14 @@ async function fetchAndDisplayPosts() {
                     <div class="post-text">${post.content}</div>
                     <div class="post-actions">
                         <button class="action-button upvote-button ${userVote === 'U' ? 'upvoted' : ''}" onclick="votePost(${post.postID}, 'U')">Upvote</button>
-                        <div class="vote-count">${voteCount}</div>
                         <button class="action-button downvote-button ${userVote === 'D' ? 'downvoted' : ''}" onclick="votePost(${post.postID}, 'D')">Downvote</button>
                         <button class="action-button" onclick="openCommentModal(${post.postID})">Comment</button>
                         <button class="action-button" onclick="bookmarkPost(${post.postID})">Bookmark</button>
-                        <button class="action-button" onclick="deletePost(${post.postID})">Delete</button>
+                        ${userRole === 'admin' || post.createBy == userId ? `<button class="action-button" onclick="deletePost(${post.postID})">Delete</button>` : ''}
                         <button class="action-button" onclick="readMore(${post.postID})">Read More</button>
                     </div>
                 </div>
+                <div class="vote-count">${voteCount}</div>
             `;
             postContainer.appendChild(postElement);
         }
